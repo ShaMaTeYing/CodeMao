@@ -1,0 +1,42 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-lg-12 col-sm-12 text-center">
+			<h2>公告后台管理</h2>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 15px;">
+		<form action="__APP__/Admin/showBulletinPage" method="post">
+		
+			<div class="col-md-2">
+				<a class="btn btn-primary" href="__APP__/Admin/showAddBulletinPage" role="button">新增公告</a>
+			</div>
+		</form>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table  class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr style="background-color: #A074C4;">
+					<th class="text-center">公告ID</th>
+					<th class="text-center">公告内容</th>
+					<th class="text-center">发布时间</th>
+					<th class="text-center">作者</th>
+				</tr>
+				<volist name='bulletinData' id='vo'>
+					<tr>
+						<td><{$vo.id}></td>
+						<td><{$vo.content}></td>
+						<td><{$vo.creat_time|date="Y-m-d H:i",###}></td>
+						<td><{$vo.anthor}></td>
+					</tr>
+				</volist>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="page"><{$page}></div>
+		</div>
+	</div>
+	
+</block>

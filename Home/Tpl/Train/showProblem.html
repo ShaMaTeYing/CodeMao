@@ -1,0 +1,235 @@
+<extend name="../Public/trainBase" />
+<block name="css">
+	<style type="text/css">
+		.mes-row-item{
+			color: #0066FF;
+		}
+		p{
+			font-size: 18px;
+			font-weight: 600;
+		}
+		pre{
+			margin-left: 15px;
+		}
+		.mysapn{
+			white-space: pre-wrap;       
+			white-space: -moz-pre-wrap;  
+			white-space: -pre-wrap;      
+			white-space: -o-pre-wrap;    
+			word-wrap: break-word;
+			font-family: "Microsoft YaHei";
+			font-size: 15px;
+			line-height: 150%;
+			background-color: #FFFFFF;
+			border-width: 0;
+		}
+		.pre2{
+			white-space: pre-wrap;       
+			white-space: -moz-pre-wrap;  
+			white-space: -pre-wrap;      
+			white-space: -o-pre-wrap;    
+			word-wrap: break-word;
+			font-family: "Microsoft YaHei";
+			font-size: 15px;
+			line-height: 150%;
+			background-color: #FFFFFF;
+		}
+	</style>
+	<link rel="stylesheet" href="__PUBLIC__/codemirror/lib/codemirror.css">
+	<link rel="stylesheet" href="__PUBLIC__/codemirror/theme/eclipse.css">
+</block>
+<block name="trainMain">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			  <h2> <{$problemData.problem_mark}> <span>:</span> <{$problemData.title}> </h2>
+		</div>
+	</div>
+	<div class="row text-center" style="margin-bottom: 30px;">
+		<div class="col-md-12">
+			<span class="mes-row-item">时间限制: <{$problemData.time_limit}> MS</span>
+			<span class="mes-row-item">内存限制: <{$problemData.memory_limit}> KB</span>
+			<span class="mes-row-item">提交总数: <{$problemData.submissions}></span>
+			<span class="mes-row-item">AC总数: <{$problemData.accepted}></span>
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-md-12">
+			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-success">
+			  <div class="panel-heading">问题描述</div>
+			  <div class="panel-body">
+			  	<span class="mysapn"><{$problemData.description}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+			  <div class="panel-heading">输入格式</div>
+			  <div class="panel-body">
+			  	<span class="mysapn"><{$problemData.input}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+			  <div class="panel-heading">输出格式</div>
+			  <div class="panel-body">
+			  	<span class="mysapn"><{$problemData.output}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-warning">
+			  <div class="panel-heading">样例输入</div>
+			  <div class="panel-body">
+			  	<span class="mysapn"><{$problemData.sample_input}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-warning">
+			  <div class="panel-heading">样例输出</div>
+			  <div class="panel-body">
+			  	<span class="mysapn"><{$problemData.sample_output}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-danger">
+			  <div class="panel-heading">作者</div>
+			  <div class="panel-body">
+			  	<span class="mysapn"><{$problemData.author}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-danger">
+			  <div class="panel-heading">来源</div>
+			  <div class="panel-body">
+			  	<span class="mysapn"><{$problemData.source}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<form class="form-inline" action="__APP__/Train/onlineJudge" method="post">
+		<input type="hidden" name="problemID"  value="<{$problemData.id}>" />
+		<input type="hidden" name="level_msg_id" id="level_msg_id" value="<{$levelMsgId}>" />
+		<div class="form-group" style="margin-top: 20px;">
+		   <label style="font-size: 18px;">语言</label>
+		   <select name="language" class="form-control">
+		   	<volist name="lanData" id='vo'>
+		   		<eq name="vo" value="$lastLan">
+		   			<option value="<{$vo}>" selected="selected"><{$vo}></option>
+		   			<else/>
+		   			<option value="<{$vo}>"><{$vo}></option>
+		   		</eq>
+		   	</volist>
+			</select>
+		</div>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+				  <div class="panel-heading">你的源代码</div>
+				  <div class="panel-body">
+				    <textarea id="editor" name="editor"></textarea>
+				  </div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="row" style="margin-top: 15px;">
+			<div class="col-md-12 text-center">
+				<div class="btn-group" role="group" aria-label="...">
+					<div class="row">
+						<div class="col-lg-3">
+							
+								<input class="btn  btn-primary" type="submit" value="提交代码" >
+							 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script src="__PUBLIC__/codemirror/lib/codemirror.js"></script>
+	<script src="__PUBLIC__/codemirror/mode/clike/clike.js"></script>
+	<script type="text/javascript">
+		var myTextarea = document.getElementById('editor');
+		var CodeMirrorEditor = CodeMirror.fromTextArea(myTextarea, {
+		    mode: "text/x-c++src",
+		    matchBrackets: true,
+		    indentUnit:4,
+		    theme:'eclipse',
+			lineNumbers: true
+		});	
+	</script>
+	<!--<div class="col-md-12" style="padding-top: 40px;">
+		<div class="upper">
+			<h3 class="text-center"> <{$problemData.title}> </h3>
+			<div class="upper-message text-center" style="color: #C12E2A;">
+				<div class="mes-row">
+					<span class="mes-row-item">Time Limit: <{$problemData.time_limit}> MS</span>
+					<span class="mes-row-item">Memory Limit: <{$problemData.memory_limit}> K </span>
+				</div>
+				<div class="mes-row">
+					<span class="mes-row-item">Total Submission(s): <{$problemData.submissions}></span>
+					<span class="mes-row-item">Accepted Submission(s): <{$problemData.accepted}></span>
+				</div>
+			</div>
+		</div>
+		<div class="middle">
+			<div class="list">
+				<h5>问题描述</h5>
+				<div class="list-message"><pre><{$problemData.description}></pre></div>
+			</div>
+			<div class="list">
+				<h5>输入格式</h5>
+				<div class="list-message"><pre><{$problemData.input}></pre></div>
+			</div>
+			<div class="list">
+				<h5>输出格式</h5>
+				<div class="list-message"><pre><{$problemData.output}></pre></div>
+			</div>
+			<div class="list">
+				<h5>样例输入 </h5>
+				<div class="list-message">
+					<pre><{$problemData.sample_input}></pre>
+				</div>
+			</div>
+			<div class="list">
+				<h5>样例输出 </h5>
+				<div class="list-message">
+					<pre><{$problemData.sample_output}></pre>
+				</div>
+			</div>
+			<div class="list">
+				<h5>作者 </h5>
+				<pre> <{$problemData.author}></pre>
+			</div>
+			<div class="list">
+				<h5>来源 </h5>
+				<pre> <{$problemData.source}></pre>
+			</div>
+			
+			<div class="submit">
+			<a href="__APP__/Train/showSubmit/id/<{$problemData.id}>/level_msg_id/<{$levelMsgId}>/title/<{$problemData.title}>">提交代码</a>
+			</div>
+		</div>
+	</div>-->
+</block>

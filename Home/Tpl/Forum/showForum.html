@@ -1,0 +1,53 @@
+<extend name="../Public/base" />
+<block name="css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/dist/css/wangEditor.min.css">
+	<style type="text/css">
+		.mytable table, th, td{
+			border: 1px solid lightgrey;
+		}
+	</style>
+</block>
+<block name="main">
+	<div class="row">
+		<div class="col-md-12 text-center">
+	  		<h2>留言</h2>
+	 	</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+	  		<h4 style="text-align: right;">
+	  			<a href="__APP__/Forum/index">提交留言</a>
+	  		</h4>
+	 	</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<volist name="BBSData" id="vo">
+				<div class="row" style="padding-bottom: 10px;">
+					<div class="col-md-6" style="text-align: left;">
+						<h4 style="color: #000000;"><{$vo.nickname}></h4>
+					</div>
+					<div class="col-md-6" style="text-align: right;">
+						<h4><{$vo.submit_time|date="Y-m-d H:i:s",###}></h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 mytable">
+						<{$vo.comment}>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<hr />
+					</div>
+				</div>	
+			</volist>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<{$page}>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</block>

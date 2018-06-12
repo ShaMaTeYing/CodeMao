@@ -1,0 +1,145 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row" style="margin-bottom: 10px;">
+		<div class="col-md-12 text-center">
+			<h2>实时评测状态</h2>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 10px;">
+		<div class="col-md-12">
+			<form action="__APP__/Judge/showRealTimeEvaluation" class="form-inline" role="form" method="post"> 
+				<div class="form-group">
+			    	<label for="exampleInputName2">问题ID</label>
+			   		<input type="text" name="problemId" class="form-control" placeholder="问题ID" value="<{$pid}>"/>	
+				</div>
+				<div class="form-group">
+			    	<label for="exampleInputName2">昵称</label>
+			   		<input type="text" name="anthor" class="form-control" placeholder="昵称" value="<{$ant}>"/>
+				</div>
+				
+				<div class="form-group">
+			    	<label for="exampleInputName2">语言</label>
+			   		<select name="language" class="form-control">
+						<volist name="languageArray" id="vo">
+						<eq name="lan" value="$vo.index">
+							<option value="<{$vo.index}>" selected="selected"> <{$vo.status}> </option>
+							<else/>
+							<option value="<{$vo.index}>"> <{$vo.status}> </option>
+						</eq>
+						</volist>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<label for="exampleInputName2">状态</label>
+			   		<select name="status" class="form-control">
+						<volist name="statusArray" id="vo">
+							<eq name="sta" value="$vo.index">
+								<option value="<{$vo.index}>" selected="selected"> <{$vo.status}> </option>
+								<else/>
+								<option value="<{$vo.index}>"><{$vo.status}></option>
+							</eq>	
+						</volist>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<input class="btn btn-primary" type="submit" value="搜索">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr style="background-color:rgb(204,204,255)">
+					<th class="text-center">运行ID</th>
+					<th class="text-center">昵称</th>
+					<th class="text-center">问题ID</th>
+					<th class="text-center">评测结果</th>
+					<th class="text-center">运行时间</th>
+					<th class="text-center">运行内存</th>
+					<th class="text-center">代码长度</th>
+					<th class="text-center">语言</th>
+					<th class="text-center">提交时间</th>
+				</tr>
+				<volist name='list' id='vo'>
+					<tr>
+						<td>
+							<if condition="($vo.user_id eq $myId) OR ($myRoot eq 2) "> 
+								<a href="__APP__/Judge/showJudgeDetail/id/<{$vo.id}>">
+									<{$vo.id}>
+								</a>
+							<else /> <{$vo.id}>
+							</if>
+						</td>
+						<td>
+							<a href="__APP__/User/showUserMessage/id/<{$vo.user_id}>">
+							<{$vo.nickname}>
+							</a>
+						</td>
+						<td>
+							<a href="__APP__/Problem/showProblem/id/<{$vo.problem_id}>">
+							<{$vo.problem_id}>
+							</a>
+						</td>
+						<td>
+							<eq name="vo.judge_status" value="0">
+								<span style="color: #008000;">Accepted</span>
+							</eq>
+							<eq name="vo.judge_status" value="1">
+								<span style="color: #CC0000;">Wrong Answer</span>
+							</eq>
+							<eq name="vo.judge_status" value="2">
+								<span style="color: #66512C;">Time Limit Exceeded</span>
+							</eq>
+							<eq name="vo.judge_status" value="3">
+								<span style="color: #66512C;">Memory Limit Exceeded</span>
+							</eq>
+							<eq name="vo.judge_status" value="4">
+								<span style="color: #0000FF;">Runtime Error</span>
+							</eq>
+							<eq name="vo.judge_status" value="5">
+								<span style="color: #0000FF;">Compilation Error</span>
+							</eq>
+							<eq name="vo.judge_status" value="6">
+								<span style="color: #990073;">Output Limit Exceeded</span>
+							</eq>
+							<eq name="vo.judge_status" value="7">
+								<span style="color: #990073;">Input Limit Exceeded</span>
+							</eq>
+							<eq name="vo.judge_status" value="8">
+								<span style="color: #DD1144;">Pending</span>
+							</eq>
+							<eq name="vo.judge_status" value="9">
+								<span style="color: cadetblue;">Compiling</span>
+							</eq>
+							<eq name="vo.judge_status" value="10">
+								<span style="color: darkturquoise;">Runing</span>
+							</eq>
+							<eq name="vo.judge_status" value="11">
+								<span style="color: midnightblue;">Presentation Error</span>
+							</eq>
+						</td>
+						<td><{$vo.exe_time}> MS</td>
+						<td><{$vo.exe_memory}> KB</td>
+						<td>
+							
+							<if condition="($vo.user_id eq $myId) OR ($myRoot eq 2) "> 
+								<a href="__APP__/Judge/showUserCode/id/<{$vo.id}>/userId/<{$vo.user_id}>"><{$vo.code_len}>B</a>
+							<else /> <{$vo.code_len}>B
+							</if>
+
+						</td>
+						<td><{$vo.language}></td>
+						
+						<td><{$vo.submit_time|date="Y-m-d H:i",###}></td>
+					</tr>
+				</volist>	
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div ><{$page}></div>
+		</div>
+	</div>
+</block>

@@ -1,0 +1,57 @@
+<extend name="../Public/trainBase" />
+<block name="trainMain">
+	<div class="row">
+		<div class="col-md-12 text-center">
+				<h2>
+					<{$listData.level_title}>	
+				</h2>
+		</div>
+	</div>
+	<div class="col-md-12" style="padding-top: 40px;">
+		<table class="table table-condensed table-striped table-bordered">
+			<tr style="background-color:rgb(51,122,183);color: #FFFFFF;">
+				<th class="text-center" style="width: 10%;">状态</th>
+				<th class="text-center" style="width: 10%;">题号</th>
+				<th style="text-align:left;">标题</th>
+				<th class="text-center" style="width: 10%;">难度</th>
+				<th class="text-center" style="width: 15%;">正确率</th>
+			</tr>
+			<volist name='problemData' id='vo'>
+				<tr class="text-center" style="width: 10%;">
+					<td class="text-center">
+						<eq name="vo.judge_status" value="0">
+							<span class="glyphicon glyphicon-ok success" aria-hidden="true" style="color: #008000;">
+								
+							</span>
+						<else/>
+							<gt name="vo.judge_status" value="0">
+								<span class="glyphicon glyphicon-minus" aria-hidden="true" style="color: #F5E79E;"></span>
+							</gt>
+						</eq>
+					</td>
+					<td><{$vo.problem_mark}></td>
+					<td style="text-align:left;"> <a href='__APP__/Train/showProblem/id/<{$vo.id}>/level_msg_id/<{$vo.level_msg_id}>'> <{$vo.title}> </a> </td>
+					<td>
+						<eq name="vo.difficulty" value="0">
+							入门
+						</eq>
+						<eq name="vo.difficulty" value="1">
+							简单
+						</eq>
+						<eq name="vo.difficulty" value="2">
+							一般
+						</eq>
+						<eq name="vo.difficulty" value="3">
+							中等
+						</eq>
+						<eq name="vo.difficulty" value="4">
+							困难
+						</eq>
+						
+					</td>
+					<td><{:getRatio($vo['accepted'],$vo['submissions'])}>% (<{$vo.accepted}>/<{$vo.submissions}>) </td>
+				</tr>
+			</volist>
+		</table>
+	</div>
+</block>

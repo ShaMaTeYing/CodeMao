@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <link rel="stylesheet" href="__PUBLIC__/bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
+	    <link rel="stylesheet" href="__PUBLIC__/bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<link rel="shortcut icon" href="__PUBLIC__/img/onecode.png" type="image/x-icon" />
+		<block name="css"></block>
+		<script language="javascript" src="__PUBLIC__/bootstrap-3.3.7-dist/js/jquery-1.12.2.min.js"></script>
+		<script language="javascript" src="__PUBLIC__/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		
+		<block name="js"></block>
+		<title>
+			<block name="title">一码学程</block>
+		</title>
+	</head>	
+	<body>
+		<block name="header">
+			<include file="../Public/header" />	
+		</block>
+		<div class="row">
+		<div class="col-lg-12">
+			<div class="btn-group" role="group" aria-label="...">
+			  <a href="__APP__/Ladder/showContestListPage" class="btn btn-primary">天梯赛列表</a>
+			  <a href="__APP__/Ladder/showProblemListPage" class="btn btn-info">题目列表</a>
+			  <a href="__APP__/Ladder/showRealTimeEvaluation" class="btn btn-info">评测状态</a>
+			  <a href="__APP__/Ladder/showRankPage" class="btn btn-success">天梯赛排名</a>
+			</div>
+		</div>
+	</div>
+	<hr />
+		<block name="main"></block>
+		<block name="footer">
+			<include file="../Public/footer" />
+		</block>
+		<block name="footerJs"></block>
+	</body>
+</html>

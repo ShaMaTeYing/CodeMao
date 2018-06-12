@@ -1,0 +1,38 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row">
+		<div class="col-lg-3 col-md-3">
+			<ul class="nav nav-pills nav-stacked">
+			  <li role="presentation" class="active"><a href="#" style="font-size: 26px;">全部课程</a></li>
+			  <volist name="levelData" id="vo">
+			  	<li role="presentation">
+			  		<a href="__APP__/Train/index/id/<{$vo.id}>">
+			  			<span style="font-size: 20px;"><{$vo.entrance_title}></span>
+			  		</a>
+			  	</li>
+			  </volist>
+			</ul>
+		</div>
+		<div class="col-lg-9 col-md-9">
+			<div class="panel panel-default">
+			  <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
+			  	<div class="col-lg-12 col-md-12 text-left">
+			  		<span class="text-left" style="font-size: 24px;margin-left: 14px;"><{$nowLevelData}></span>
+			  	</div>
+			  </div>
+			  <ul class="list-group">
+				<volist name='list' id='vo'>
+					  <li class="list-group-item">
+					    <span class="badge"><{$vo.pass_number}> / <{$vo.problem_number}></span>
+					    <a href="__APP__/Train/showProblemList/id/<{$vo.id}>" style="font-size: 18px;">
+							<{$vo.level_title}>
+						</a>
+					  </li>
+				</volist>
+			  </ul>
+			  
+			</div>
+			
+		</div>
+	</div>
+</block>

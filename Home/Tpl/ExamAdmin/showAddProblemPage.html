@@ -1,0 +1,135 @@
+<extend name="../Public/base" />
+<block name="main">
+	<form action='<{:U("ExamAdmin/addProblem")}>' name="form1" method='post' enctype="multipart/form-data" onSubmit="return myCheck()">
+		<input type="hidden" name="contest_id" id="cont" value="<{$contestId}>" />
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2>添加问题</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">时间限制(单位MS)</label>
+			    	<input type="text" class="form-control" name="time_limit" value="1000">
+			    </div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">内存限制(单位KB)</label>
+			    	<input type="text" class="form-control" name="memory_limit" value="131072">
+			    </div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">输出限制(单位KB)</label>
+			    	<input type="text" class="form-control" name="output_limit" value="256">
+			    </div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-2">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">题号</label>
+			    	<input type="text" class="form-control" name="problem_mark" value="<{$problem_mark}>" >
+			    </div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">标题</label>
+			    	<input type="text" class="form-control" name="title" >
+			    </div>
+			</div>
+			
+			<div class="col-md-2">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">作者</label>
+			    	<input type="text" class="form-control" name="author" >
+			    </div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">来源</label>
+			    	<input type="text" class="form-control" name="source" >
+			    </div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">分数</label>
+			    	<input type="text" class="form-control" name="score" >
+			    </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">问题描述</label>
+			    	<textarea class="form-control" rows="8" name="description"></textarea>
+			    </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">输入格式</label>
+			    	<textarea class="form-control" rows="8" name="input"></textarea>
+			    </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">输出格式</label>
+			    	<textarea class="form-control" rows="8" name="output"></textarea>
+			    </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">输入样例</label>
+			    	<textarea class="form-control" rows="8" name="sample_input"></textarea>
+			    </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">输出样例</label>
+			    	<textarea class="form-control" rows="8" name="sample_output"></textarea>
+			    </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="form-group">
+			    	<input class="btn btn-default" type="submit"  value="提交" />
+					<input class="btn btn-default" type="reset" value="重置" />
+			    </div>
+			</div>
+		</div>
+		<script type="text/javascript">  
+            function myCheck()  
+            {  
+               for(var i=0;i<document.form1.elements.length-1;i++)  
+               {  
+                  if(document.form1.elements[i].value=="")  
+                  {  
+                     alert("当前表单不能有空项");  
+                     document.form1.elements[i].focus();  
+                     return false;  
+                  }  
+               }  
+               var dif = document.getElementById("dif").value;
+        
+               if(dif>="0"&&dif<="5"){
+               		return true; 
+               }else {
+               		alert("难度必须在0到5之间！！");
+               		return false;
+               }
+            }  
+	</script>
+	</form>
+</block>

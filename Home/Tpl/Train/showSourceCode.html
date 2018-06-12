@@ -1,0 +1,114 @@
+<extend name="../Public/trainBase" />
+<block name="css">
+	<link rel="stylesheet" href="__PUBLIC__/codemirror/lib/codemirror.css">
+	<link rel="stylesheet" href="__PUBLIC__/codemirror/theme/eclipse.css">
+</block>
+<block name="trainMain">
+	<div class="row" style="margin-bottom: 20px;">
+		<div class="col-md-12 text-center">
+			<h3>评测信息</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr>
+					<th class="text-center">运行ID</th>
+					<th class="text-center">提交时间</th>
+					<th class="text-center">评测结果</th>
+					<th class="text-center">问题ID</th>
+					<th class="text-center">运行时间</th>
+					<th class="text-center">运行内存</th>
+					<th class="text-center">代码长度</th>
+					<th class="text-center">语言</th>
+					<th class="text-center">昵称</th>
+				</tr>
+				<volist name='judgeData' id='vo'>
+					<tr>
+						<td>
+							<a href="__APP__/Train/showJudgeDetail/id/<{$vo.id}>">
+								<{$vo.id}>
+							</a>
+						</td>
+						<td><{$vo.submit_time|date="Y-m-d H:i",###}></td>
+						<td>
+							<eq name="vo.judge_status" value="0">
+								<span style="color: #008000;">Accepted</span>
+							</eq>
+							<eq name="vo.judge_status" value="1">
+								<span style="color: #CC0000;">Wrong Answer</span>
+							</eq>
+							<eq name="vo.judge_status" value="2">
+								<span style="color: #66512C;">Time Limit Exceeded</span>
+							</eq>
+							<eq name="vo.judge_status" value="3">
+								<span style="color: #66512C;">Memory Limit Exceeded</span>
+							</eq>
+							<eq name="vo.judge_status" value="4">
+								<span style="color: #0000FF;">Runtime Error</span>
+							</eq>
+							<eq name="vo.judge_status" value="5">
+								<span style="color: #0000FF;">Compilation Error</span>
+							</eq>
+							<eq name="vo.judge_status" value="6">
+								<span style="color: #990073;">Output Limit Exceeded</span>
+							</eq>
+							<eq name="vo.judge_status" value="7">
+								<span style="color: #990073;">Input Limit Exceeded</span>
+							</eq>
+							<eq name="vo.judge_status" value="8">
+								<span style="color: #DD1144;">Pending</span>
+							</eq>
+							<eq name="vo.judge_status" value="9">
+								<span style="color: cadetblue;">Compiling</span>
+							</eq>
+							<eq name="vo.judge_status" value="10">
+								<span style="color: darkturquoise;">Runing</span>
+							</eq>
+							<eq name="vo.judge_status" value="11">
+								<span style="color: midnightblue;">Presentation Error</span>
+							</eq>
+						</td>
+						<td>
+							<a href="__APP__/Train/showProblem/id/<{$vo.problem_id}>">
+							<{$vo.problem_id}>
+							</a>
+						</td>
+						
+						<td><{$vo.exe_time}> MS</td>
+						<td><{$vo.exe_memory}> KB</td>
+						<td><{$vo.code_len}>B</td>
+						<td><{$vo.language}></td>
+						<td>
+							<a href="__APP__/User/showUserMessage/id/<{$vo.user_id}>">
+							<{$vo.nickname}>
+							</a>
+						</td>
+					</tr>
+				</volist>	
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2>源代码</h2>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-12">
+	   		<textarea id="editor" name="editor"><{$codes}></textarea>
+		</div>
+	</div>
+	<script src="__PUBLIC__/codemirror/lib/codemirror.js"></script>
+	<script src="__PUBLIC__/codemirror/mode/clike/clike.js"></script>
+	<script type="text/javascript">
+		var myTextarea = document.getElementById('editor');
+		var CodeMirrorEditor = CodeMirror.fromTextArea(myTextarea, {
+		    mode: "text/x-c++src",
+		    matchBrackets: true,
+		    indentUnit:4,
+		    theme:'eclipse',
+			lineNumbers: true
+		});	
+	</script>
+</block>

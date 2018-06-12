@@ -1,0 +1,183 @@
+<extend name="../Public/examBase" />
+<block name="css">
+	<style type="text/css">
+		.mes-row-item{
+			color: #0066FF;
+		}
+		p{
+			font-size: 18px;
+			font-weight: 600;
+		}
+		pre{
+			margin-left: 15px;
+		}
+		.pre1{
+			white-space: pre-wrap;       
+			white-space: -moz-pre-wrap;  
+			white-space: -pre-wrap;      
+			white-space: -o-pre-wrap;    
+			word-wrap: break-word;
+			font-family: "Microsoft YaHei";
+			font-size: 15px;
+			line-height: 150%;
+			background-color: #FFFFFF;
+			border-width: 0;
+		}
+		.pre2{
+			white-space: pre-wrap;       
+			white-space: -moz-pre-wrap;  
+			white-space: -pre-wrap;      
+			white-space: -o-pre-wrap;    
+			word-wrap: break-word;
+			font-family: "Microsoft YaHei";
+			font-size: 15px;
+			line-height: 150%;
+			background-color: #FFFFFF;
+		}
+	</style>
+	<link rel="stylesheet" href="__PUBLIC__/codemirror/lib/codemirror.css">
+	<link rel="stylesheet" href="__PUBLIC__/codemirror/theme/eclipse.css">
+</block>
+<block name="main">
+	<!--<div class="row">
+		<div class="col-lg-12">
+			<div class="btn-group" role="group" aria-label="...">
+			  <a href="#" class="btn btn-primary">题目描述</a>
+			  <a href="#" class="btn btn-info">我的提交</a>
+			  <a href="#" class="btn btn-info">所有提交</a>
+			  <a href="#" class="btn btn-success">换下一题</a>
+			</div>
+		</div>
+	</div>
+	<hr />-->
+	<div class="row">
+		<div class="col-md-12 text-center">
+			  <h2> <{$problemData.problem_mark}> <span>:</span> <{$problemData.title}> </h2>
+		</div>
+	</div>
+	<div class="row text-center" style="margin-bottom: 30px;">
+		<div class="col-md-12">
+			<span class="mes-row-item">时间限制: <{$problemData.time_limit}> MS</span>
+			<span class="mes-row-item">内存限制: <{$problemData.memory_limit}> KB</span>
+			<span class="mes-row-item">提交总数: <{$problemData.submissions}></span>
+			<span class="mes-row-item">AC总数: <{$problemData.accepted}></span>
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-md-12">
+			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-success">
+			  <div class="panel-heading">问题描述</div>
+			  <div class="panel-body">
+			  	<span style="white-space:pre"><{$problemData.description}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+			  <div class="panel-heading">输入格式</div>
+			  <div class="panel-body">
+			  	<span style="white-space:pre"><{$problemData.input}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+			  <div class="panel-heading">输出格式</div>
+			  <div class="panel-body">
+			  	<span style="white-space:pre"><{$problemData.output}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-warning">
+			  <div class="panel-heading">样例输入</div>
+			  <div class="panel-body">
+			  	<span style="white-space:pre"><{$problemData.sample_input}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-warning">
+			  <div class="panel-heading">样例输出</div>
+			  <div class="panel-body">
+			  	<span style="white-space:pre"><{$problemData.sample_output}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<!--<div class="row">
+		<div class="col-md-12">
+			<p>作者</p>
+			<pre><{$problemData.author}></pre>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p>来源</p>
+			<pre><{$problemData.source}></pre>
+		</div>
+	</div>-->
+	<form class="form-inline" action="__APP__/Exam/onlineJudge" method="post">
+		<input type="hidden" name="problemID"  value="<{$problemData.id}>" />
+		
+		<div class="form-group" style="margin-top: 20px;">
+		   <label style="font-size: 18px;">语言</label>
+		   <select name="language" class="form-control">
+		   	<volist name="lanData" id='vo'>
+		   		<eq name="vo" value="$lastLan">
+		   			<option value="<{$vo}>" selected="selected"><{$vo}></option>
+		   			<else/>
+		   			<option value="<{$vo}>"><{$vo}></option>
+		   		</eq>
+		   	</volist>
+			</select>
+		</div>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+				  <div class="panel-heading">你的源代码</div>
+				  <div class="panel-body">
+				    <textarea id="editor" name="editor"></textarea>
+				  </div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="row" style="margin-top: 15px;">
+			<div class="col-md-12 text-center">
+				<div class="btn-group" role="group" aria-label="...">
+					<div class="row">
+						<div class="col-lg-3">
+							 <input class="btn  btn-primary" type="submit" value="提交代码" >
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script src="__PUBLIC__/codemirror/lib/codemirror.js"></script>
+	<script src="__PUBLIC__/codemirror/mode/clike/clike.js"></script>
+	<script type="text/javascript">
+		var myTextarea = document.getElementById('editor');
+		var CodeMirrorEditor = CodeMirror.fromTextArea(myTextarea, {
+		    mode: "text/x-c++src",
+		    matchBrackets: true,
+		    indentUnit:4,
+		    theme:'eclipse',
+			lineNumbers: true
+		});	
+	</script>
+</block>

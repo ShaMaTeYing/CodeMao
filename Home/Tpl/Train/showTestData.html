@@ -1,0 +1,28 @@
+<extend name="../Public/trainBase" />
+<block name="css">
+	<style type="text/css">
+			pre{
+				white-space: pre-wrap;       
+			white-space: -moz-pre-wrap;  
+			white-space: -pre-wrap;      
+			white-space: -o-pre-wrap;    
+			word-wrap: break-word;
+			font-family: "Microsoft YaHei";
+			font-size: 15px;
+			line-height: 150%;
+			background-color: #FFFFFF;
+			border-width: 0;
+			}
+	</style>
+</block>
+<block name="trainMain">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">第<{$trainJudgeData.group_id}>组数据</h3>
+		  </div>
+		  <pre><{$testData}></pre>
+		</div>
+		
+	</div>
+</block>

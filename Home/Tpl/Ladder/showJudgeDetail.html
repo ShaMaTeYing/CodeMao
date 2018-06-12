@@ -1,0 +1,111 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="panel panel-success">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">题目信息</h3>
+			  </div>
+			  <div class="panel-body">
+			     <span>题目标题：<{$problemData.title}> </span>
+				<span>时间限制：<{$problemData.time_limit}> MS</span>
+				<span>内存限制：<{$problemData.memory_limit}> KB</span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="panel panel-info">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">用户提交信息</h3>
+			  </div>
+			  <div class="panel-body">
+			     <span>用户昵称：<{$userProblemData.nickname}> </span>
+				<span>提交时间：<{$userProblemData.submit_time|date="Y-m-d H:i",###}> </span>
+				<span>提交语言：<{$userProblemData.language}> </span>
+				<span>得分：<{$score}></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">评测详情</h3>
+			  </div>
+			     <table class="table table-bordered table-striped table-condensed">
+					<tr style="background-color:rgb(204,204,255)">
+						<th class="text-center">测试用例</th>
+						<th class="text-center">运行时间</th>
+						<th class="text-center">运行内存</th>
+						<th class="text-center">评测结果</th>
+						<th class="text-center">每组得分</th>
+						<eq name="myRoot" value="2">
+							<th class="text-center">输入数据</th>
+							<th class="text-center">输出数据</th>	
+						</eq>
+						
+					</tr>
+					<volist name='judgeData' id='vo'>
+						<tr class="text-center">
+							<td><{$vo.group_id}></td>
+							<td><{$vo.exe_time}> MS</td>
+							<td><{$vo.exe_memory}> KB</td>
+							<td>
+								<eq name="vo.judge_status" value="0">
+									<span style="color: #008000;">Accepted</span>
+								</eq>
+								<eq name="vo.judge_status" value="1">
+									<span style="color: #CC0000;">Wrong Answer</span>
+								</eq>
+								<eq name="vo.judge_status" value="2">
+									<span style="color: #66512C;">Time Limit Exceeded</span>
+								</eq>
+								<eq name="vo.judge_status" value="3">
+									<span style="color: #66512C;">Memory Limit Exceeded</span>
+								</eq>
+								<eq name="vo.judge_status" value="4">
+									<span style="color: #0000FF;">Runtime Error</span>
+								</eq>
+								<eq name="vo.judge_status" value="5">
+									<span style="color: #0000FF;">Compilation Error</span>
+								</eq>
+								<eq name="vo.judge_status" value="6">
+									<span style="color: #990073;">Output Limit Exceeded</span>
+								</eq>
+								<eq name="vo.judge_status" value="7">
+									<span style="color: #990073;">Input Limit Exceeded</span>
+								</eq>
+								<eq name="vo.judge_status" value="8">
+									<span style="color: #DD1144;">Pending</span>
+								</eq>
+								<eq name="vo.judge_status" value="9">
+									<span style="color: cadetblue;">Compiling</span>
+								</eq>
+								<eq name="vo.judge_status" value="10">
+									<span style="color: darkturquoise;">Runing</span>
+								</eq>
+								<eq name="vo.judge_status" value="11">
+									<span style="color: midnightblue;">Presentation Error</span>
+								</eq>
+							</td>
+							<td><{$vo.score}></td>
+							<eq name="myRoot" value="2">
+								<td>
+									<a href="__APP__/Ladder/showTestData/id/<{$vo.id}>/op/0">查看</a>
+								</td>
+								<td>
+									<a href="__APP__/Ladder/showTestData/id/<{$vo.id}>/op/1">查看</a>
+								</td>
+							</eq>
+						</tr>
+					</volist>	
+				</table>
+			</div>
+			
+		</div>
+	</div>
+	
+</block>

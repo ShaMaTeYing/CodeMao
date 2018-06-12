@@ -1,0 +1,56 @@
+<extend name="../Public/base" />
+<block name="css">
+	<style type="text/css">
+		p{
+			font-size: 18px;
+		}
+	</style>
+</block>
+<block name="main">
+	<div class="row" style="margin-bottom: 15px;">
+		<div class="col-md-12 text-center">
+			<h2>提交你的问题</h2>
+		</div>
+	</div>
+	<form action="__APP__/Judge/onlineJudge/problemID/<{$problemData.id}>" method="post">
+		<input type="hidden" name="problemID"  value="<{$problemData['id']}>" />
+		<div class="row" >
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-2 col-md-offset-3">
+						<div class="form-group">
+						   <p>问题ID:<{$problemData['id']}></p>
+					  	</div>
+					</div>
+					<div class="col-md-1">
+						<div class="form-group">
+							<p>语言:</p>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group">
+					  		<select name="language" class="form-control">
+								<option value="C++">C++</option>
+								<option value="C">C</option>
+								<option value="PASCAL">PASCAL</option>
+							</select>
+					  	</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<p class="text-center">源代码</p>
+				<textarea class="form-control" rows="25" name="code" required></textarea>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<input class="btn btn-default" type="submit" value="提交">   
+				<input class="btn btn-default" type="reset" value="重置">
+			</div>
+		</div>
+	</form>
+</block>

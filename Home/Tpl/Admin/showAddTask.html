@@ -1,0 +1,28 @@
+<extend name="../Public/trainAdminBase" />
+<block name="main">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2>新增章节</h2>
+		</div>
+	</div>
+	<form action="__APP__/Admin/addTask" method="post">
+		<input type="hidden" name="level_id" value="<{$levelMsgId}>"/>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-4 col-md-offset-4">
+				<label for="exampleInputEmail1">章节标题</label>
+				<input name="level_title" type="text" class="form-control">
+			</div>
+		</div>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-4 col-md-offset-4">
+				<label for="exampleInputEmail1">章节摘要</label>
+				<textarea name="level_abstract" class="form-control" rows="10"></textarea>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-12 col-md-offset-4">
+				<input class="btn btn-primary" type="submit" value="提交">
+			</div>
+		</div>
+	</form>
+</block>

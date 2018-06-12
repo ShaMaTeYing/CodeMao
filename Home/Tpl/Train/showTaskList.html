@@ -1,0 +1,50 @@
+<extend name="../Public/base" />
+<block name="css">
+	<style type="text/css">
+		.my-abstrat{
+			overflow:hidden;
+			text-overflow:ellipsis;
+			-o-text-overflow:ellipsis;
+			white-space:nowrap;
+			width:100%;
+		}
+	</style>
+</block>
+<block name="main">
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-md-12 text-center">
+			<h2><{$levelData.entrance_title}></h2>
+		</div>
+	</div>
+	<div class="row">
+		<volist name='listData' id='vo'>
+				<div class="col-lg-4 col-sm-4">
+					<div class="panel panel-warning">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">
+					    	<a href="__APP__/Train/showProblemList/id/<{$vo.id}>">
+								<{$vo.level_title}>
+							</a>
+					    </h3>
+					  </div>
+					  <div class="panel-body">
+					  		<span class="label label-primary"><{$vo.pass_number}>/<{$vo.problem_number}></span>
+					    	<span class="label label-info">
+					    		<eq name="vo.status" value="0">
+									<span>可练习</span>
+								<else/>
+									<span>不可练习</span>
+								</eq>
+					    	</span>
+					    	<div style="height: 50px;">
+					    		<h5>
+						    		<{$vo.level_abstract}>
+						    	</h5>
+					    	</div>
+					    	
+					  </div>
+					</div>
+				</div>
+		</volist>
+	</div>
+</block>

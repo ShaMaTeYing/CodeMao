@@ -1,0 +1,50 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row">
+		<div class="col-lg-12 text-center">
+			<h2>天梯赛列表</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-10 text-left">
+			<a class="btn btn-primary" href="__APP__/LadderAdmin/showAddContestPage" role="button">新增测试</a>
+		</div>
+		<div class="col-lg-2 text-right">
+			<a class="btn btn-primary" href="__APP__/Admin/updateSubmit">更新分值</a>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 15px;">
+		<div class="col-lg-12">
+			<table class="table table-bordered table-condensed table-striped  table-hover text-center">
+				<tr>
+					<th class="text-left">天梯赛名</th>
+					<th class="text-center">统计</th>
+					<th class="text-center">参与人数</th>
+					<th class="text-center">操作</th>
+				</tr>
+				<volist name="contestListData" id="vo">
+					<tr>
+						<td>
+							<a href="__APP__/LadderAdmin/showProblemListPage/id/<{$vo.id}>">
+								<{$vo.name}>
+							</a>
+						</td>
+						<td></td>
+						<td>
+							<{$vo.join_number}>
+						</td>
+						<td>
+							<a href="__APP__/LadderAdmin/showModifyContestPage/id/<{$vo.id}>">编辑</a>
+							|
+							<eq name="vo.is_visible" value="0">
+								<a href="__APP__/LadderAdmin/changeStatus/id/<{$vo.id}>">隐藏</a>
+								<else/>
+								<a href="__APP__/LadderAdmin/changeStatus/id/<{$vo.id}>">显示</a>
+							</eq>
+						</td>
+					</tr>
+				</volist>
+			</table>
+		</div>
+	</div>
+</block>

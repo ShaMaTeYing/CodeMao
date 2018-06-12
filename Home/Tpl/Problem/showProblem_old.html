@@ -1,0 +1,140 @@
+<extend name="../Public/base" />
+<block name="css">
+	<style type="text/css">
+		.mes-row-item{
+			color: #0066FF;
+		}
+		p{
+			font-size: 18px;
+			font-weight: 600;
+		}
+		pre{
+			margin-left: 15px;
+		}
+		.pre1{
+			white-space: pre-wrap;       
+			white-space: -moz-pre-wrap;  
+			white-space: -pre-wrap;      
+			white-space: -o-pre-wrap;    
+			word-wrap: break-word;
+			font-family: "Microsoft YaHei";
+			font-size: 15px;
+			line-height: 150%;
+			background-color: #FFFFFF;
+			border-width: 0;
+		}
+		.pre2{
+			white-space: pre-wrap;       
+			white-space: -moz-pre-wrap;  
+			white-space: -pre-wrap;      
+			white-space: -o-pre-wrap;    
+			word-wrap: break-word;
+			font-family: "Microsoft YaHei";
+			font-size: 15px;
+			line-height: 150%;
+			background-color: #FFFFFF;
+		}
+	</style>
+	<link rel="stylesheet" href="__PUBLIC__/codemirror/lib/codemirror.css">
+	<link rel="stylesheet" href="__PUBLIC__/codemirror/theme/eclipse.css">
+</block>
+<block name="main">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2> <{$problemData.id}> <span>:</span> <{$problemData.title}> </h2>
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-md-12">
+			<span class="mes-row-item">时间限制: <{$problemData.time_limit}> MS</span>
+			<span class="mes-row-item">内存限制: <{$problemData.memory_limit}> K </span>
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-md-12">
+			<span class="mes-row-item">提交总数: <{$problemData.submissions}></span>
+			<span class="mes-row-item">AC总数: <{$problemData.accepted}></span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p>问题描述</p>
+			<pre class="pre1"><{$problemData.description}></pre>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p>输入格式</p>
+			<pre class="pre1"><{$problemData.input}></pre>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p>输出格式</p>
+			<pre class="pre1"><{$problemData.output}></pre>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p>样例输入</p>
+			<pre class="pre2"><{$problemData.sample_input}></pre>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p>样例输出</p>
+			<pre class="pre2"><{$problemData.sample_output}></pre>
+		</div>
+	</div>
+	<!--<div class="row">
+		<div class="col-md-12">
+			<p>作者</p>
+			<pre><{$problemData.author}></pre>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p>来源</p>
+			<pre><{$problemData.source}></pre>
+		</div>
+	</div>-->
+	<form class="form-inline" action="__APP__/Judge/onlineJudge" method="post">
+		<input type="hidden" name="problemID"  value="<{$problemData.id}>" />
+		<div class="form-group" style="margin-top: 20px;">
+		   <label style="font-size: 18px;">语言</label>
+		   <select name="language" class="form-control">
+		   	<volist name="lanData" id='vo'>
+		   		<eq name="vo" value="$lastLan">
+		   			<option value="<{$vo}>" selected="selected"><{$vo}></option>
+		   			<else/>
+		   			<option value="<{$vo}>"><{$vo}></option>
+		   		</eq>
+		   	</volist>
+			</select>
+		</div>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-12">
+				<label>你的源代码</label>
+		   		<textarea id="editor" name="editor"></textarea>
+			</div>
+		</div>
+	
+		<div class="row" style="margin-top: 15px;">
+			<div class="col-md-12 text-center">
+				<input class="btn btn-default" type="submit" value="提交代码" >
+			</div>
+		</div>
+	</form>
+	<script src="__PUBLIC__/codemirror/lib/codemirror.js"></script>
+	<script src="__PUBLIC__/codemirror/mode/clike/clike.js"></script>
+	<script type="text/javascript">
+		var myTextarea = document.getElementById('editor');
+		var CodeMirrorEditor = CodeMirror.fromTextArea(myTextarea, {
+		    mode: "text/x-c++src",
+		    matchBrackets: true,
+		    indentUnit:4,
+		    theme:'eclipse',
+			lineNumbers: true
+		});	
+	</script>
+</block>

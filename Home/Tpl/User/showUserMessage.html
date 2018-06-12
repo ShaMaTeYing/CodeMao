@@ -1,0 +1,115 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row text-center">
+		<div class="col-md-4 hidden-xs">
+			<span class="lead">排名</span>
+			<span class="lead"><{$myRank}></span>
+		</div>
+		<div class="col-md-4">
+			<h1 id="username"><{$user.username}><a href="#" id="add-friend" class="link-icon" title="Add Friend" style="display: none;"><span class="fa fa-star" style="color: #ccc;"></span></a><a href="#" id="remove-friend" class="link-icon" title="Remove Friend" style=""><span class="fa fa-star" style="color: glod;"></span></a></h1>
+			<div class="hidden-xs" id="profile-school">
+				<a href="#"><{$user.school}></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<span class="lead">解决题目</span>
+			<span class="lead"><{$user.solve_problem}></span>
+		</div>
+		
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<blockquote>
+				<p><{$user.motto}></p>
+			</blockquote>
+		</div>
+	</div>
+	<hr />
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-md-12">
+			<h4 >题库已AC的题目列表</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-condensed table-striped table-bordered text-center table-hover">
+				<volist name="problemData" id="vo" mod="10" >
+					<eq name="mod" value="0"><tr></eq>
+					<td style="background-color: #99FF99;">
+						<a href="__APP__/Problem/showProblem/id/<{$vo.problem_id}>">
+							<{$vo.problem_id}>
+						</a>
+					</td>
+					<eq name="mod" value="9"></tr></eq>
+				</volist>
+			</table>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-md-12">
+			<h4 >题库已提交未AC的题目列表</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-condensed table-striped table-bordered text-center table-hover">
+				<volist name="notSolve" id="vo" mod="10" >
+					<eq name="mod" value="0"><tr></eq>
+					<td style="background-color: #FF9999;">
+						<a href="__APP__/Problem/showProblem/id/<{$vo.problem_id}>">
+							<{$vo.problem_id}>
+						</a>
+					</td>
+					<eq name="mod" value="9"></tr></eq>
+				</volist>
+			</table>
+		</div>
+	</div>
+	<hr />
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-md-12">
+			<h4 >课程已AC的题目列表</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-condensed table-striped table-bordered text-center table-hover">
+				<volist name="trainProblem" id="vo">
+					<tr>
+						<td style="width: 40%;" class="text-left"><{$vo[0]['problem_title']}></td>
+						<volist name="vo" id="vo1">
+							<td style="background-color: #99FF99;">
+								<a href="__APP__/Train/showProblem/id/<{$vo1.problem_id}>">
+									<{$vo1.problem_mark}>
+								</a>
+							</td>
+						</volist>
+					</tr>
+				</volist>
+			</table>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-md-12">
+			<h4 >课程已提交未AC的题目列表</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-condensed table-striped table-bordered text-center table-hover">
+				<volist name="trainNotSolveProblem" id="vo" mod="10" >
+					<tr>
+						<td style="width: 40%;" class="text-left"><{$vo[0]['problem_title']}></td>
+						<volist name="vo" id="vo1">
+							<td style="background-color: #FF9999;">
+								<a href="__APP__/Train/showProblem/id/<{$vo1.problem_id}>">
+									<{$vo1.problem_mark}>
+								</a>
+							</td>
+						</volist>
+					</tr>
+				</volist>
+			</table>
+		</div>
+	</div>
+</block>

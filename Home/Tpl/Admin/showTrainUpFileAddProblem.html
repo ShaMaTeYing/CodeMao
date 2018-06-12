@@ -1,0 +1,23 @@
+<extend name="../Public/trainAdminBase" />
+
+<block name="main">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2>上传题目文本文档</h2>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4 text-center">
+			<form action="__APP__/Admin/trainUpFileAddProblem" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="id" value="<{$levelMsgId}>">
+				<div class="form-group">
+					
+					<input class="col-md-offset-3" type="file" name="file_path"/>
+					<p class="help-block">文件大小不能超过8M</p>
+				</div>
+				<button type="submit" class="btn btn-default">提交</button>
+			</form>
+		</div>
+	</div>
+</block>

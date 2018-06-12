@@ -1,0 +1,29 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row" style="margin-bottom: 40px;">
+		<div class="col-md-12 text-center">
+			<h2>课程</h2>
+		</div>
+	</div>
+	<div class="row">
+		<volist name="levelData" id="vo">
+			<div class="col-md-4">
+				<div class="panel panel-success">
+				  <div class="panel-heading">
+				  	<a href="__APP__/Train/showTaskList/id/<{$vo.id}>">
+				    <h3 class="panel-title"><{$vo.entrance_title}></h3>
+				    </a>
+				  </div>
+				  <div class="panel-body" style="height: 250px;white-space: pre-wrap;       
+			white-space: -moz-pre-wrap;  
+			white-space: -pre-wrap;      
+			white-space: -o-pre-wrap;    
+			word-wrap: break-word;"><{$vo.content}></div>
+				</div>
+			</div>
+		</volist>
+	</div>
+	
+	
+	
+</block>

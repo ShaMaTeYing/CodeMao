@@ -1,0 +1,87 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2><{$contestData.name}></h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<span>开始时间 : <{$contestData.start_time|date="Y-m-d H:i",###}></span>
+			<span>结束时间 : <{$contestData.end_time|date="Y-m-d H:i",###}></span>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 20px;margin-top: 10px;">
+		<div class="col-md-12 text-center" style="color: #0066FF;">
+			<span>当前服务器时间：</span>
+			<span id="showDate">
+				<{$nowTime|date="Y-m-d H:i:s",###}>
+			</span>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 20px;margin-top: 10px;">
+		<div class="col-md-12 text-left" style="color: #0066FF;">
+			<a class="btn btn-default" href="__APP__/ExamAdmin/showAddProblemPage/id/<{$contestData.id}>" role="button">新增题目</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table  class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr>
+					<th class="text-center">题号</th>
+					<th class="text-center">标题</th>
+					<th class="text-center">操作</th>
+				</tr>
+				<volist name='problemData' id='vo'>
+					<tr>
+						<td>
+							<a href="__APP__/ExamAdmin/showProblemPage/id/<{$vo.id}>"><{$vo.problem_mark}></a>
+						</td>
+						<td>
+							<a href="__APP__/ExamAdmin/showProblemPage/id/<{$vo.id}>"><{$vo.title}></a>
+						</td>
+						<td>
+							<a href="__APP__/Admin/reJudge/id/<{$vo.id}>">重判</a>|
+							<a href="__APP__/ExamAdmin/showModifyProblemPage/contest_id/<{$contestData.id}>/id/<{$vo.id}>">编辑</a>|
+							<a href="__APP__/ExamAdmin/showUpLoadProblemDataPage/contest_id/<{$contestData.id}>/id/<{$vo.id}>/title/<{$vo.title}>">
+								数据
+								<eq name="vo.dataStatus" value="1">
+									(已上传)
+									<else/>
+									(未上传)
+								</eq>
+							</a>|
+							<eq name="vo.status" value="1">
+								<a href="__APP__/ExamAdmin/switchProblemStatus/contest_id/<{$contestData.id}>/id/<{$vo.id}>">隐藏</a>
+								<else/>
+								<a href="__APP__/ExamAdmin/switchProblemStatus/contest_id/<{$contestData.id}>/id/<{$vo.id}>">显示</a>
+							</eq>
+						</td>
+					</tr>
+				</volist>
+			</table>
+		</div>
+	</div>
+	
+	<div class="text-center"><{$page}></div>
+
+	<script type="text/javascript"> 
+			$(function(){ 
+				setInterval("getTime();",1000); //每隔一秒执行一次 
+				}) 
+				//取得系统当前时间 
+			var stime = "<{$nowTime}>";
+			function getTime(){ 
+				stime++;
+		        var Otime = new Date(parseInt(stime) * 1000);
+		        //$("#showDate").html(Otime.pattern("yyyy-MM-dd EEE HH:mm:ss"));
+				//var myDate = new Date(); 
+				var myDate=Otime;
+				var date = myDate.toLocaleDateString(); 
+				var hours = myDate.getHours(); 
+				var minutes = myDate.getMinutes(); 
+				var seconds = myDate.getSeconds(); 
+				$("#showDate").html(date+" "+hours+":"+minutes+":"+seconds); //将值赋给div 
+			} 
+		</script>
+</block>

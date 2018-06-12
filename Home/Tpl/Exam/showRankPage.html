@@ -1,0 +1,56 @@
+<extend name="../Public/examBase" />
+<block name="main">
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-lg-12 text-center" style="font-size: 32px;">
+			<span class="glyphicon glyphicon-hand-right" style="color: #660066;"></span>
+			<span style="color: #3300CC;">排行榜</span>
+			<span class="glyphicon glyphicon-hand-left" style="color: #660066;"></span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<table class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr style="background-color: rgb(101,137,209);color: #FFFFFF;">
+					<th class="text-center" style="width: 7%;">排名</th>
+					<th class="text-center">昵称</th>
+					<th class="text-center" style="width: 7%;">通过题数</th>
+					<th class="text-center" style="width: 7%;">时间</th>
+					<th class="text-center" style="width: 7%;">得分</th>
+					<volist name="problem" id="vo">
+						<th class="text-center" style="width: 7%;"><{$vo}></th>
+					</volist>
+				</tr>
+				<volist name='sorted' id='vo'>
+					<tr>
+						<td><{$vo.rank}></td>
+						<td>
+							<{$vo.nickname}>
+						</td>
+						<td><{$vo.ac_number}></td>
+						<td><{$vo.all_time}></td>
+						<td><{$vo.score}></td>
+						<volist name="problem" id="voo">
+							<eq name="vo.{$voo}.ac" value="1">
+								<td class="text-center" style="background-color: rgb(170,226,171);"><{$vo.{$voo}.score}>(<{$vo.{$voo}.wa}>)</td>
+								<else/>
+								<eq name="vo.{$voo}.ac" value="-1">
+									<td class="text-center" style="background-color: rgb(246,123,81);"><{$vo.{$voo}.score}>(<{$vo.{$voo}.wa}>)</td>
+									<else/>
+									<eq name="vo.{$voo}.ac" value="2">
+										<td class="text-center" style="background-color: rgb(87,187,87);"><{$vo.{$voo}.score}>(<{$vo.{$voo}.wa}>)</td>
+										<else/>
+										<td class="text-center"></td>
+									</eq>
+								</eq>
+							</eq>
+							
+						</volist>
+					</tr>
+				</volist>	
+			</table>
+		</div>
+	</div>
+	<script language="javascript">
+		setTimeout("self.location.reload();",30000);
+	</script>
+</block>

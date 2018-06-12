@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <link rel="stylesheet" href="__PUBLIC__/bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
+	    <link rel="stylesheet" href="__PUBLIC__/bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<link rel="shortcut icon" href="__PUBLIC__/img/onecode.png" type="image/x-icon" />
+		<block name="css"></block>
+		<script language="javascript" src="__PUBLIC__/bootstrap-3.3.7-dist/js/jquery-1.12.2.min.js"></script>
+		<script language="javascript" src="__PUBLIC__/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<block name="js"></block>
+		<title>
+			<block name="title">一码学程</block>
+		</title>
+	</head>
+	<body>
+		<block name="header">
+			<include file="../Public/header" />
+		</block>
+		<div class="row">
+			<div class="col-md-2">
+				<div class="row">
+					<div class="col-md-12">
+						<h4>课程后台管理</h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="collapse navbar-collapse nav-stacked">
+						  	<li role="presentation"><a href="__APP__/Admin/showLevelList">查看课程列表</a></li>
+						  	<ul class="collapse navbar-collapse nav-stacked">
+						  		<volist name="trainLevelData" id="vo">
+						  			<li role="presentation"><a href="__APP__/Admin/showTaskList/id/<{$vo.id}>"><{$vo.entrance_title}></a></li>
+						  		</volist>
+							</ul>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-10">
+				<block name="main">
+					
+				</block>
+			</div>
+		</div>
+		
+		<block name="footer">
+			<include file="../Public/footer" />
+		</block>
+		
+	</body>
+</html>

@@ -1,0 +1,57 @@
+<extend name="../Public/trainAdminBase" />
+<block name="main">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2><{$levelData.entrance_title}></h2>
+		</div>
+	</div>
+	
+	<div class="row" style="margin-bottom: 15px;">
+		<div class="col-md-12">
+			<a class="btn btn-primary" href="__APP__/Admin/showAddTask/id/<{$levelMsgId}>" role="button">新增章节</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped table-bordered text-center">
+				<tr style="background-color: #CC99FF;">
+					<th class="text-center">章节标题</th>
+					<th class="text-center">题数</th>
+					<th class="text-center">操作</th>
+				</tr>
+				<volist name="levelMsgData" id="vo">
+					<tr>
+						<td class="text-left">
+							<a href="__APP__/Admin/showTrainProblemList/id/<{$vo.id}>">
+								<{$vo.level_title}>
+							</a>
+						</td>
+						<td class="text-center">
+							<{$vo.problem_number}>
+						</td>
+						<td>
+							<a href="__APP__/Admin/showModifyTask/id/<{$vo.id}>/levelId/<{$levelData.id}>">编辑</a>
+							|
+							<eq name="vo.status" value="0">
+								<a href="__APP__/Admin/showModifyTaskStatus/id/<{$vo.id}>/status/1/levelId/<{$levelData.id}>">隐藏</a>
+								<else/>	
+								<a href="__APP__/Admin/showModifyTaskStatus/id/<{$vo.id}>/status/0/levelId/<{$levelData.id}>">显示</a>
+							</eq>
+							<eq name="vo.priority" value="$minPriority">
+								<else />
+								|
+								<a href="__APP__/Admin/showTaskList/id/<{$levelData.id}>/op/1/priority/<{$vo.priority}>">上移</a>
+							</eq>
+							<eq name="vo.priority" value="$maxPriority">
+								
+								<else />
+								|
+								<a href="__APP__/Admin/showTaskList/id/<{$levelData.id}>/op/2/priority/<{$vo.priority}>">下移</a>
+							</eq>
+						</td>
+					</tr>
+				</volist>
+			</table>
+		</div>
+	</div>
+</block>

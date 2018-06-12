@@ -1,0 +1,104 @@
+<extend name="../Public/trainBase" />
+<block name="css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/dist/css/wangEditor.min.css">
+	<style type="text/css">
+		.mytable table, th, td{
+			border: 1px solid lightgrey;
+		}
+	</style>
+</block>
+<block name="trainMain">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-12 text-center">
+		  		<h3>讨论区</h3>
+		 </div>
+		</div>
+		<volist name="BBSData" id="vo">
+			<div class="row" style="padding-bottom: 10px;">
+				<div class="col-md-6">
+					<span><{$vo.nickname}></span>
+				</div>
+				<div class="col-md-4 col-md-offset-2">
+					<span><{$vo.submit_time|date="Y-m-d H:i:s",###}></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-11 mytable">
+					<{$vo.comment}>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-11">
+					<hr />
+				</div>
+			</div>
+					
+					
+					
+					
+		</volist>
+		<div class="row">
+			<div class="col-md-11 text-center">
+			<{$page}>
+		</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-11 text-center">
+				<h3>发表意见</h3>
+			</div>
+		</div>
+		<div class="row">
+			<form action="#" method="post">
+				<div class="col-md-11 ">
+				  	<textarea id="textarea1"  name="textarea" style="height:400px;max-height:500px;"></textarea>
+				</div>
+				<div class="col-md-8">
+				  	<input class="btn btn-default" type="submit"  value="提交">
+				</div>
+			</form>
+		  
+		</div>
+		
+
+
+<!--这里引用jquery和wangEditor.js-->
+
+		<script type="text/javascript" src="__PUBLIC__/dist/js/lib/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/dist/js/wangEditor.js"></script>
+		<script type="text/javascript">
+		    var editor = new wangEditor('textarea1');
+		    editor.create();
+		    
+		    //alert(html);
+		   
+		    $(function(){
+			  
+			  	$("input[type='submit']").click(function(){
+			      	event.preventDefault();//取消默认提交表单
+			       	// 获取编辑器区域完整html代码
+					
+        			var html = editor.$txt.html();
+
+			        // 获取编辑器纯文本内容
+			        var text = editor.$txt.text();
+	
+			        // 获取格式化后的纯文本
+			        var formatText = editor.$txt.formatText();
+			     
+			      	$.post(
+			            '__APP__/Train/getWangEditorData',
+			            {html:html},
+			            function(data){
+			            	//alert(data.url);
+			                if(data.status == 1){
+			                    window.location.href = data.url;
+			                }
+			              
+			        }, "json");
+			  	})
+			})
+		</script>
+	</div>
+</block>

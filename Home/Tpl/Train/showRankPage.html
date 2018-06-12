@@ -1,0 +1,43 @@
+<extend name="../Public/trainBase" />
+<block name="trainMain">
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h2>练习排名</h2>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 50px">
+			<div class="col-lg-12">
+				<table class="table table-condensed table-striped table-bordered text-center table-hover">
+					<tr style="background: #9999FF">
+						<th class="text-center" style="width: 7%;">排名</th>
+						<th class="text-center">昵称</th>
+						<th class="text-center" style="width: 7%;">通过题数</th>
+						<th class="text-center" style="width: 7%;">得分</th>
+						<volist name="trainProblemData" id="vo">
+							<th class="text-center" style="width: 7%;"><{$vo.problem_mark}></th>
+						</volist>
+					</tr>
+					<volist name='rankData' id='vo'>
+						<tr>
+							<td><{$vo.rank}></td>
+							<td>
+								<a href="__APP__/User/showUserMessage/id/<{$vo.id}>"><{$vo.nickname}></a>
+							</td>
+							<td><{$vo.ac_number}></td>
+							<td><{$vo.score}></td>
+							<volist name="trainProblemData" id="voo">
+									<td class="text-center" style="background-color: <{$vo.{$voo['problem_mark']}.backgroud_color}>;">
+										<gt name="vo.{$voo['problem_mark']}.judge_status" value="0">
+											<{$vo.{$voo['problem_mark']}.score}>
+										</gt>
+									</td>
+							</volist>
+						</tr>
+					</volist>	
+				</table>
+			</div>
+		</div>
+	</div>
+	
+</block>

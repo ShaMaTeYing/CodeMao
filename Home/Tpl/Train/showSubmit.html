@@ -1,0 +1,38 @@
+<extend name="../Public/trainBase" />
+<block name="trainMain">
+	<div class="col-md-12" style="padding-top: 40px;">
+		<form action="__APP__/Train/onlineJudge" method="post">
+			<input type="hidden" name="problemID" value="<{$id}>"/>
+			<input type="hidden" name="level_msg_id" value="<{$level_msg_id}>"/> 
+			<div class="row">
+				<h2 class="text-center"></h2>
+			</div>
+			<div class="row" style="padding-bottom: 15px;">
+				<div class="col-md-4">
+					<span style="font-size: 18px;">问题标题:<{$title}></span>
+				</div>
+				<div class="col-md-2" style="font-size: 18px;">
+					<span>语言</span>
+				</div>
+				
+				<div class="col-md-2">
+					<select class="form-control" name="language">
+					  <option value="C++">C++</option>
+					  <option value="C">C</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<textarea class="form-control" rows="20" name="code"></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<input class="btn btn-default text-center" type="submit" value="提交代码">
+				</div>
+			</div>
+		</form>
+	</div>
+</block>

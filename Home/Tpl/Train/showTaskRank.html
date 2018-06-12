@@ -1,0 +1,24 @@
+<extend name="../Public/trainBase" />
+<block name="trainMain">
+	<div class="col-md-12" style="padding-top: 40px;">
+		<table  class="table table-condensed table-striped table-bordered">
+				<tr>
+					<th class="text-center">昵称</th>
+					<th class="text-center">解决问题总数</th>
+					<th class="text-center">总提交数</th>
+					<th class="text-center">AC率</th>
+					<th class="text-center">排名</th>
+				</tr>
+				<volist name='list' id='vo'>
+					<tr class="text-center">
+						<td> <a href="__APP__/User/showUserMessage/id/<{$vo.user_id}>"><{$vo.nickname}> </a></td>
+						<td> <{$vo.solve_problem}>  </td>
+						<td> <{$vo.submissions}>  </td>
+						<td><{:getRatio($vo['solve_problem'],$vo['submissions'])}>% (<{$vo.solve_problem}>/<{$vo.submissions}>) </td>
+						<td> <{$vo.rank}> </td>
+					</tr>
+				</volist>
+		</table>
+	</div>
+	<div class="text-center"><{$page}></div>
+</block>

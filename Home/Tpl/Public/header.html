@@ -1,0 +1,68 @@
+<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<div class="row">
+							<div class="col-md-12">
+								<nav class="navbar navbar-default">
+								  <div class="container-fluid">
+									<!-- Brand and toggle get grouped for better mobile display -->
+									<div class="navbar-header">
+
+									  	<img src="__PUBLIC__/img/tm.png" alt="" />
+
+									</div>
+									<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+									  <ul class="nav navbar-nav" style="font-size: 20px;">
+										<li><a href="__APP__/Index/index" style="color: #2c7e92;">首页</a></li>
+										
+										<li><a href="__APP__/Problem/showProblemList" style="color: #2c7e92;">题库</a></li>
+										<li><a href="__APP__/Judge/showRealTimeEvaluation" style="color: #2c7e92;">状态</a></li>
+										<li><a href="__APP__/Ladder/showContestListPage" style="color: #2c7e92;">天梯</a></li>
+									  	<li><a href="__APP__/Train/index" style="color: #2c7e92;">课程</a></li>
+									  	<li><a href="__APP__/Exam/index" style="color: #2c7e92;">比赛</a></li>
+									  	<li><a href="__APP__/User/showAllUserRank" style="color: #2c7e92;">排行榜</a></li>
+									  	<!--<li><a href="__APP__/Exam/index">比赛</a></li>-->
+									  	<!--<li><a href="__APP__/Forum/showForum">留言区</a></li>-->
+									  </ul>
+									  
+									  <ul class="nav navbar-nav navbar-right">
+										<eq name="loginStatus" value="0">
+											<li><a href="__APP__/User/showLogin" style="color: #2c7e92;">登录</a></li>
+											<!--<li><a href="__APP__/User/showRegister">注册</a></li>-->
+											<else/>
+											 <li class="dropdown">
+												 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #2c7e92;"> <{$userinfoData.username}>
+												 <span class="caret"></span></a>
+												 <ul class="dropdown-menu">
+												  
+													<li><a href="__APP__/User/showUserMessage/id/<{$userinfoData.id}>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;我的信息</a></li>
+													<li><a href="__APP__/User/showModifyUserMessage/id/<{$userinfoData.id}>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;修改信息</a></li>
+													<li><a href="__APP__/User/showModifyPassword/id/<{$userinfoData.id}>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;修改密码</a></li>
+													<gt name="userinfoData.root" value="0">
+														<li><a href="__APP__/Test/showProblemList"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;测题系统</a></li>
+														<li><a href="__APP__/TestAdmin/showProblemLibrary"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;测题管理</a></li>
+													</gt>
+													<gt name="userinfoData.root" value="1">
+													<li><a href="__APP__/Admin/showBulletinPage"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;公告管理</a></li>
+													<li><a href="__APP__/Admin/showAddUserPage"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;新增用户</a></li>
+													<li><a href="__APP__/Admin/showProblemLibrary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;题目管理</a></li>
+													<li><a href="__APP__/Admin/showLoginMessage"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;登录管理</a></li>
+													<li><a href="__APP__/Admin/showUserMessage"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;用户管理</a></li>
+													<li><a href="__APP__/Admin/showLevelList"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;课程管理</a></li>
+													<li><a href="__APP__/ExamAdmin/index"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;比赛管理</a></li>
+													<li><a href="__APP__/LadderAdmin/showContestListPage"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;天梯管理</a></li>
+													<li><a href="__APP__/Admin/showViolationQueryPage"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;违规查询</a></li>
+													</gt>
+													<li><a href="__APP__/User/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;退出登录</a></li>
+													<li role="separator" class="divider"></li>
+											  </ul>
+												  
+											</li>
+										</eq>
+										
+									  </ul>
+									</div><!-- /.navbar-collapse -->
+								  </div><!-- /.container-fluid -->
+								</nav>
+							</div>
+						</div>

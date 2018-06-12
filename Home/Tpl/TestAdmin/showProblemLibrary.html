@@ -1,0 +1,84 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-lg-12 col-sm-12 text-center">
+			<h2>测题后台管理</h2>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 15px;">
+		<form action="__APP__/TestAdmin/showProblemLibrary" method="post">
+			<div class="col-md-4">
+					<input type="text" class="form-control" name="id" value="<{$content}>">  
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-primary" type="submit">搜索</button>
+			</div>
+			<div class="col-md-2">
+				<a class="btn btn-primary" href="__APP__/TestAdmin/showAddProblem" role="button">新增题目</a>
+			</div>
+			<div class="col-md-2">
+				<a class="btn btn-primary" href="__APP__/TestAdmin/showUpZipAddProblem" role="button">上传压缩文件添题</a>
+			</div>
+		</form>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table  class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr style="background-color: #A074C4;">
+					<th class="text-center">问题ID</th>
+					<th>标题</th>
+					<th class="text-center">难度</th>
+					<th class="text-center">标签</th>
+					<th class="text-center">操作</th>
+				</tr>
+				<volist name='problemData' id='vo'>
+					<tr>
+						<td>
+							<a href="__APP__/Test/showProblem/id/<{$vo.id}>"><{$vo['id']}> </a>
+							
+						</td>
+						<td style="text-align: left;"> 
+							<a href="__APP__/Test/showProblem/id/<{$vo.id}>">
+							<{$vo.title}>  
+							</a>
+						</td>
+						<td>
+							<{$vo.difficulty}>
+						</td>
+						<td>
+							<{$vo.label}>
+						</td>
+						<td>
+							<a href="__APP__/TestAdmin/reJudge/id/<{$vo.id}>">重判</a> |
+							<a href="__APP__/TestAdmin/showModifyProblem/id/<{$vo.id}>">编辑</a> |
+							<a href="__APP__/TestAdmin/showUpload/id/<{$vo.id}>/title/<{$vo.title}>">
+								数据
+								<eq name="vo.dataStatus" value="1">
+									<span style="color: green;">(已上传)</span>
+									<else/>
+									<span style="color: red;">(未上传)</span>
+								</eq>
+							</a> |
+							<eq name="vo.status" value="1">
+								<a href="__APP__/TestAdmin/deleteProblem/id/<{$vo.id}>/status/0">隐藏</a>
+								<else/>
+								<a href="__APP__/TestAdmin/deleteProblem/id/<{$vo.id}>/status/1">显示</a>
+							</eq>
+							 
+							<gt name="userinfo.root" value="1">
+								|
+								<a href="__APP__/TestAdmin/addTestToProblem/id/<{$vo.id}>">添加到题库</a>
+							</gt>
+						</td>
+					</tr>
+				</volist>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="page"><{$page}></div>
+		</div>
+	</div>
+	
+</block>

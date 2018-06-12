@@ -1,0 +1,87 @@
+<extend name="../Public/base" />
+<block name="css">
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+</block>
+<block name="main">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2>新增比赛</h2>
+		</div>
+		<form action="__APP__/ExamAdmin/addExam" method="post">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="form-group">
+					   <label >比赛名称</label>
+					   <input type="text" class="form-control" name="name">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2 col-md-offset-4">
+					<div class="form-group">
+					   <label >开始时间</label>
+					   <input type="text" class="form-control" value="<{$nowTime}>" id="datetimepicker" name="start_time">
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+					   <label >结束时间</label>
+					   <input type="text" class="form-control" value="<{$nowTime}>" id="datetimepicker1" name="end_time">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2 col-md-offset-4">
+					 <div class="form-group">
+				    	<label for="exampleInputName2">状态</label>
+				   		<select name="type" class="form-control">
+							<volist name="type" id="vo">
+								<eq name="sta" value="$vo.index">
+									<option value="<{$vo.index}>" selected="selected"> <{$vo.status}> </option>
+									<else/>
+									<option value="<{$vo.index}>"><{$vo.status}></option>
+								</eq>	
+							</volist>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+				    	<label for="exampleInputName2">密码</label>
+				   		<input type="password" name="passwor" class="form-control" placeholder="密码" value="<{$ant}>"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="checkbox">
+					  <label>
+					    <input type="checkbox" value="1" name="is_visible">
+					    前台隐藏
+					  </label>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 30px;">
+				<div class="col-md-4 col-md-offset-4">
+					<input class="btn btn-default" type="submit" value="提交比赛">
+				</div>
+			</div>
+		</div>
+		</form>
+		
+	
+</block>
+<block name="footerJs">
+	<script language="javascript" src="__PUBLIC__/bootstrap-3.3.7-dist/js/jquery-1.12.2.min.js"></script>
+	<script src="__PUBLIC__/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	<script src="__PUBLIC__/bootstrap-datetimepicker/js/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script type="text/javascript">
+    $('#datetimepicker').datetimepicker({
+	    format: 'yyyy-mm-dd hh:ii'
+	});
+	 $('#datetimepicker1').datetimepicker({
+	    format: 'yyyy-mm-dd hh:ii'
+	});
+</script>     
+</block>

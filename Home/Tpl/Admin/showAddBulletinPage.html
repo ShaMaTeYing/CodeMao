@@ -1,0 +1,27 @@
+<extend name="../Public/base" />
+<block name="main">
+	<form action='<{:U("Admin/addBulletin")}>' name="form1" method='post' enctype="multipart/form-data" onSubmit="return myCheck()">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2>新增公告</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">公告内容</label>
+			    	<textarea class="form-control" rows="8" name="content"></textarea>
+			    </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="form-group">
+			    	<input class="btn btn-default" type="submit"  value="提交" />
+					<input class="btn btn-default" type="reset" value="重置" />
+			    </div>
+			</div>
+		</div>
+	
+	</form>
+</block>

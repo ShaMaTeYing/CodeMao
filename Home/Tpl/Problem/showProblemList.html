@@ -1,0 +1,107 @@
+<extend name="../Public/base" />
+<block name="main">
+	
+	<div class="row">
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row" style="margin-bottom: 20px;">
+						<form action="__APP__/Problem/showProblemList" method="post">
+							<div class="col-md-12">
+								<div class="input-group">
+		                            <input type="text" class="form-control" name="value" placeholder="搜索" value="">
+		                            <div class="input-group-btn">
+		                            	<button type="submit" class="btn btn-primary">
+		                            		<span class="glyphicon glyphicon-search"></span>
+		                            	</button>
+		                            </div>
+		                        </div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-primary">
+					  <div class="panel-heading">
+					  	<!--<h6 class="label-title text-left">
+			
+							分类
+						</h6>-->
+						<span style="font-size: 16px;font-family: 'STHeiti Light';">标签</span>
+					  </div>
+					  <!--<div class="panel-body">-->
+					   <ul class="list-group">
+						<volist name='labelData' id='vo'>
+							<gt name="vo.problem_number" value="0">
+							  <li class="list-group-item">
+							    <span class="badge"><{$vo.problem_number}></span>
+							    	<a href="__APP__/Problem/showProblemList/label_id/<{$vo.label_id}>">
+										<{$vo.label_name}>
+									</a>
+							  </li>
+							</gt>
+						</volist>
+						</ul>
+					  <!--</div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<table  class="table table-bordered table-condensed table-striped  table-hover text-center">
+				<tr style="background-color:rgb(51,122,183);color: #FFFFFF;">
+					<th style="width: 7%;" class="text-center">状态</th>
+					<th style="width: 10%;" class="text-center">ID</th>
+					<th style="text-align:left;" class="text-center">标题</th>
+					<th style="width: 8%;" class="text-center" >分值</th>
+					<th  style="width: 18%;" class="text-center">通过率</th>
+				</tr>
+				<volist name='problemData' id='vo'>
+					<tr style="width: 10%;" class="<{$vo.class_status}>">
+						<td class="tCenter">
+							<eq name="vo.judge_status" value="0">
+								<span class="glyphicon glyphicon-ok" style="color: #009926;" aria-hidden="true"></span>
+							<else/>
+								<gt name="vo.judge_status" value="0">
+									<span class="glyphicon glyphicon-minus" aria-hidden="true" style="color: #FF0000;"></span>
+								</gt>
+							</eq>
+						</td>
+						<td><{$vo.id}> </td>
+						<td style="text-align:left;"> <a href='__APP__/Problem/showProblem/id/<{$vo.id}>'> <{$vo.title}> </a> </td>
+						<td>
+							<eq name="vo.difficulty" value="0">
+								5
+							</eq>
+							<eq name="vo.difficulty" value="1">
+								7
+							</eq>
+							<eq name="vo.difficulty" value="2">
+								9
+							</eq>
+							<eq name="vo.difficulty" value="3">
+								11
+							</eq>
+							<eq name="vo.difficulty" value="4">
+								13
+							</eq>
+							
+						</td>
+						<td><{:getRatio($vo['accepted'],$vo['submissions'])}>% (<{$vo.accepted}>/<{$vo.submissions}>) </td>
+					</tr>
+				</volist>
+				
+				</table>
+				<div class="row">
+			    	<div class="col-md-12">
+			    		<div class="text-center"><{$page}></div>
+			    	</div>
+			    </div>
+		</div>
+		
+	</div>
+    
+		
+</block>

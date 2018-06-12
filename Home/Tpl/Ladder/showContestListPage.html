@@ -1,0 +1,64 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row">
+		<div class="col-lg-12 text-center">
+			<h2>一码天梯赛</h2>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 30px;">
+		<div class="col-lg-8">
+			<span class="label label-info" style="font-size: 16px;">天梯题目只能提交一次！</span>
+			<span class="label label-info" style="font-size: 16px;">得分计入排行榜！</span>
+			<span class="label label-info" style="font-size: 16px;">天梯题目提交后，将在题库中显示！</span>
+		</div>
+		<div class="col-lg-2 col-lg-offset-2 text-right">
+			<form action="__APP__/Ladder/showContestListPage" method="post">
+				<div class="input-group text-right">
+	                <input type="text" class="form-control" name="value" placeholder="搜索" value="">
+	                <div class="input-group-btn">
+	                	<button type="submit" class="btn btn-primary">
+	                		<span class="glyphicon glyphicon-search"></span>
+	                	</button>
+	                </div>
+	            </div>
+			</form>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 15px;">
+		<div class="col-lg-12">
+			<table class="table table-bordered table-condensed table-striped  table-hover text-center">
+				<tr>
+					<th class="text-center">天梯赛名</th>
+					<th class="text-center" style="color: rgb(242,113,127);">A (20)</th>
+					<th class="text-center" style="color: rgb(212,101,107);">B (20)</th>
+					<th class="text-center" style="color: rgb(48,120,168);">C (30)</th>
+					<th class="text-center" style="color: rgb(59,154,254);">D (40)</th>
+					<th class="text-center">总得分</th>
+				</tr>
+				<volist name="contestListData" id="vo">
+					<tr>
+						<td class="text-center">
+							<a href="__APP__/Ladder/showProblemListPage/id/<{$vo.id}>">
+								<{$vo.name}>
+							</a>
+						</td>
+						
+							<volist name="vo.problems" id="voo">
+								<td style="background-color: <{$vo.{$voo}.color}>;">
+									<eq name="vo.{$voo}.judge_status" value="-1">
+										<a href="__APP__/Ladder/showProblemPage/id/<{$vo.{$voo}.problem_id}>">—</a>
+										<else/>
+										<{$vo.{$voo}.score}>
+									</eq>
+								</td>
+							</volist>
+						
+						<td>
+							<{$vo.score}>
+						</td>
+					</tr>
+				</volist>
+			</table>
+		</div>
+	</div>
+</block>

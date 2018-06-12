@@ -1,0 +1,80 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2>比赛列表</h1>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 20px;margin-top: 10px;">
+		<div class="col-md-12 text-center" style="color: #0066FF;">
+			<span>当前服务器时间：</span>
+			<span id="showDate">
+				<{$nowTime|date="Y-m-d H:i:s",###}>
+			</span>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 20px;">
+			<form action="__APP__/Exam/index" method="post">
+				<div class="col-md-4">
+					<div class="input-group">
+	                    <input type="text" class="form-control" name="value" placeholder="搜索" value="">
+	                    <div class="input-group-btn">
+	                    	<button type="submit" class="btn btn-primary">
+	                    		<span class="glyphicon glyphicon-search"></span>
+	                    	</button>
+	                    </div>
+			        </div>
+		        </div>
+			</form>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table  class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr style="background-color:rgb(51,122,183);color: #FFFFFF;">
+					<th class="text-center">比赛名称</th>
+					<th class="text-center">开始时间</th>
+					<th class="text-center">结束时间</th>
+					<th class="text-center">类型</th>
+					<th class="text-center">状态</th>
+					<th class="text-center">作者</th>
+				</tr>
+				<volist name='list' id='vo'>
+					<tr>
+						<td>
+							<a href="__APP__/Exam/showProblemList/id/<{$vo.id}>">
+								<{$vo.name}> 
+							</a>
+						</td>
+						<td> <{$vo.start_time|date="Y-m-d H:i",###}>  </td>
+						<td> <{$vo.end_time|date="Y-m-d H:i",###}> </td>
+						<td><{$vo.type}></td>
+						<td style="color: <{$vo.status_color}>;"><{$vo.status}></td>
+						<td><{$vo.anthor}></td>
+					</tr>
+				</volist>
+			</table>
+		</div>
+	</div>
+	
+	<div class="text-center"><{$page}></div>
+
+	<script type="text/javascript"> 
+			$(function(){ 
+				setInterval("getTime();",1000); //每隔一秒执行一次 
+				}) 
+				//取得系统当前时间 
+			var stime = "<{$nowTime}>";
+			function getTime(){ 
+				stime++;
+		        var Otime = new Date(parseInt(stime) * 1000);
+		        //$("#showDate").html(Otime.pattern("yyyy-MM-dd EEE HH:mm:ss"));
+				//var myDate = new Date(); 
+				var myDate=Otime;
+				var date = myDate.toLocaleDateString(); 
+				var hours = myDate.getHours(); 
+				var minutes = myDate.getMinutes(); 
+				var seconds = myDate.getSeconds(); 
+				$("#showDate").html(date+" "+hours+":"+minutes+":"+seconds); //将值赋给div 
+			} 
+		</script>
+</block>

@@ -1,0 +1,63 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row" style="margin-bottom: 15px;">
+		<form action="__APP__/Admin/showProblemLibrary" method="post">
+			<div class="col-md-4">
+					<input type="text" class="form-control" name="id" value="<{$content}>">  
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-default" type="submit">搜索</button>
+			</div>
+			<div class="col-md-2">
+				<a class="btn btn-default" href="__APP__/Admin/showAddProblem" role="button">新增题目</a>
+			</div>
+			<div class="col-md-2">
+				<a class="btn btn-default" href="__APP__/Admin/showUpZipAddProblem" role="button">上传压缩文件添题</a>
+			</div>
+		</form>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table  class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr>
+					<th class="text-center">问题ID</th>
+					<th>标题</th>
+					<th class="text-center">操作</th>
+				</tr>
+				<volist name='problemData' id='vo'>
+					<tr>
+						<td>
+							<a href="__APP__/Problem/showProblem/id/<{$vo.id}>"><{$vo['id']}> </a>
+							
+						</td>
+						<td style="text-align: left;"> <{$vo.title}>  </td>
+						<td>
+							<a href="__APP__/Admin/reJudge/id/<{$vo.id}>">重判</a>|
+							<a href="__APP__/Admin/showModifyProblem/id/<{$vo.id}>">编辑</a>|
+							<a href="__APP__/Admin/showUpload/id/<{$vo.id}>/title/<{$vo.title}>">
+								数据
+								<eq name="vo.dataStatus" value="1">
+									(已上传)
+									<else/>
+									(未上传)
+								</eq>
+							</a>|
+							<eq name="vo.status" value="1">
+								<a href="__APP__/Admin/deleteProblem/id/<{$vo.id}>/status/0">隐藏</a>
+								<else/>
+								<a href="__APP__/Admin/deleteProblem/id/<{$vo.id}>/status/1">显示</a>
+							</eq>
+							
+						</td>
+					</tr>
+				</volist>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="page"><{$page}></div>
+		</div>
+	</div>
+	
+</block>

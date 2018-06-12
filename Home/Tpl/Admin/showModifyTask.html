@@ -1,0 +1,35 @@
+<extend name="../Public/trainAdminBase" />
+<block name="main">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2>修改章节数据</h2>
+		</div>
+	</div>
+	<form action="__APP__/Admin/modifyTask" method="post">
+		<input type="hidden" name="id" value="<{$levelMsgData.id}>"/>
+		<input type="hidden" name="levelId" value="<{$levelId}>"/>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-4 col-md-offset-4">
+				<label for="exampleInputEmail1">章节标题</label>
+				<input name="level_title" type="text" class="form-control" value="<{$levelMsgData.level_title}>">
+			</div>
+		</div>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-4 col-md-offset-4">
+				<label for="exampleInputEmail1">章节摘要</label>
+				<textarea name="level_abstract" class="form-control" rows="10"><{$levelMsgData.level_abstract}></textarea>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-4 col-md-offset-4">
+				<label for="exampleInputEmail1">排序优先级</label>
+				<input name="priority" type="text" class="form-control" value="<{$levelMsgData.priority}>">
+			</div>
+		</div>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-12 col-md-offset-4">
+				<input class="btn btn-primary" type="submit" value="修改">
+			</div>
+		</div>
+	</form>
+</block>
