@@ -8,7 +8,7 @@
 									<!-- Brand and toggle get grouped for better mobile display -->
 									<div class="navbar-header">
 
-									  	<img src="__PUBLIC__/img/tm.png" alt="" />
+									  	<img src="__PUBLIC__/img/codemao.jpg" alt="" width="150px" height="50px"/>
 
 									</div>
 									<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
@@ -17,18 +17,13 @@
 										
 										<li><a href="__APP__/Problem/showProblemList" style="color: #2c7e92;">题库</a></li>
 										<li><a href="__APP__/Judge/showRealTimeEvaluation" style="color: #2c7e92;">状态</a></li>
-										<li><a href="__APP__/Ladder/showContestListPage" style="color: #2c7e92;">天梯</a></li>
-									  	<li><a href="__APP__/Train/index" style="color: #2c7e92;">课程</a></li>
-									  	<li><a href="__APP__/Exam/index" style="color: #2c7e92;">比赛</a></li>
+									  	<li><a href="__APP__/Train/showCourseIndexPage" style="color: #2c7e92;">课程</a></li>
 									  	<li><a href="__APP__/User/showAllUserRank" style="color: #2c7e92;">排行榜</a></li>
-									  	<!--<li><a href="__APP__/Exam/index">比赛</a></li>-->
-									  	<!--<li><a href="__APP__/Forum/showForum">留言区</a></li>-->
 									  </ul>
 									  
 									  <ul class="nav navbar-nav navbar-right">
 										<eq name="loginStatus" value="0">
 											<li><a href="__APP__/User/showLogin" style="color: #2c7e92;">登录</a></li>
-											<!--<li><a href="__APP__/User/showRegister">注册</a></li>-->
 											<else/>
 											 <li class="dropdown">
 												 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #2c7e92;"> <{$userinfoData.username}>

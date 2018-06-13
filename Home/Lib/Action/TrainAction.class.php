@@ -645,4 +645,16 @@ class TrainAction extends BaseAction {
 		$this->assign('trainJudgeData',$trainJudgeData);
 		$this->display();
 	}
+	public function showCourseIndexPage(){
+		$courseData=M('course')->find();
+		$courseSectionData=M('course_section')->where(array('course_id'=>$courseData['id']))->select();
+		$this->assign('courseData',$courseData);
+		$this->assign('courseSectionData',$courseSectionData);
+		$this->display();
+	}
+	public function showCourseVideoPage(){
+		$courseSectionData=M('course_section')->where(array('course_id'=>$_GET['id']))->find();
+		$this->assign('courseSectionData',$courseSectionData);
+		$this->display();
+	}
 }
