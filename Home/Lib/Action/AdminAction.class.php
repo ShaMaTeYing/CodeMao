@@ -81,38 +81,23 @@ class AdminAction extends BaseAction {
 	}
 	/*添加题目*/
 	public function creatProblemData(){
-		
 		$User = M("problem");
 		foreach($_POST as $key=>$value){
+			if($key!='stdexe')
 			$_POST[$key]=htmlspecialchars($value);
 		}
-		//dump($_POST);
-		$labelString=$_POST['label'];
-		$labelString=$this->trimall($labelString);
-		$labelData=trim($labelData);
-		$labelData=explode(";", $labelString);
-		for($i=0;$i<count($labelData);$i++){
-			$where['label_name']=$labelData[$i];
-			$cnt=M('label_info')->where($where)->count();
-			if($cnt==0){
-				$data['label_name']=$labelData[$i];
-				$data['status']=0;
-				M('label_info')->data($data)->add();
-			}
-			$labelId=M('label_info')->where($where)->find();
-			$problemId=$User->max('id');
-			$problemLabelData['problem_id']=$problemId+1;
-			$problemLabelData['label_id']=$labelId['id'];
-			M('problem_label')->data($problemLabelData)->add();
-		}
-		unset($_POST['label']);
-		//dump($_POST);
-		//die;
+		$jsonData=array('label'=>$_POST['label'],
+		'idea'=>$_POST['idea'],
+		'stdexe'=>$_POST['stdexe']);
+		$saveData=$_POST;
+		$saveData['tips']=json_encode($jsonData);
 		
+		unset($saveData['label']);unset($saveData['idea']);unset($saveData['stdexe']);
+		
+		$problemId=M('problem')->max('id');
 		$_POST['id']=$problemId+1;
-		$count=$User->add($_POST);
-		if($count)
-			$this->success('success','showProblemLibrary');
+		$count=$User->add($saveData);
+		if($count) $this->success('success','showProblemLibrary');
 		else $this->error('fail','showProblemLibrary');
 	}
 	

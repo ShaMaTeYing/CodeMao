@@ -657,4 +657,8 @@ class TrainAction extends BaseAction {
 		$this->assign('courseSectionData',$courseSectionData);
 		$this->display();
 	}
+	public function showCourseTextbookPage(){
+		$this->display();
+	}
+	
 }

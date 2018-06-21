@@ -184,6 +184,13 @@ class ProblemAction extends BaseAction {
 		$userinfo=session('userinfo');
 		//echo "problemId".$problemId;
 		$arr=M('problem')->find($problemId);
+		$tipsData=json_decode($arr['tips']);
+		//dump($tipsData);
+		$arr['label']=$tipsData->label;
+		$arr['idea']=$tipsData->idea;
+		$arr['stdexe']=$tipsData->stdexe;
+		//dump($arr);
+		//die;
 		$ans=M('ladder_contest_problem')->where(array('problem_id'=>$problemId))->find();
 		if($ans){
 			$record=M('ladder_user_problem')->where(array('user_id'=>$userinfo['id'],'problem_id'=>$problemId))->find();

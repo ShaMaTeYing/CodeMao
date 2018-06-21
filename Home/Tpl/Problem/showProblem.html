@@ -118,7 +118,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<!--<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-danger">
 			  <div class="panel-heading">作者</div>
@@ -135,6 +135,97 @@
 			  <div class="panel-body">
 			  	<span class="mysapn"><{$problemData.source}></span>
 			  </div>
+			</div>
+		</div>
+	</div>-->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+			    <div class="panel-heading" role="tab" id="headingOne">
+			      <h4 class="panel-title">
+			        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+			         	 锦囊
+			        </a>
+			      </h4>
+			    </div>
+			    <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+			      <div class="panel-body">
+			      	<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+					  锦囊一
+					</button>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel">锦囊一</h4>
+					      </div>
+					      <div class="modal-body">
+					        <{$problemData.label}>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					
+					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+					  锦囊二
+					</button>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel">锦囊二</h4>
+					      </div>
+					      <div class="modal-body">
+					        <{$problemData.idea}>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					
+					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal3">
+					  锦囊三
+					</button>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel"> 锦囊三</h4>
+					      </div>
+					      <div class="modal-body">
+					      	<div class="row">
+								<div class="col-md-12">
+							   		<pre><{$problemData.stdexe}></pre>
+								</div>
+							</div>
+					        
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+			      </div>
+			    </div>
+			  </div>
+			 
 			</div>
 		</div>
 	</div>
@@ -201,6 +292,14 @@
 	<script type="text/javascript">
 		var myTextarea = document.getElementById('editor');
 		var CodeMirrorEditor = CodeMirror.fromTextArea(myTextarea, {
+		    mode: "text/x-c++src",
+		    matchBrackets: true,
+		    indentUnit:4,
+		    theme:'eclipse',
+			lineNumbers: true
+		});	
+		var myTextarea1 = document.getElementById('editor1');
+		var CodeMirrorEditor1 = CodeMirror.fromTextArea(myTextarea1, {
 		    mode: "text/x-c++src",
 		    matchBrackets: true,
 		    indentUnit:4,
