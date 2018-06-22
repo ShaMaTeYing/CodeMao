@@ -647,7 +647,7 @@ class TrainAction extends BaseAction {
 	}
 	public function showCourseIndexPage(){
 		$courseData=M('course')->find();
-		$courseSectionData=M('course_section')->where(array('course_id'=>$courseData['id']))->select();
+		$courseSectionData=M('course_section')->where(array('course_id'=>$courseData['id'],'status'=>0))->order(array('order'))->select();
 		$this->assign('courseData',$courseData);
 		$this->assign('courseSectionData',$courseSectionData);
 		$this->display();
@@ -660,5 +660,4 @@ class TrainAction extends BaseAction {
 	public function showCourseTextbookPage(){
 		$this->display();
 	}
-	
 }
