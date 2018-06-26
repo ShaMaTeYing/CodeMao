@@ -76,14 +76,22 @@
 						    </div>
 						    <div id="<{$vo.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$vo.id}>">
 						      <div class="panel-body">
-						      	<div class="row">
-						      		<div class="col-lg-offset-10 col-lg-1">
-						      			<a href="__APP__/Train/showCourseTextbookPage/id/<{$vo.id}>" target="_blank" title="第<{$vo.id}>课 <{$vo.name}>PPT"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
-						      		</div>
-						      		<div class="col-lg-1">
-						      			<a href="__APP__/Train/showCourseVideoPage/id/<{$vo.id}>" target="_blank" title="第<{$vo.id}>课 <{$vo.name}>视频"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>
-						      		</div>
-						      	</div>
+						      	<volist name="vo.subInfo" id="subvo" key="subindex">
+						      		<div class="row">
+						      			<div class="col-lg-2">
+						      				<h5><{$index}>.<{$subindex}> <{$subvo.name}></h5>
+						      			</div>
+							      		<div class="col-lg-offset-8 col-lg-1" style="margin-top: 10px;">
+							      			<a href="__APP__/Train/showCourseTextbookPage/id/<{$subvo.ppt}>" target="_blank" title="第<{$vo.id}>课 <{$vo.name}>PPT"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
+							      		</div>
+							      		<div class="col-lg-1" style="margin-top: 10px;">
+							      			<a href="__APP__/Train/showCourseVideoPage/id/<{$subvo.id}>" target="_blank" title="第<{$vo.id}>课 <{$vo.name}>视频"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>
+							      		</div>
+							      		
+							      	</div>
+							      	<hr style="margin-top: 0;margin-bottom: 10px;border: 0;border-top: 2px solid #d9edf7;" />
+						      	</volist>
+						      	
 						      </div>
 						    </div>
 						  </div>

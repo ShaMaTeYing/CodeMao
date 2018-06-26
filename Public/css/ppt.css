@@ -1,0 +1,8 @@
+/*设置文本对齐: 左对齐 居中 右对齐*/
+.tl{ text-align: left; } 
+.tm{ text-align: center; }
+.tr{ text-align: right; }
+
+/*设置浮动: 左浮动 右浮动*/
+.fl{ float: left}
+.fr{ float: right}

@@ -64,6 +64,8 @@ class TrainAdminAction extends BaseAction {
 		$this->assign('courseSectionData',$courseSectionData);
 		$this->assign('order',$order);
 //		dump($courseSectionData);
+		$course = M('course')->where(array('id'=>$_GET['id']))->find();
+		$this->assign('course',$course);
 		$this->display();
 	}
 	function modifySectionData(){
@@ -113,5 +115,28 @@ class TrainAdminAction extends BaseAction {
 		$saveData['order']=$cnt+1;
 		M('course_section')->add($saveData);
 		$this->redirect('showCourseSectionPage');
+	}
+	function showCourseSubSectionPage(){
+		$courseSectionData=M('course_section')->where(array('id'=>$_GET['id']))->find();
+		$courseSubSectionData=M('course_sub_section')->where(array('course_section_id'=>$_GET['id']))->select();
+		$this->assign('courseSubSectionData',$courseSubSectionData);
+		$this->assign('courseSectionData',$courseSectionData);
+		$this->display();
+	}
+	function addSubSection(){
+		M('course_sub_section')->add($_POST);
+		$this->redirect('showCourseSubSectionPage',array('id'=>$_POST['course_section_id']));
+	}
+	function modifySubSectionData(){
+		
+		M('course_sub_section')->where(array('id'=>$_POST['id']))->save($_POST);
+		$this->redirect('showCourseSubSectionPage',array('id'=>$_POST['course_section_id']));
+	}
+	function switchSubStatic(){
+		$courseSectionData=M('course_sub_section')->where(array('id'=>$_GET['id']))->find();
+		$courseSectionData['status']=(string)(1-intval($courseSectionData['status']));
+		$res=M('course_sub_section')->save($courseSectionData);
+		if($res) $this->redirect('showCourseSubSectionPage',array('id'=>$_GET['id']));
+		else $this->error("修改失败！",U('showCourseSubSectionPage',array("id"=>$_GET['id'])));
 	}
 }

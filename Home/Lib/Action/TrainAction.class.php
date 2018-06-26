@@ -648,8 +648,16 @@ class TrainAction extends BaseAction {
 	public function showCourseIndexPage(){
 		$courseData=M('course')->find();
 		$courseSectionData=M('course_section')->where(array('course_id'=>$courseData['id'],'status'=>0))->order(array('order'))->select();
+		foreach($courseSectionData as $k => $v){
+			$secId=$courseSectionData[$k]['id'];
+			$courseSubSectionData=M('course_sub_section')->where(array('course_section_id'=>$secId,'status'=>0))
+			->select();
+			$courseSectionData[$k]['subInfo']=$courseSubSectionData;
+		}
+		
 		$this->assign('courseData',$courseData);
 		$this->assign('courseSectionData',$courseSectionData);
+//		$this->assign('courseSubSectionData',$courseSubSectionData);
 		$this->display();
 	}
 	public function showCourseVideoPage(){

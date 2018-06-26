@@ -2,7 +2,7 @@
 <block name="main">
 	<div class="row" style="margin-bottom: 50px;">
 		<div class="col-lg-12">
-			<h2 class="text-center">课程章节管理</h2>
+			<h2 class="text-center"><{$course.name}>课程章节管理</h2>
 		</div>
 	</div>
 	<div class="row" style="margin-top: 20px;">
@@ -42,7 +42,7 @@
 				<volist name='courseSectionData' id='vo' key="index">
 					<tr>
 						<td>
-							<a href="__APP__/TrainAdmin/showCourseSectionPage/id/<{$vo.id}>"><h4><{$vo.name}></h4></a>
+							<a href="__APP__/TrainAdmin/showCourseSubSectionPage/id/<{$vo.id}>"><h4><{$vo.name}></h4></a>
 						</td>
 						<td>
 							<!-- Button trigger modal -->
