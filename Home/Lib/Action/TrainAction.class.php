@@ -645,6 +645,19 @@ class TrainAction extends BaseAction {
 		$this->assign('trainJudgeData',$trainJudgeData);
 		$this->display();
 	}
+	protected function getProblemLink($problemStr){
+//		dump($problemStr);
+		$problem=M('problem');
+		$tmp = explode(";", $problemStr);
+		foreach($tmp as  $k => $v){
+			$t = trim($tmp[$k]);
+//			dump($t);
+			$ans[$k]['mark']=$t;
+			$ans[$k]['problem_id']=$problem->where(array('problem_mark'=>$t))->find()['id'];
+		}
+		//dump($ans);
+		return $ans;
+	}
 	public function showCourseIndexPage(){
 		$courseData=M('course')->find();
 		$courseSectionData=M('course_section')->where(array('course_id'=>$courseData['id'],'status'=>0))->order(array('order'))->select();
@@ -652,9 +665,12 @@ class TrainAction extends BaseAction {
 			$secId=$courseSectionData[$k]['id'];
 			$courseSubSectionData=M('course_sub_section')->where(array('course_section_id'=>$secId,'status'=>0))
 			->select();
+			foreach($courseSubSectionData as $k1 => $v1){
+				$courseSubSectionData[$k1]['all_problem']=$this->getProblemLink($courseSubSectionData[$k1]['all_problem']);
+			}
 			$courseSectionData[$k]['subInfo']=$courseSubSectionData;
 		}
-		
+//		dump($courseSectionData);
 		$this->assign('courseData',$courseData);
 		$this->assign('courseSectionData',$courseSectionData);
 //		$this->assign('courseSubSectionData',$courseSubSectionData);
