@@ -307,19 +307,12 @@ class AdminAction extends BaseAction {
 		
 		$id=$_GET['id'];
 		$data=M('problem')->where('id='.$id)->find();
-		//dump($data);
-		$list=M("table")->table('label_info a,problem_label b')
-			->where("a.id=b.label_id and b.problem_id=".$data['id']." and b.status=0")
-			->select();
-		//dump($list);
 		
-
-		foreach($list as $key => $value){
-			
-			$labelData=$labelData.$list[$key]['label_name'].";";
-		}
-		$labelData=rtrim($labelData,';');
-		$this->assign('labelData',$labelData);
+		$tipsData=json_decode($data['tips']);
+		//dump($tipsData);
+		$data['label']=$tipsData->label;
+		$data['idea']=$tipsData->idea;
+		$data['stdexe']=$tipsData->stdexe;
 		$this->assign('data',$data);
 		$this->display();
 	}
@@ -328,47 +321,19 @@ class AdminAction extends BaseAction {
 		//dump($_POST);
 		
 		foreach($_POST as $key=>$value){
+			if($key!='stdexe')
 			$_POST[$key]=htmlspecialchars($value);
 		}
-		$data=$_POST;
+		$jsonData=array('label'=>$_POST['label'],
+		'idea'=>$_POST['idea'],
+		'stdexe'=>$_POST['stdexe']);
+		$saveData=$_POST;
+		$saveData['tips']=json_encode($jsonData);
+		
+		unset($saveData['label']);unset($saveData['idea']);unset($saveData['stdexe']);
+		$data=$saveData;
 		//设置该题目对应的标签不可用
-		$labelData=M('problem_label')->where('problem_id='.$data['id'])->select();
-		foreach($labelData as $key => $value){
-			$labelData[$key]['status']=1;
-			M('problem_label')
-				->where('id='.$labelData[$key]['id'])
-				->save($labelData[$key]);
-		}
-		//dump($labelData);
-		//提取出修改后的所有标签
-		$labelString=$data['label'];
-		$labelData=explode(";", $labelString);
-		//dump($labelData);
-		for($i=0;$i<count($labelData);$i++){
-			$where['label_name']=$labelData[$i];
-			$cnt=M('label_info')->where($where)->count();
-			if($cnt==0){
-				$mydata['label_name']=$labelData[$i];
-				$mydata['status']=0;
-				M('label_info')->data($mydata)->add();
-			}
-			$labelId=M('label_info')->where($where)->find();
-			//$problemId=$User->max('id');
-			$problemLabelData['problem_id']=$data['id'];
-			$problemLabelData['label_id']=$labelId['id'];
-			$res=M('problem_label')->where($problemLabelData)->count();
-			if($res){
-				$myData['status']=0;
-				M('problem_label')->where($problemLabelData)->save($myData);
-			}else {
-				M('problem_label')->data($problemLabelData)->add();
-			}
-				
-		}
-		unset($_POST['label']);
-		//dump($_POST);
-		//die;
-		$count=M('problem')->where('id='.$_POST['id'])->save($_POST);
+		$count=M('problem')->where('id='.$_POST['id'])->save($data);
 		if($count>0){
 			$this->success('success!','showProblemLibrary');
 		}else {

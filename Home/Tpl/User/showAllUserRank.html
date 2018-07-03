@@ -28,7 +28,6 @@
 					<th class="text-center">签名</th>
 					<th class="text-center" style="width: 5%">总分</th>
 					<th class="text-center" style="width: 5%">题库分</th>
-					<th class="text-center" style="width: 5%">天梯分</th>
 					<th class="text-center" style="width: 5%">解题数</th>
 					<th class="text-center" style="width: 5%">总提交</th>
 					<th class="text-center" style="width: 6%">正确率</th>
@@ -38,16 +37,10 @@
 						<td> <{$vo.rank}> </td>
 						<td> <a href="__APP__/User/showUserMessage/id/<{$vo.id}>" style="color: <{$vo.color}>;"><{$vo.nickname}> </a></td>
 						<td width="50%"> 
-							<elt name="vo.rank" value="5">
-								  <marquee behavior="alternate"><{$vo.motto}></marquee>
-								<else/>
 								<{$vo.motto}> 
-							</elt>
-							
 						</td>
 						<td style="color:#0099FF"><{$vo.score}></td>
 						<td><{$vo.library_score}></td>
-						<td><{$vo.ladder_score}></td>
 						<td> <{$vo.solve_problem}> </td>
 						<td> <{$vo.submissions}>  </td>
 						<td><{:getRatio($vo['solve_problem'],$vo['submissions'])}>%  </td>

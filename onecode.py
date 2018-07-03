@@ -284,6 +284,16 @@ class onecode:
             self.modifyJudgeStatus(row['id'],max_time,max_memory,status)  # 9 is Compiling
             self.modifyUserMessage(row,status)
             self.modifyProblemMessage(problemData[0],status)
+            if status == 0:
+                sql = "select  distinct problem_id from %s where judge_status = '%d' and user_id = '%d' and problem_id = '%d' " % (self.user_problem, 0, row['user_id'],row['problem_id'])
+                problems = self.select(sql)
+                solve_problem = len(problems)
+                if solve_problem == 1:
+                    sql = "select  * from %s where  user_id = '%d' and problem_id = '%d' " % ('tips',  row['user_id'], row['problem_id'])
+                    tips = self.select(sql)
+                    score=int(float(tips[0]['tip'])*(2*float(problemData[0]['difficulty'])+5))
+                    sql = "UPDATE %s SET score = '%d' WHERE id = '%d'" % ('tips', score, tips[0]['id'])
+                    self.update(sql)
             if self.problem == 'contest_problem':
                 self.modifyContestJudgeMessage(row,problemData[0],status)
 

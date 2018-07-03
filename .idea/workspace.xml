@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e77a5b12-63e4-4d43-a51c-0e5e8bf245c4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/contest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Home/Lib/Action/TestAdminAction.class.php" afterPath="$PROJECT_DIR$/Home/Lib/Action/TestAdminAction.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Home/Lib/Action/ExamAction.class.php" afterPath="$PROJECT_DIR$/Home/Lib/Action/ExamAction.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Home/Tpl/Exam/index.html" afterPath="$PROJECT_DIR$/Home/Tpl/Exam/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Home/Tpl/Exam/showProblem.html" afterPath="$PROJECT_DIR$/Home/Tpl/Exam/showProblem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Home/Tpl/Exam/showProblemList.html" afterPath="$PROJECT_DIR$/Home/Tpl/Exam/showProblemList.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Home/Tpl/Exam/showRankPage.html" afterPath="$PROJECT_DIR$/Home/Tpl/Exam/showRankPage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Home/Tpl/Problem/showProblemList.html" afterPath="$PROJECT_DIR$/Home/Tpl/Problem/showProblemList.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Home/Tpl/Public/examBase.html" afterPath="$PROJECT_DIR$/Home/Tpl/Public/examBase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Home/Tpl/Public/examHeader.html" afterPath="$PROJECT_DIR$/Home/Tpl/Public/examHeader.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Home/Tpl/Public/header.html" afterPath="$PROJECT_DIR$/Home/Tpl/Public/header.html" />
+      <change beforePath="$PROJECT_DIR$/Home/Lib/Action/AdminAction.class.php" afterPath="$PROJECT_DIR$/Home/Lib/Action/AdminAction.class.php" />
+      <change beforePath="$PROJECT_DIR$/Home/Lib/Action/ProblemAction.class.php" afterPath="$PROJECT_DIR$/Home/Lib/Action/ProblemAction.class.php" />
+      <change beforePath="$PROJECT_DIR$/Home/Lib/Action/UserAction.class.php" afterPath="$PROJECT_DIR$/Home/Lib/Action/UserAction.class.php" />
+      <change beforePath="$PROJECT_DIR$/Home/Tpl/Admin/showModifyProblem.html" afterPath="$PROJECT_DIR$/Home/Tpl/Admin/showModifyProblem.html" />
+      <change beforePath="$PROJECT_DIR$/Home/Tpl/Problem/showProblem.html" afterPath="$PROJECT_DIR$/Home/Tpl/Problem/showProblem.html" />
+      <change beforePath="$PROJECT_DIR$/Home/Tpl/Problem/showProblemList.html" afterPath="$PROJECT_DIR$/Home/Tpl/Problem/showProblemList.html" />
+      <change beforePath="$PROJECT_DIR$/Home/Tpl/User/showAllUserRank.html" afterPath="$PROJECT_DIR$/Home/Tpl/User/showAllUserRank.html" />
+      <change beforePath="$PROJECT_DIR$/onecode.py" afterPath="$PROJECT_DIR$/onecode.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="contest.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="contest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/contest.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
-              <caret line="244" column="24" lean-forward="true" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
+              <caret line="244" column="24" lean-forward="false" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
               <folding>
                 <element signature="e#614#791#0" expanded="false" />
                 <element signature="e#824#841#0" expanded="false" />
@@ -56,6 +52,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="onecode.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/onecode.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="752">
+              <caret line="300" column="19" lean-forward="true" selection-start-line="300" selection-start-column="19" selection-end-line="300" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -76,7 +82,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/onecode.py" />
         <option value="$PROJECT_DIR$/Home/Tpl/Ladder/showRealTimeEvaluation.html" />
         <option value="$PROJECT_DIR$/Home/Tpl/Ladder/showJudgeDetail.html" />
         <option value="$PROJECT_DIR$/Home/Lib/Action/ProblemAction.class.php" />
@@ -93,6 +98,7 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/train.py" />
         <option value="$PROJECT_DIR$/contest.py" />
+        <option value="$PROJECT_DIR$/onecode.py" />
       </list>
     </option>
   </component>
@@ -103,9 +109,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="389" />
-    <option name="y" value="88" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="2107" />
+    <option name="y" value="-23" />
     <option name="width" value="1398" />
     <option name="height" value="992" />
   </component>
@@ -124,34 +130,23 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="OneCode" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OneCode" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OneCode" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OneCode" type="462c0819:PsiDirectoryNode" />
-              <item name="Home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OneCode" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OneCode" type="462c0819:PsiDirectoryNode" />
-              <item name="Home" type="462c0819:PsiDirectoryNode" />
-              <item name="Conf" type="462c0819:PsiDirectoryNode" />
+              <item name="CodeMao" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CodeMao" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="D:/code/python/faceRecognition" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
   </component>
@@ -191,6 +186,7 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="ladder" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -208,6 +204,7 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="onecode" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -225,6 +222,7 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -242,6 +240,7 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Python.ladder" />
@@ -257,6 +256,9 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -275,7 +277,7 @@
     <option name="totallyTimeSpent" value="18737000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="1911" y="-9" width="1938" height="1048" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.128125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -288,7 +290,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39845476" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -297,6 +298,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -637,13 +639,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/onecode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="271" column="24" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -668,7 +663,7 @@
     <entry file="file://$PROJECT_DIR$/contest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
-          <caret line="244" column="24" lean-forward="true" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
+          <caret line="244" column="24" lean-forward="false" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
           <folding>
             <element signature="e#614#791#0" expanded="false" />
             <element signature="e#824#841#0" expanded="false" />
@@ -692,6 +687,14 @@
             <element signature="e#7578#9253#0" expanded="false" />
             <element signature="e#9288#9333#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/onecode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="752">
+          <caret line="300" column="19" lean-forward="true" selection-start-line="300" selection-start-column="19" selection-end-line="300" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>

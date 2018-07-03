@@ -188,7 +188,7 @@ class ProblemAction extends BaseAction {
 		//dump($tipsData);
 		$arr['label']=$tipsData->label;
 		$arr['idea']=$tipsData->idea;
-		$arr['stdexe']=$tipsData->stdexe;
+		$arr['stdexe']=htmlspecialchars($tipsData->stdexe);
 		//dump($arr);
 		//die;
 		$ans=M('ladder_contest_problem')->where(array('problem_id'=>$problemId))->find();
@@ -205,6 +205,12 @@ class ProblemAction extends BaseAction {
 		$lastLan=session('lastLan');
 		if(!$lastLan) $lastLan="C++";
 		$lanData=array("C++","C","PASCAL");
+		
+		$tipsData=M('tips')->where(array('user_id'=>$userinfo['id'],'problem_id'=>$problemId))->find();
+		if($tipsData['tip']==1) $tipsData['radio']=80;
+		else if($tipsData['tip']==2) $tipsData['radio']=50;
+		else if($tipsData['tip']==3) $tipsData['radio']=0;
+		$this->assign('tipsData',$tipsData);
 		$this->assign('lanData',$lanData);
 		$this->assign('lastLan',$lastLan);
 		$this->assign('problemData',$arr);
@@ -406,7 +412,40 @@ class ProblemAction extends BaseAction {
 			$this->error('非法操作!');
 		}
 	}
-	
+	public function changeProblemTips(){
+		$pid=$_POST['pid'];
+		$tip=$_POST['tip'];
+		$tips=M('tips');
+		$userinfo=session('userinfo');
+		$saveData['user_id']=$userinfo['id'];
+		$saveData['problem_id']=$pid;
+		$saveData['tip']=$tip;
+		$tipsData=$tips->where(array('problem_id'=>$pid,'user_id'=>$userinfo['id']))->find();
+		if(!$tipsData){//如果不存在
+			$tips->add($saveData);
+		}else {
+			if($tipsData['tip']<$tip){
+				$tipsData['tip']=$tip;
+				$tips->save($tipsData);
+			}
+		}
+	}
+	public function showStdexe(){
+		$userinfo=session('userinfo');
+		$tipsData=M('tips')->where(array('user_id'=>$userinfo['id'],'problem_id'=>$_GET['id']))->find();
+		if(!$tipsData||$tipsData['tip']!=3) {
+			$this->redirect('Problem/showProblem',array('id'=>$_GET['id']));
+		}
+		$arr=M('problem')->find($_GET['id']);
+		$tipsData=json_decode($arr['tips']);
+		//dump($tipsData);
+		$arr['label']=$tipsData->label;
+		$arr['idea']=$tipsData->idea;
+		$arr['stdexe']=$tipsData->stdexe;
+//		dump($arr);
+		$this->assign('tips',$arr);// 赋值分页输出
+		$this->display(); // 输出模板
+	}
 	
 	
 }

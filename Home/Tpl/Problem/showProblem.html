@@ -152,7 +152,7 @@
 			    <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
 			      <div class="panel-body">
 			      	<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 					  锦囊一
 					</button>
 					
@@ -162,19 +162,23 @@
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="myModalLabel">锦囊一</h4>
+					        <h4 class="modal-title text-center" id="myModalLabel">锦囊一</h4>
+					        
 					      </div>
 					      <div class="modal-body">
-					        <{$problemData.label}>
+					        <!--<{$problemData.label}>-->
+					        	<span>如果打开锦囊一，最后的AC得分为总分的80%，请确定是否打开。</span>
+					        	<div id="tips1"></div>
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					        <button type="button" class="btn btn-default" onclick="showtips1()">确定</button>
 					      </div>
 					    </div>
 					  </div>
 					</div>
 					
-					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
 					  锦囊二
 					</button>
 					
@@ -187,16 +191,19 @@
 					        <h4 class="modal-title" id="myModalLabel">锦囊二</h4>
 					      </div>
 					      <div class="modal-body">
-					        <{$problemData.idea}>
+					      		<span>如果打开锦囊二，最后的AC得分为总分的50%，请确定是否打开。</span>
+					        	<div id="tips2"></div>
+					        
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					        <button type="button" class="btn btn-default" onclick="showtips2()">确定</button>
 					      </div>
 					    </div>
 					  </div>
 					</div>
 					
-					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal3">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">
 					  锦囊三
 					</button>
 					
@@ -211,17 +218,24 @@
 					      <div class="modal-body">
 					      	<div class="row">
 								<div class="col-md-12">
-							   		<pre><{$problemData.stdexe}></pre>
+									<span>如果打开锦囊三，最后的AC得分为0，请确定是否打开。</span>
+					        		<div id="tips3"></div>
+							   		
 								</div>
 							</div>
 					        
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					      	<button type="button" class="btn btn-default" onclick="showtips3()">确定</button>
 					      </div>
 					    </div>
 					  </div>
 					</div>
+					<gt name="tipsData.tip" value="0">
+							<span style="margin-left: 50px;">你已经看过锦囊<{$tipsData.tip}>,AC后的得分为总分的<{$tipsData.radio}>% </span>
+						<else/>
+					</gt>
 			      </div>
 			    </div>
 			  </div>
@@ -298,13 +312,61 @@
 		    theme:'eclipse',
 			lineNumbers: true
 		});	
-		var myTextarea1 = document.getElementById('editor1');
-		var CodeMirrorEditor1 = CodeMirror.fromTextArea(myTextarea1, {
-		    mode: "text/x-c++src",
-		    matchBrackets: true,
-		    indentUnit:4,
-		    theme:'eclipse',
-			lineNumbers: true
-		});	
+//		var myTextarea1 = document.getElementById('editor1');
+//		var CodeMirrorEditor1 = CodeMirror.fromTextArea(myTextarea1, {
+//		    mode: "text/x-c++src",
+//		    matchBrackets: true,
+//		    indentUnit:4,
+//		    theme:'eclipse',
+//			lineNumbers: true
+//		});	
+		function showtips1()
+		{
+//			alert("<{$problemData.label}>");
+//			$("#tips1").val("<{$problemData.label}>");
+			$.ajax({
+			             type: "POST",
+			             url: "__APP__/Problem/changeProblemTips",
+			             data: {tip:"1", pid:<{$problemData.id}> },
+//			             dataType: "json",
+			             success: function(data){
+			                         
+			                      }
+			         });
+			document.getElementById('tips1').innerHTML="<h3>锦囊1内容：<{$problemData.label}><h3>";
+			
+		}
+		function showtips2()
+		{
+//			alert("<{$problemData.label}>");
+//			$("#tips1").val("<{$problemData.label}>");
+			$.ajax({
+			             type: "POST",
+			             url: "__APP__/Problem/changeProblemTips",
+			             data: {tip:"2", pid:<{$problemData.id}> },
+//			             dataType: "json",
+			             success: function(data){
+			                         
+			                      }
+			         });
+			document.getElementById('tips2').innerHTML="<h3 class='text-center'>锦囊2内容<h3><h6><{$problemData.idea}></h6>";
+			
+		}
+		function showtips3()
+		{
+			$.ajax({
+			             type: "POST",
+			             url: "__APP__/Problem/changeProblemTips",
+			             data: {tip:"3", pid:<{$problemData.id}> },
+//			             dataType: "json",
+			             success: function(data){
+//			             	alert("test");
+							var tempwindow=window.open('_blank'); // 先打开页面
+							tempwindow.location='__APP__/Problem/showStdexe/id/<{$problemData.id}>'; // 后更改页面地址
+//			                         window.open("__APP__/Problem/showStdexe/id/<{$problemData.id}>");
+			                      }
+			         });
+
+		}
 	</script>
 </block>

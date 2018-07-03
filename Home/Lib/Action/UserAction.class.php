@@ -217,6 +217,10 @@ class UserAction extends Action {
         call_user_func_array('array_multisort',$args);
         return array_pop($args);
     }
+    /*
+     	排序思路，tips再开一个字段score记录用户对应题目的得分，判题时，第一次AC，根据tip信息计算出分数写入该字段
+     	判题端暂时未写
+     * */
 	/*显示所有用户*/
 	public function showAllUserRank(){
 		if(!session('loginStatus'))//登录不成功则跳转
@@ -240,6 +244,7 @@ class UserAction extends Action {
 		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
         //order('solve_problem desc,submissions asc')
 		$list = $User->where($map)->limit($Page->firstRow.','.$Page->listRows)->select();
+		$tips = M('tips');
         for($i=0;$i<count($list);$i++){
             if($i>0&&$list[$i]['solve_problem']==$list[$i-1]['solve_problem']&&$list[$i]['submissions']==$list[$i-1]['submissions']){
                 $list[$i]['rank']=$list[$i-1]['rank'];
@@ -255,7 +260,7 @@ class UserAction extends Action {
             }else {
                 $list[$i]['color']='blue';
             }
-            $list[$i]['score']=$list[$i]['library_score']+$list[$i]['ladder_score'];
+            $list[$i]['score']=$tips->where(array('user_id'=>$list[$i]['id']))->sum('score');
         }
 //      dump($list);
         $list=$this->sortArrByManyField($list,'score',SORT_DESC,'solve_problem',SORT_DESC,'submissions',SORT_ASC);
@@ -275,7 +280,7 @@ class UserAction extends Action {
 			}else {
 				$list[$i]['color']='blue';
 			}
-			$list[$i]['score']=$list[$i]['library_score']+$list[$i]['ladder_score'];
+			$list[$i]['score']=$list[$i]['library_score'];
 		}
 		//$this->assign('color','red');
 
