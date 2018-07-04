@@ -291,7 +291,8 @@ class onecode:
                 if solve_problem == 1:
                     sql = "select  * from %s where  user_id = '%d' and problem_id = '%d' " % ('tips',  row['user_id'], row['problem_id'])
                     tips = self.select(sql)
-                    score=int(float(tips[0]['tip'])*(2*float(problemData[0]['difficulty'])+5))
+                    tipsToRadio={0:1,1:0.8,2:0.5,3:0,4:0}
+                    score=int(tipsToRadio[int(tips[0]['tip'])]*(2*float(problemData[0]['difficulty'])+5))
                     sql = "UPDATE %s SET score = '%d' WHERE id = '%d'" % ('tips', score, tips[0]['id'])
                     self.update(sql)
             if self.problem == 'contest_problem':

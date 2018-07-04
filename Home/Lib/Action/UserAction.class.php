@@ -280,7 +280,7 @@ class UserAction extends Action {
 			}else {
 				$list[$i]['color']='blue';
 			}
-			$list[$i]['score']=$list[$i]['library_score'];
+			
 		}
 		//$this->assign('color','red');
 
