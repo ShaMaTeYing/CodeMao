@@ -27,7 +27,6 @@
 					<th class="text-center">昵称</th>
 					<th class="text-center">签名</th>
 					<th class="text-center" style="width: 5%">总分</th>
-					<th class="text-center" style="width: 5%">题库分</th>
 					<th class="text-center" style="width: 5%">解题数</th>
 					<th class="text-center" style="width: 5%">总提交</th>
 					<th class="text-center" style="width: 6%">正确率</th>
@@ -40,7 +39,6 @@
 								<{$vo.motto}> 
 						</td>
 						<td style="color:#0099FF"><{$vo.score}></td>
-						<td><{$vo.library_score}></td>
 						<td> <{$vo.solve_problem}> </td>
 						<td> <{$vo.submissions}>  </td>
 						<td><{:getRatio($vo['solve_problem'],$vo['submissions'])}>%  </td>
