@@ -312,7 +312,7 @@ class myThread(threading.Thread):
         self.problem=problem
 
     def run(self):
-        judge = onecode('localhost', 'root', 'OneCode', 'onecode', 3306, 'utf8', self.user_problem, self.judge_detail,self.problem)
+        judge = onecode('localhost', 'root', 'OneCode', 'codemao', 3306, 'utf8', self.user_problem, self.judge_detail,self.problem)
         judge.polling()
 
 if __name__ == '__main__':

@@ -677,7 +677,7 @@ class TrainAction extends BaseAction {
 		$this->display();
 	}
 	public function showCourseVideoPage(){
-		$courseSectionData=M('course_section')->where(array('course_id'=>$_GET['id']))->find();
+		$courseSectionData=M('course_sub_section')->where(array('id'=>$_GET['id']))->find();
 		$this->assign('courseSectionData',$courseSectionData);
 		$this->display();
 	}
