@@ -172,7 +172,7 @@
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					        <button type="button" class="btn btn-default" onclick="showtips1()">确定</button>
+					        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="showtips1()">确定</button>
 					      </div>
 					    </div>
 					  </div>
@@ -197,7 +197,7 @@
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					        <button type="button" class="btn btn-default" onclick="showtips2()">确定</button>
+					        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="showtips2()">确定</button>
 					      </div>
 					    </div>
 					  </div>
@@ -227,11 +227,42 @@
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					      	<button type="button" class="btn btn-default" onclick="showtips3()">确定</button>
+					      	<button type="button" class="btn btn-default" data-dismiss="modal" onclick="showtips3()">确定</button>
 					      </div>
 					    </div>
 					  </div>
 					</div>
+					<gt name="problemData.app_id" value="0">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal4">
+					  锦囊四
+					</button>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel"> 锦囊四</h4>
+					      </div>
+					      <div class="modal-body">
+					      	<div class="row">
+								<div class="col-md-12">
+									<span>如果打开锦囊四，最后的AC得分为0，请确定是否打开。</span>
+					        		<div id="tips3"></div>
+							   		
+								</div>
+							</div>
+					        
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					      	<button type="button" class="btn btn-default" data-dismiss="modal" onclick="showtips4()">确定</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					</gt>
 					<gt name="tipsData.tip" value="0">
 							<span style="margin-left: 50px;">你已经看过锦囊<{$tipsData.tip}>,AC后的得分为总分的<{$tipsData.radio}>% </span>
 						<else/>
@@ -363,6 +394,22 @@
 //			             	alert("test");
 							var tempwindow=window.open('_blank'); // 先打开页面
 							tempwindow.location='__APP__/Problem/showStdexe/id/<{$problemData.id}>'; // 后更改页面地址
+//			                         window.open("__APP__/Problem/showStdexe/id/<{$problemData.id}>");
+			                      }
+			         });
+
+		}
+		function showtips4()
+		{
+			$.ajax({
+			             type: "POST",
+			             url: "__APP__/Problem/changeProblemTips",
+			             data: {tip:"4", pid:<{$problemData.id}> },
+//			             dataType: "json",
+			             success: function(data){
+//			             	alert("test");
+							var tempwindow=window.open('_blank'); // 先打开页面
+							tempwindow.location='__APP__/Problem/showVideo/id/<{$problemData.id}>'; // 后更改页面地址
 //			                         window.open("__APP__/Problem/showStdexe/id/<{$problemData.id}>");
 			                      }
 			         });

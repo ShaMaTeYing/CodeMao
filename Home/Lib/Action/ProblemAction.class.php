@@ -210,6 +210,7 @@ class ProblemAction extends BaseAction {
 		if($tipsData['tip']==1) $tipsData['radio']=80;
 		else if($tipsData['tip']==2) $tipsData['radio']=50;
 		else if($tipsData['tip']==3) $tipsData['radio']=0;
+		else if($tipsData['tip']==4) $tipsData['radio']=0;
 		$this->assign('tipsData',$tipsData);
 		$this->assign('lanData',$lanData);
 		$this->assign('lastLan',$lastLan);
@@ -447,5 +448,9 @@ class ProblemAction extends BaseAction {
 		$this->display(); // 输出模板
 	}
 	
-	
+	public function showVideo(){
+		$problemData=M('problem')->where(array('id'=>$_GET['id']))->find();
+		$this->assign('problemData',$problemData);// 赋值分页输出
+		$this->display(); // 输出模板
+	}
 }
