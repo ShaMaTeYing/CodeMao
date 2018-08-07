@@ -215,6 +215,7 @@ class ProblemAction extends BaseAction {
 		$this->assign('lanData',$lanData);
 		$this->assign('lastLan',$lastLan);
 		$this->assign('problemData',$arr);
+		$this->assign('userinfo',$userinfo);
 		$this->display();
 	}
 	/*获取所有状态*/
@@ -452,5 +453,9 @@ class ProblemAction extends BaseAction {
 		$problemData=M('problem')->where(array('id'=>$_GET['id']))->find();
 		$this->assign('problemData',$problemData);// 赋值分页输出
 		$this->display(); // 输出模板
+	}
+	public function testAjax(){
+		$data=$_POST;
+		$this->ajaxReturn($data,'JSON');
 	}
 }

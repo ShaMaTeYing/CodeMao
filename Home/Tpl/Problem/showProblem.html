@@ -275,6 +275,12 @@
 		</div>
 	</div>
 	<!--<div class="row">
+		<div class="col-lg-12 text-center">
+			<button type="button" class="btn btn-default" onclick="editCode()">编写代码</button>
+	
+		</div>
+	</div>-->
+	<!--<div class="row">
 		<div class="col-md-12">
 			<p>作者</p>
 			<pre><{$problemData.author}></pre>
@@ -318,15 +324,6 @@
 						<div class="col-lg-3">
 							 <input class="btn  btn-primary" type="submit" value="提交代码" >
 						</div>
-						<!--<div class="col-lg-3">
-							<a href="__APP__/Problem/showMySubmit/problemId/<{$problemData.id}>" class="btn btn-info">历史</a>
-						</div>
-						<div class="col-lg-3">
-							<a href="__APP__/Problem/showProblemStatic/problemId/<{$problemData.id}>" class="btn btn-info">统计</a>
-						</div>
-						<div class="col-lg-3">
-							<a href="__APP__/Problem/changeProblem/problemId/<{$problemData.id}>" class="btn btn-success">换题</a>
-						</div>-->
 					</div>
 				</div>
 			</div>
@@ -343,14 +340,9 @@
 		    theme:'eclipse',
 			lineNumbers: true
 		});	
-//		var myTextarea1 = document.getElementById('editor1');
-//		var CodeMirrorEditor1 = CodeMirror.fromTextArea(myTextarea1, {
-//		    mode: "text/x-c++src",
-//		    matchBrackets: true,
-//		    indentUnit:4,
-//		    theme:'eclipse',
-//			lineNumbers: true
-//		});	
+	</script>
+	<script type="text/javascript">
+	
 		function showtips1()
 		{
 //			alert("<{$problemData.label}>");
@@ -358,7 +350,7 @@
 			$.ajax({
 			             type: "POST",
 			             url: "__APP__/Problem/changeProblemTips",
-			             data: {tip:"1", pid:<{$problemData.id}> },
+			             data: {tip:"1", pid:<{$problemData.id}>},
 //			             dataType: "json",
 			             success: function(data){
 			                         
@@ -374,7 +366,7 @@
 			$.ajax({
 			             type: "POST",
 			             url: "__APP__/Problem/changeProblemTips",
-			             data: {tip:"2", pid:<{$problemData.id}> },
+			             data: {tip:"2", pid:<{$problemData.id}>},
 //			             dataType: "json",
 			             success: function(data){
 			                         
@@ -388,7 +380,7 @@
 			$.ajax({
 			             type: "POST",
 			             url: "__APP__/Problem/changeProblemTips",
-			             data: {tip:"3", pid:<{$problemData.id}> },
+			             data: {tip:"3", pid:<{$problemData.id}>},
 //			             dataType: "json",
 			             success: function(data){
 //			             	alert("test");
@@ -404,7 +396,7 @@
 			$.ajax({
 			             type: "POST",
 			             url: "__APP__/Problem/changeProblemTips",
-			             data: {tip:"4", pid:<{$problemData.id}> },
+			             data: {tip:"4", pid:<{$problemData.id}>},
 //			             dataType: "json",
 			             success: function(data){
 //			             	alert("test");
@@ -414,6 +406,25 @@
 			                      }
 			         });
 
+		}
+		function editCode()
+		{
+			$.ajax({
+			             type: "POST",
+			             url: "http://playground.onecode.com.cn",
+			             data: 
+			             {
+			             	user_id:"<{$userinfo.id}>", 
+			             	nickname:"<{$userinfo.nickname}>", 
+			             	realname:"<{$userinfo.realname}>",
+			             	problem_id:"<{$problemData.id}>",
+			             	title:"<{$problemData.id}>",
+			             },
+//			             dataType: "json",
+			             success: function(data){
+			             	console.log(data);
+			                     }
+			         });
 		}
 	</script>
 </block>
