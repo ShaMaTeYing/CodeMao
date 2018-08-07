@@ -78,16 +78,18 @@
 						      <div class="panel-body">
 						      	<volist name="vo.subInfo" id="subvo" key="subindex">
 						      		<div class="row">
-						      			<div class="col-lg-2">
+						      			<div class="col-lg-3">
 						      				<h5><{$index}>.<{$subindex}> <{$subvo.name}></h5>
 						      			</div>
-						      			<div class="col-lg-4" style="margin-top: 8px;">
-						      				<span>题目:</span>
-						      				<volist name="subvo.all_problem" id="pdata">
+						      			<div class="col-lg-7" style="margin-top: 8px;">
+						      				<volist name="subvo.all_problem" id="pdata" key="pindex">
+						      					<eq name="pindex" value="1">
+						      						<span>题目:</span>
+						      					</eq>
 						      					<span style="margin-left: 5px;"><a href="__APP__/Problem/showProblem/id/<{$pdata.problem_id}>" target="_blank"><{$pdata.mark}></a></span>
 						      				</volist>
 						      			</div>
-							      		<div class="col-lg-offset-4 col-lg-1" style="margin-top: 10px;">
+							      		<div class="col-lg-1" style="margin-top: 10px;">
 							      			<a href="__APP__/Train/showCourseTextbookPage/id/<{$subvo.ppt}>" target="_blank" title="第<{$vo.id}>课 <{$vo.name}>PPT"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
 							      		</div>
 							      		<div class="col-lg-1" style="margin-top: 10px;">
