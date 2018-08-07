@@ -649,9 +649,12 @@ class TrainAction extends BaseAction {
 //		dump($problemStr);
 		$problem=M('problem');
 		$tmp = explode(";", $problemStr);
+		//dump($tmp);
+		//if($tmp) return null;
 		foreach($tmp as  $k => $v){
 			$t = trim($tmp[$k]);
-//			dump($t);
+			//dump($t);
+			if(!$t) continue;
 			$ans[$k]['mark']=$t;
 			$ans[$k]['problem_id']=$problem->where(array('problem_mark'=>$t))->find()['id'];
 		}
