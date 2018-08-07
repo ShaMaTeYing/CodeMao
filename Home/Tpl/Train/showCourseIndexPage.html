@@ -81,7 +81,7 @@
 						      			<div class="col-lg-3">
 						      				<h5><{$index}>.<{$subindex}> <{$subvo.name}></h5>
 						      			</div>
-						      			<div class="col-lg-7" style="margin-top: 8px;">
+						      			<div class="col-lg-8" style="margin-top: 8px;">
 						      				<volist name="subvo.all_problem" id="pdata" key="pindex">
 						      					<eq name="pindex" value="1">
 						      						<span>题目:</span>
@@ -89,9 +89,9 @@
 						      					<span style="margin-left: 5px;"><a href="__APP__/Problem/showProblem/id/<{$pdata.problem_id}>" target="_blank"><{$pdata.mark}></a></span>
 						      				</volist>
 						      			</div>
-							      		<div class="col-lg-1" style="margin-top: 10px;">
+							      		<!--<div class="col-lg-1" style="margin-top: 10px;">
 							      			<a href="__APP__/Train/showCourseTextbookPage/id/<{$subvo.ppt}>" target="_blank" title="第<{$index}>.<{$subindex}>课 <{$subvo.name}>PPT"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
-							      		</div>
+							      		</div>-->
 							      		<div class="col-lg-1" style="margin-top: 10px;">
 							      			<a href="__APP__/Train/showCourseVideoPage/id/<{$subvo.id}>" target="_blank" title="第<{$index}>.<{$subindex}>课 <{$subvo.name}>视频"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>
 							      		</div>
