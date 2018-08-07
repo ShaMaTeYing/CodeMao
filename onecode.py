@@ -292,7 +292,10 @@ class onecode:
                     sql = "select  * from %s where  user_id = '%d' and problem_id = '%d' " % ('tips',  row['user_id'], row['problem_id'])
                     tips = self.select(sql)
                     tipsToRadio={0:1,1:0.8,2:0.5,3:0,4:0}
-                    tips_tip = tips[0]['tip'];
+                    if len(tips)>0:
+                        tips_tip = tips[0]['tip'];
+                    else :
+                        tips_tip = 1;
                     radio = tipsToRadio[int(tips_tip)];
                     difficulty = int(problemData[0]['difficulty']);
                     score = int(radio)*(2*difficulty+5);
