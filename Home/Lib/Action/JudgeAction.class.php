@@ -206,6 +206,15 @@ class JudgeAction extends BaseAction {
 			if($i==$caseNumber) $judgeDetail['group_score']=100-($caseNumber-1)*intval(100/$caseNumber);
 			M('judge_detail')->add($judgeDetail);
 		}
+		$tip = M('tips')->where(array('user_id'=>$userinfo['id'],'problem_id'=>$_POST['problemID']))->find();
+		dump($tip);
+//		die;
+		if(!$tip){
+			$tips['user_id']=$userinfo['id'];
+			$tips['problem_id']=$_POST['problemID'];
+			$tips['tip']=0;
+			M('tips')->add($tips);
+		}
 		$this->redirect('Judge/showRealTimeEvaluation');
 	}
 	public function showUserCode(){
