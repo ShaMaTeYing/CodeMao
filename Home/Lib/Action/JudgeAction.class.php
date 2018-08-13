@@ -49,7 +49,10 @@ class JudgeAction extends BaseAction {
 			}
 		}
 		if($problemId) {
-			$where['problem_id']  = $problemId;
+			
+			//$where['problem_id']  = $problemId;
+			$where['problem_id']  =M('problem')->where(array('problem_mark'=>$problemId))->find()['id'];
+			
 			$parmCnt=$parmCnt+1;
 		}
 		if($anthor) {
@@ -65,6 +68,10 @@ class JudgeAction extends BaseAction {
 		$show  = $Page->show();// 分页显示输出
 		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
 		$list = $User->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		foreach($list as $k=>$v){
+			$list[$k]['problem_mark']=M('problem')->where(array('id'=>$list[$k]['problem_id']))->find()['problem_mark'];
+			
+		}
 		//dump($count);
 		//dump($Page);
 		

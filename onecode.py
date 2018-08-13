@@ -298,7 +298,7 @@ class onecode:
                         tips_tip = 1;
                     radio = tipsToRadio[int(tips_tip)];
                     difficulty = int(problemData[0]['difficulty']);
-                    score = int(radio)*(2*difficulty+5);
+                    score = int(radio*(2*difficulty+5));
                     #score=int(tipsToRadio[int(tips[0]['tip'])]*(2*float(problemData[0]['difficulty'])+5))
                     sql = "UPDATE %s SET score = '%d' WHERE id = '%d'" % ('tips', score, tips[0]['id'])
                     self.update(sql)
