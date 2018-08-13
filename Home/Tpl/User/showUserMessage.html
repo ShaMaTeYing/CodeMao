@@ -37,7 +37,7 @@
 					<eq name="mod" value="0"><tr></eq>
 					<td style="background-color: #99FF99;">
 						<a href="__APP__/Problem/showProblem/id/<{$vo.problem_id}>">
-							<{$vo.problem_id}>
+							<{$vo.problem_mark}>
 						</a>
 					</td>
 					<eq name="mod" value="9"></tr></eq>
@@ -57,7 +57,7 @@
 					<eq name="mod" value="0"><tr></eq>
 					<td style="background-color: #FF9999;">
 						<a href="__APP__/Problem/showProblem/id/<{$vo.problem_id}>">
-							<{$vo.problem_id}>
+							<{$vo.problem_mark}>
 						</a>
 					</td>
 					<eq name="mod" value="9"></tr></eq>
@@ -66,49 +66,26 @@
 		</div>
 	</div>
 	<hr />
+
+	
 	<div class="row" style="margin-bottom: 30px;">
 		<div class="col-md-12">
-			<h4 >课程已AC的题目列表</h4>
+			<h4 >锦囊打开情况</h4>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table table-condensed table-striped table-bordered text-center table-hover">
-				<volist name="trainProblem" id="vo">
-					<tr>
-						<td style="width: 40%;" class="text-left"><{$vo[0]['problem_title']}></td>
-						<volist name="vo" id="vo1">
-							<td style="background-color: #99FF99;">
-								<a href="__APP__/Train/showProblem/id/<{$vo1.problem_id}>">
-									<{$vo1.problem_mark}>
-								</a>
-							</td>
-						</volist>
-					</tr>
+			<table class="table table-condensed table-striped  text-center table-hover">
+				<tr>
+				<volist name="tipsData" id="vo" mod="10" >
+						<td>
+							<button class="btn btn-primary btn-block" type="button">
+							  <{$vo.problem_mark}> <span class="badge"><{$vo.tip}></span>
+							</button>
+							<eq name="mod" value="9"></tr><tr></eq>
+						</td>
 				</volist>
-			</table>
-		</div>
-	</div>
-	<div class="row" style="margin-bottom: 30px;">
-		<div class="col-md-12">
-			<h4 >课程已提交未AC的题目列表</h4>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table table-condensed table-striped table-bordered text-center table-hover">
-				<volist name="trainNotSolveProblem" id="vo" mod="10" >
-					<tr>
-						<td style="width: 40%;" class="text-left"><{$vo[0]['problem_title']}></td>
-						<volist name="vo" id="vo1">
-							<td style="background-color: #FF9999;">
-								<a href="__APP__/Train/showProblem/id/<{$vo1.problem_id}>">
-									<{$vo1.problem_mark}>
-								</a>
-							</td>
-						</volist>
-					</tr>
-				</volist>
+				</tr>
 			</table>
 		</div>
 	</div>

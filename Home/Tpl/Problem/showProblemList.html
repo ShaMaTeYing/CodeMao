@@ -9,8 +9,9 @@
 					<!--<th style="width: 10%;" class="text-center">ID</th>-->
 					<th style="width: 10%;" class="text-center">编号</th>
 					<th style="text-align:left;" class="text-center">标题</th>
+					<th style="width: 8%;" class="text-center">锦囊</th>
 					<th style="width: 18%;" class="text-center">难度</th>
-					<th style="width: 8%;" class="text-center" >分值</th>
+					<th style="width: 8%;" class="text-center" >得分/总分</th>
 					<th  style="width: 18%;" class="text-center">通过率</th>
 				</tr>
 				<volist name='problemData' id='vo'>
@@ -28,12 +29,20 @@
 						<td><{$vo.problem_mark}> </td>
 						<td style="text-align:left;"> <a href='__APP__/Problem/showProblem/id/<{$vo.id}>'> <{$vo.title}> </a> </td>
 						<td>
+							<eq name="vo.tip" value="0">
+								
+								<else/>
+								锦囊<{$vo.tip}>
+							</eq>
+						</td>
+						<td>
 							<for start="-1" end="$vo.difficulty">
 								<span class="glyphicon glyphicon-star-empty"></span>	
 							</for>
 									
 						</td>
 						<td>
+							<{$vo.get_score}> /
 							<eq name="vo.difficulty" value="0">
 								5
 							</eq>

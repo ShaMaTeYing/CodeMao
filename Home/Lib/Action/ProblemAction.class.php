@@ -20,9 +20,17 @@ class ProblemAction extends BaseAction {
         array_multisort($key_arrays,$sort_order,$sort_type,$arrays);  
         return $arrays;  
     } 
+    protected function queryProblemTips($tipsData,$problemId){
+    	foreach($tipsData as $k => $v){
+    		if($tipsData[$k]['problem_id']==$problemId) return $tipsData[$k];
+    	}
+    	return null;
+    }
     public function showProblemList(){
     	$query=array();
 		$userinfo=session('userinfo');
+		$tipsData=M('tips')->where(array('user_id'=>$userinfo['id']))->select();
+//		dump($tipsData);
 		$query['user_id']=$userinfo['id'];
 		$userProblem=M('ladder_user_problem')->where($query)->field('problem_id')->select();
 		foreach($userProblem as $k => $v){
@@ -112,8 +120,17 @@ class ProblemAction extends BaseAction {
 				$userDoNew[$v['problem_id']] = $v['judge_status'];
 			}
 		}
-	
+		
 		foreach($list as $k1 => $v1){
+			$queryTips=$this->queryProblemTips($tipsData,$list[$k1]['id']);
+			if($queryTips){
+				$list[$k1]['tip']=$queryTips['tip'];
+				if($queryTips['score']) $list[$k1]['get_score']=$queryTips['score'];
+				else $list[$k1]['get_score']=0;
+			}else{
+				$list[$k1]['tip']=0;
+				$list[$k1]['get_score']=0;
+			}
 			if($problemMark[$list[$k1]['id']]){
 				unset($list[$k1]);
 				continue;
@@ -135,7 +152,7 @@ class ProblemAction extends BaseAction {
 				//$list[$k1]['class_status']="active";
 			}
 		}
-		
+//		dump($list);
 		$this->assign('problemData',$list);// 赋值数据集
 		$this->assign('page',$show);// 赋值分页输出
 

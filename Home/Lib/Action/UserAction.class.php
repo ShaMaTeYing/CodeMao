@@ -324,50 +324,21 @@ class UserAction extends Action {
 		$problemData=array();
 		$ac=$this->getAcArray($problemData,'user_problem',$_GET['id'],'problem_id');
 		$notSolve=$this->getNotSolveArray($ac,'user_problem',$_GET['id'],'problem_id');
-		
-		//------train------
-		$train_problem_id=array();
-		$train_ac=$this->getAcArray($train_problem_id,'train_user_problem',$_GET['id'],'problem_id');
-		//dump($train_problem_id);
-		$train_problem=M('train_problem');
-		$level_msg=M('level_msg');
-		$trainProblem=array();
-		$problemNum=array();
-		foreach($train_problem_id as $k => $v){
-			$p_id=$train_problem_id[$k]['problem_id'];
-			//dump($p_id);
-			$train_problem_data=$train_problem->where(array('id'=>$p_id))->find();
-			//dump($train_problem_data);
-			$level_msg_id=$train_problem_data['level_msg_id'];
-			$level_msg_name=$level_msg->where(array('id'=>$level_msg_id))->find()['level_title'];
-			if(isset($problemNum[$level_msg_name])) $tmp=$problemNum[$level_msg_name];
-			else $tmp=0;
-			$trainProblem[$level_msg_name][$tmp]['problem_mark']=$train_problem_data['problem_mark'];
-			$trainProblem[$level_msg_name][$tmp]['problem_id']=$train_problem_data['id'];
-			$trainProblem[$level_msg_name][$tmp]['problem_title']=$level_msg_name;
-			$problemNum[$level_msg_name]=$tmp+1;
+		$tipsData=M('tips')->where(array('user_id'=>$_GET['id']))->select();
+		foreach($tipsData as $k => $v){
+			$tipsData[$k]['problem_mark']=M('problem')->where(array('id'=>$tipsData[$k]['problem_id']))->find()['problem_mark'];
+			
 		}
-		$train_notSolve=$this->getNotSolveArray($train_ac,'train_user_problem',$_GET['id'],'problem_id');
-		//dump($train_notSolve);
-		$trainNotSolveProblem=array();
-		$problemNum=array();
-		foreach($train_notSolve as $k => $v){
-			$p_id=$train_notSolve[$k]['problem_id'];
-			//dump($p_id);
-			$train_problem_data=$train_problem->where(array('id'=>$p_id))->find();
-			//dump($train_problem_data);
-			$level_msg_id=$train_problem_data['level_msg_id'];
-			$level_msg_name=$level_msg->where(array('id'=>$level_msg_id))->find()['level_title'];
-			if(isset($problemNum[$level_msg_name])) $tmp=$problemNum[$level_msg_name];
-			else $tmp=0;
-			$trainNotSolveProblem[$level_msg_name][$tmp]['problem_mark']=$train_problem_data['problem_mark'];
-			$trainNotSolveProblem[$level_msg_name][$tmp]['problem_id']=$train_problem_data['id'];
-			$trainNotSolveProblem[$level_msg_name][$tmp]['problem_title']=$level_msg_name;
-			$problemNum[$level_msg_name]=$tmp+1;
+		foreach($problemData as $k=>$v){
+			$problemData[$k]['problem_mark']=M('problem')->where(array('id'=>$problemData[$k]['problem_id']))->find()['problem_mark'];
+			
 		}
-		
-		$this->assign('trainNotSolveProblem',$trainNotSolveProblem);
-		$this->assign('trainProblem',$trainProblem);
+		foreach($notSolve as $k=>$v){
+			$notSolve[$k]['problem_mark']=M('problem')->where(array('id'=>$notSolve[$k]['problem_id']))->find()['problem_mark'];
+			
+		}
+		//dump($notSolve);
+		$this->assign('tipsData',$tipsData);
 		$this->assign('notSolve',$notSolve);
 		$this->assign('user',$userInfo);
 		$this->assign('myRank',$myRank);
