@@ -80,7 +80,17 @@
 				<volist name="tipsData" id="vo" mod="10" >
 						<td>
 							<button class="btn btn-primary btn-block" type="button">
-							  <{$vo.problem_mark}> <span class="badge"><{$vo.tip}></span>
+							  <{$vo.problem_mark}> 
+							  	<eq name="vo.tip" value="0">
+							  		<span class="badge">
+							  			<{$vo.tip}>
+							  		</span>
+							  		<else/>
+							  		<span class="badge" style="color:black;background-color:#00FF00">
+							  			<{$vo.tip}>
+							  		</span>
+							  	</eq>
+							 
 							</button>
 							<eq name="mod" value="9"></tr><tr></eq>
 						</td>
