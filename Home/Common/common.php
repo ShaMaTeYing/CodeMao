@@ -33,4 +33,29 @@
 		//die;
 		M('violation')->add($violation_msg_data);
 	}
+	function testLogin($username,$password){
+		$psw =$password;
+		$user=M('user')->where(array('username'=>$username))->find();
+		$data = array();
+		if(!$user){
+			$data['status'] = 1;
+			$data['info'] = 'User does not exist!';
+		}else{
+			//判断用户是否禁用
+			if($user['status']==0){
+				$data['status'] = 2;
+				$data['info'] = 'User is disabled!';
+			}else{
+				//判断用户的密码是否一致
+				if($user['password']==$psw){
+					session('loginStatus',1);//显示登录成功的界面
+					session('userinfo',$user);//设置userinfo的值，以便传值给模板
+				}else {
+					$data['status'] = 4;
+					$data['info'] = 'wrong password!';
+				}
+			}
+			
+		}
+	}
 ?>

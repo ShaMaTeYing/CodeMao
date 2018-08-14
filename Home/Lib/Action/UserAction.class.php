@@ -15,6 +15,11 @@ class UserAction extends Action {
 		{
 			$this->assign('userinfoData',session('userinfo'));
 		}
+		$username = cookie('username');
+		$password = cookie('password');
+		if($username){
+			testLogin($username,$password);
+		}
    	}
    	public function showDisablePage(){
    		$this->display();
@@ -145,6 +150,7 @@ class UserAction extends Action {
 		M('login_msg')->add($login_msg_data);
 		//$this->success('退出成功！','index');
 		session('userinfo',null);
+		cookie(null);
 		$this->redirect('Index/index');
 	}
 	/* 获取用户邮箱 */
