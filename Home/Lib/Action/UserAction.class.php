@@ -21,14 +21,7 @@ class UserAction extends Action {
    		$this->display();
    	}
 	public function showLogin(){
-		$username = cookie('username');
-		$password = cookie('password');
-		if($username){
-			testLogin($username,$password);
-		}
-		$loginStatus=session('loginStatus');
-		if($loginStatus) $this->redirect('Index/index');
-		else $this->display();
+		$this->display();
 	}
 	//登录判断函数
 	public function checkLogin(){
