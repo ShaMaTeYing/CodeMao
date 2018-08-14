@@ -33,20 +33,24 @@ class UserAction extends Action {
 		if(!$user){
 			$data['status'] = 1;
 			$data['info'] = 'User does not exist!';
+		}else{
+			//判断用户是否禁用
+			if($user['status']==0){
+				$data['status'] = 2;
+				$data['info'] = 'User is disabled!';
+			}else{
+				//判断用户的密码是否一致
+				if($user['password']==$psw){
+					$data['status'] = 3;
+					$data['info'] = 'login successful!';
+				}else {
+					$data['status'] = 4;
+					$data['info'] = 'wrong password!';
+				}
+			}
+			
 		}
-		//判断用户是否禁用
-		if($user['status']==0){
-			$data['status'] = 2;
-			$data['info'] = 'User is disabled!';
-		}
-		//判断用户的密码是否一致
-		if($user['password']==$psw){
-			$data['status'] = 3;
-			$data['info'] = 'login successful!';
-		}else {
-			$data['status'] = 4;
-			$data['info'] = 'wrong password!';
-		}
+		
 		$this->ajaxReturn($data,'JSON');
 	}
 	public function login(){
