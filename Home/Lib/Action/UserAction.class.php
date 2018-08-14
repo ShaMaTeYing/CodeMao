@@ -23,6 +23,31 @@ class UserAction extends Action {
 		$this->display();
 	}
 	//登录判断函数
+	public function checkLogin(){
+		$username = $_POST['username'];//获取POST传值
+		$psw =$_POST['password'];
+		$user=M('user')->where(array('username'=>$username))->find();
+		$data = array();
+		//判断用户是否存在
+		if(!$user){
+			$data['status'] = 1;
+			$data['info'] = 'User does not exist!';
+		}
+		//判断用户是否禁用
+		if($user['status']==0){
+			$data['status'] = 2;
+			$data['info'] = 'User is disabled!';
+		}
+		//判断用户的密码是否一致
+		if($user['password']==$psw){
+			$data['status'] = 3;
+			$data['info'] = 'login successful!';
+		}else {
+			$data['status'] = 4;
+			$data['info'] = 'wrong password!';
+		}
+		$this->ajaxReturn($data,'JSON');
+	}
 	public function login(){
 		$login_msg_data = array();//记录登录信息
 		$login_msg_data['ip']=get_client_ip();//获取ip
@@ -68,6 +93,8 @@ class UserAction extends Action {
 			$login_msg_data['status']='登录成功';
 			session('loginStatus',1);//显示登录成功的界面
 			session('userinfo',$user);//设置userinfo的值，以便传值给模板
+			cookie('username',$username);
+			cookie('password',$this->oneMD5($_POST['password']));
 			//$this->success('登录成功',U('Index/index'));
 			$ID=$login_msg->add($login_msg_data);
 			if($ID){
@@ -83,6 +110,10 @@ class UserAction extends Action {
 			$this->error('密码错误!');
 		}
 		
+	}
+	public function oneMD5($value){
+			$value=md5($value);
+		return $value;
 	}
 	public function myMD5($value){
 		for($i=1;$i<=5;$i++){
