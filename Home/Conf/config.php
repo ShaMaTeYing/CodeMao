@@ -26,7 +26,7 @@ return array(
 	'MAIL_CHARSET'=>'UTF-8',//编码
 	'MAIL_AUTH'=>true,//邮箱认证
 	'MAIL_HTML'=>true,//true HTML格式 false TXT格式
-//	'COOKIE_DOMAIN'=>'onecode.com.cn',
+	'COOKIE_DOMAIN'=>'onecode.com.cn',
 //	'COOKIE_EXPIRE' => 3600,
 );
 ?>
