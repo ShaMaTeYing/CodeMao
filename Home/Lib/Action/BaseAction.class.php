@@ -2,11 +2,11 @@
 // 本类由系统自动生成，仅供测试用途
 class BaseAction extends Action {
    function _initialize(){
-   		$username = cookie('username');
-		$password = cookie('password');
-		if($username){
-			testLogin($username,$password);
-		}
+// 		$username = cookie('username');
+//		$password = cookie('password');
+//		if($username){
+//			testLogin($username,$password);
+//		}
 		$userinfo=session('userinfo');
 		$userData=M('user')->where(array('id'=>$userinfo['id']))->find();
 		if($userinfo&&$userData['status']!=1)
