@@ -33,8 +33,14 @@
 		//die;
 		M('violation')->add($violation_msg_data);
 	}
+	function fourMD5($value){
+		for($i=1;$i<=4;$i++){
+			$value=md5($value);
+		}
+		return $value;
+	}
 	function testLogin($username,$password){
-		$psw =$password;
+		$psw =fourMD5($password);
 		$user=M('user')->where(array('username'=>$username))->find();
 		$data = array();
 		if(!$user){
