@@ -29,6 +29,7 @@ class UserAction extends Action {
 		$user=M('user')->where(array('username'=>$username))->find();
 		$data = array();
 		//判断用户是否存在
+		$data['username']=$_POST['username'];
 		if(!$user){
 			$data['status'] = 1;
 			$data['info'] = 'User does not exist!';
