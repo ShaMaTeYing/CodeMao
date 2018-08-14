@@ -148,6 +148,7 @@ class UserAction extends Action {
 		session('userinfo',null);
 		cookie('username',null);
 		cookie('password',null);
+		cookie(null);
 		$this->redirect('User/showLogin');
 	}
 	/* 获取用户邮箱 */
