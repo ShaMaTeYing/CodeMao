@@ -15,17 +15,20 @@ class UserAction extends Action {
 		{
 			$this->assign('userinfoData',session('userinfo'));
 		}
-		$username = cookie('username');
-		$password = cookie('password');
-		if($username){
-			testLogin($username,$password);
-		}
+		
    	}
    	public function showDisablePage(){
    		$this->display();
    	}
 	public function showLogin(){
-		$this->display();
+		$username = cookie('username');
+		$password = cookie('password');
+		if($username){
+			testLogin($username,$password);
+		}
+		$loginStatus=session('loginStatus');
+		if($loginStatus) $this->redirect('Index/index');
+		else $this->display();
 	}
 	//登录判断函数
 	public function checkLogin(){
@@ -150,8 +153,9 @@ class UserAction extends Action {
 		M('login_msg')->add($login_msg_data);
 		//$this->success('退出成功！','index');
 		session('userinfo',null);
-		cookie(null);
-		$this->redirect('Index/index');
+		cookie('username',null);
+		cookie('password',null);
+		$this->redirect('User/showLogin');
 	}
 	/* 获取用户邮箱 */
 	public function showGetMail(){
