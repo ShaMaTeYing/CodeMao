@@ -31,6 +31,7 @@ class UserAction extends Action {
 		$data = array();
 		//判断用户是否存在
 		$data['username']=$_POST['username'];
+		$data['realname']=$user['realname'];
 		if(!$user){
 			$data['status'] = 1;
 			$data['info'] = 'User does not exist!';
