@@ -286,4 +286,10 @@ class ExamAdminAction extends AdminAction {
 		$this->assign('problemData',$arr);
 		$this->display();
 	}
+	public function reJudge(){
+		//dump($_GET);
+		$data['judge_status']=8;
+		$allJudgeRecord=M('contest_user_problem')->where(array('problem_id'=>$_GET['id']))->save($data);
+		$this->success('success!',U('ExamAdmin/showProblemListPage'));
+	}
 }
