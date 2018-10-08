@@ -212,10 +212,19 @@ class APIAction extends Action {
 			$value=md5($value);
 		return $value;
 	}
+	public function getTestPostData(){
+		$resData['errorcode']=0;
+		$resData['data']['userId']='101';
+		$beginLastweek=mktime(0,0,0,date('m'),date('d')-date('w')+1-7,date('Y'));
+		$endLastweek=mktime(23,59,59,date('m'),date('d')-date('w')+7-7,date('Y'));
+		return $resData;
+//		dump($resData);
+	}
 	public function jxLogin(){
 		$token = $_POST['token'];
 		$resData=$this->getPostData($token);
 		$resData = json_decode($resData,true);
+//		$resData=$this->getTestPostData();
 		if(intval($resData['errorcode'])==0){
 			$userId=$resData['data']['userId'];
 			$userData=M('user')->where(array('jx_id'=>$userId))->find();
@@ -260,15 +269,156 @@ class APIAction extends Action {
 			evaluate:"非常好"
 		}
 		 */
+	public function getEveryLevelSubmit($userData){
+		$beginLastweek=mktime(0,0,0,date('m'),date('d')-date('w')+1-7,date('Y'));
+		$endLastweek=mktime(23,59,59,date('m'),date('d')-date('w')+7-7,date('Y'));
+		$where['user_id']=$userData['id'];
+		$where['submit_time']=array(array('egt',$beginLastweek),array('elt',$endLastweek));
+		$submitData=M('user_problem')->where($where)->select();
+		$problem=M('problem');
+	
+		foreach($submitData as $k => $v){
+			$problemData = $problem->where(array('id'=>$submitData[$k]['problem_id']))->find();
+			$everyLevelSubmit['level_'.$problemData['difficulty']]+=1;
+		}
+		return $everyLevelSubmit;
+	}
+	public function getEveryLevelAc($userData){
+		$beginLastweek=mktime(0,0,0,date('m'),date('d')-date('w')+1-7,date('Y'));
+		$endLastweek=mktime(23,59,59,date('m'),date('d')-date('w')+7-7,date('Y'));
+		$where['user_id']=$userData['id'];
+		$where['submit_time']=array(array('egt',$beginLastweek),array('elt',$endLastweek));
+		$where['judge_status']=0;
+		$submitData=M('user_problem')->where($where)->select();
+		$problem=M('problem');
+		foreach($submitData as $k => $v){
+			$problemData = $problem->where(array('id'=>$submitData[$k]['problem_id']))->find();
+			$everyLevelAc['level_'.$problemData['difficulty']]+=1;
+		}
+		return $everyLevelAc;
+	}
+	
+	protected function sortArrByManyField(){
+        $args = func_get_args();
+        if(empty($args)){
+            return null;
+        }
+        $arr = array_shift($args);
+        if(!is_array($arr)){
+            throw new Exception("第一个参数不为数组");
+        }
+        foreach($args as $key => $field){
+            if(is_string($field)){
+                $temp = array();
+                foreach($arr as $index=> $val){
+                    $temp[$index] = $val[$field];
+                }
+                $args[$key] = $temp;
+            }
+        }
+        $args[] = &$arr;//引用值
+        call_user_func_array('array_multisort',$args);
+        return array_pop($args);
+    }
+    /*
+     	排序思路，tips再开一个字段score记录用户对应题目的得分，判题时，第一次AC，根据tip信息计算出分数写入该字段
+     	判题端暂时未写
+     * */
+	/*显示所有用户*/
+	public function showAllUserRank($username){
+		if(!session('loginStatus'))//登录不成功则跳转
+		{
+			$this->redirect('User/showLogin');
+		}
+	
+		$sortParam = $_POST['sort_param'];
+		
+		$where['nickname']  = array('like','%'.$sortParam.'%');
+		$where['solve_problem']  = array('like','%'.$sortParam.'%');
+		$where['_logic'] = 'or';
+		$map['_complex'] = $where;
+		$map['status']  = 1;
+		
+		$User = M('User'); // 实例化User对象
+		import('ORG.Util.Page');// 导入分页类
+		$count      = $User->where($map)->count();// 查询满足要求的总记录数
+		$Page       = new Page($count,50);// 实例化分页类 传入总记录数和每页显示的记录数
+		$show       = $Page->show();// 分页显示输出
+		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+        //order('solve_problem desc,submissions asc')
+		$list = $User->where($map)->limit($Page->firstRow.','.$Page->listRows)->select();
+		$tips = M('tips');
+        for($i=0;$i<count($list);$i++){
+            if($i>0&&$list[$i]['solve_problem']==$list[$i-1]['solve_problem']&&$list[$i]['submissions']==$list[$i-1]['submissions']){
+                $list[$i]['rank']=$list[$i-1]['rank'];
+            }else {
+                $list[$i]['rank']=$Page->firstRow+$i+1;
+            }
+            if($list[$i]['rank']<=5){
+                $list[$i]['color']='red';
+            }else if($list[$i]['rank']<=10){
+                $list[$i]['color']='orange';
+            }else if($list[$i]['rank']<=15){
+                $list[$i]['color']='purple';
+            }else {
+                $list[$i]['color']='blue';
+            }
+            $list[$i]['score']=$tips->where(array('user_id'=>$list[$i]['id']))->sum('score');
+        }
+//      dump($list);
+        $list=$this->sortArrByManyField($list,'score',SORT_DESC,'solve_problem',SORT_DESC,'submissions',SORT_ASC);
+//		dump($list);
+		for($i=0;$i<count($list);$i++){
+			if($i>0&&$list[$i]['solve_problem']==$list[$i-1]['solve_problem']&&$list[$i]['submissions']==$list[$i-1]['submissions']){
+				$list[$i]['rank']=$list[$i-1]['rank'];
+			}else {
+				$list[$i]['rank']=$Page->firstRow+$i+1;
+			}
+			if($list[$i]['rank']<=5){
+				$list[$i]['color']='red';
+			}else if($list[$i]['rank']<=10){
+				$list[$i]['color']='orange';
+			}else if($list[$i]['rank']<=15){
+				$list[$i]['color']='purple';
+			}else {
+				$list[$i]['color']='blue';
+			}
+			if($username==$list[$i]['username']) return $list[$i]['rank'];
+		}
+		//$this->assign('color','red');
+		
+	}
 	public function jxWeekStatistics(){
-		$data['status'] = 1;
-		$data['info'] = 'Query successfully';
-		$data['rank'] = 1;
-		$data['all_submit'] = '10';
-		$data['all_ac'] = 6;
-		$data['every_level_submit'] = '{"0":1,"1":2}';
-		$data['every_level_ac'] = '{"0":1,"1":2}';
-		$data['evaluate'] = "非常好";
+		$beginLastweek=mktime(0,0,0,date('m'),date('d')-date('w')+1-7,date('Y'));
+		$endLastweek=mktime(23,59,59,date('m'),date('d')-date('w')+7-7,date('Y'));
+		$userId = $_POST['userId'];
+		$userData = M('user')->where(array('jx_id'=>$userId))->find();
+		if($userData){
+			$data['status'] = 0;
+			$data['info'] = 'Query successfully';
+			$data['rank'] = $this->showAllUserRank($userData['username']);
+			$where['user_id']=$userData['id'];
+			$where['submit_time']=array(array('egt',$beginLastweek),array('elt',$endLastweek));
+			$data['all_submit'] = M('user_problem')->where($where)->count();
+			$where['judge_status']=0;
+			$data['all_ac'] = M('user_problem')->where($where)->count();
+			$data['every_level_submit'] = $this->getEveryLevelSubmit($userData);
+			$data['every_level_ac'] = $this->getEveryLevelAc($userData);
+			if($data['all_ac']<5){
+				$data['evaluate'] = "题目写得有点少哦，还需要更加努力！";
+			}else if($data['all_ac']<10){
+				$data['evaluate'] = "这周表现不错，希望再接再厉！";
+			}else if($data['all_ac']<15){
+				$data['evaluate'] = "这周已经很少有人比你更加努力了，继续加油前进！";
+			}else if($data['all_ac']<20){
+				$data['evaluate'] = "你是个有天赋的孩子，再接再厉吧！";
+			}else {
+				$data['evaluate'] = "你已经无人能敌了，希望继续保持！";
+			}
+		}else {
+			$data['status'] = 1;
+			$data['info'] = 'Query failed';
+		}
 		$this->ajaxReturn($data,'JSON');
 	}
 }
