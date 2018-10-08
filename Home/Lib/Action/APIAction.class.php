@@ -221,7 +221,8 @@ class APIAction extends Action {
 //		dump($resData);
 	}
 	public function jxLogin(){
-		$token = $_POST['token'];
+//		$token = $_POST['token'];
+		$token = $_GET['token'];
 		$resData=$this->getPostData($token);
 		$resData = json_decode($resData,true);
 //		$resData=$this->getTestPostData();
@@ -391,7 +392,7 @@ class APIAction extends Action {
 	public function jxWeekStatistics(){
 		$beginLastweek=mktime(0,0,0,date('m'),date('d')-date('w')+1-7,date('Y'));
 		$endLastweek=mktime(23,59,59,date('m'),date('d')-date('w')+7-7,date('Y'));
-		$userId = $_POST['userId'];
+		$userId = $_GET['userId'];
 		$userData = M('user')->where(array('jx_id'=>$userId))->find();
 		if($userData){
 			$data['status'] = 0;
