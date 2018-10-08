@@ -250,7 +250,7 @@ class APIAction extends Action {
 			//$this->redirect('Index/index');
 			$data['status'] = 0;
 			$data['info'] = 'Login successfully';
-			$data['url'] = 'http://course.onecode.com.cn/CodeMao/index.php/Index/index';
+			$data['url'] = 'http://course.onecode.com.cn/index.php/Index/index';
 			$this->ajaxReturn($data,'JSON');
 		}else {
 			$data['status'] = 1;
