@@ -89,6 +89,7 @@ class IndexAction extends BaseAction {
 		return $bulletinData;
 	}
 	public function index(){
+		
 		$courseData=M('course')->find();
 		$this->assign('courseData',$courseData);
 		$userList=$this->showAllUserRank();
