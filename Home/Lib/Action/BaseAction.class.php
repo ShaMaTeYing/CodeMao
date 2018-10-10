@@ -83,6 +83,10 @@ class BaseAction extends Action {
 					cookie('username',$user['realname']);
 					cookie('password',$this->oneMD5($_POST['password']));
 				}
+				else 
+				{
+					$this->redirect('User/showLogin');
+				}
 			}
 			else 
 			{
