@@ -1,6 +1,28 @@
 <?php
 // 本类由系统自动生成，仅供测试用途
 class BaseAction extends Action {
+	public function http_post_data($url, $data_string) 
+	{	
+		$ch = curl_init();	
+		curl_setopt($ch, CURLOPT_POST, 1);	
+		curl_setopt($ch, CURLOPT_URL, $url);	
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);	
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(		"Content-Type: application/json; charset=utf-8",		"Content-Length: " . strlen($data_string))	);	
+		ob_start();	
+		curl_exec($ch);	
+		$return_content = ob_get_contents();	
+		ob_end_clean();	
+		$return_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
+		return array($return_code, $return_content);
+	}
+	public function post_json_data($token)
+	{
+		$url="http://dev.cdwtrj.com:13007/api-ymxc/token/check"; 
+		$param=array("token"=>$token);
+		$data = json_encode($param);
+		list($return_code, $return_content) = $this->http_post_data($url, $data);
+		return $return_content;
+	}
 	public function requestPost($url = '', $param = '') {
 //		dump("进入");
         if (empty($url) || empty($param)) {
@@ -30,6 +52,8 @@ class BaseAction extends Action {
         }
         $post_data = substr($o,0,-1);
 
+//		$post_data = json_encode(array('token'=>$token)); 
+//		dump($post_data);
         $res = $this->requestPost($url, $post_data);       
         return $res;
     }
@@ -69,14 +93,31 @@ class BaseAction extends Action {
 		{
 			$userId=$_GET['userId'];
 			$token=$_GET['token'];
+//			$token='23ljwoejuoiasjfasd';
 			if($token)
 			{
-				$resData=$this->getPostData($token);
+//				$resData=$this->getPostData($token);
+//				$resData = json_decode($resData,true);
+				$resData=$this->post_json_data($token);
 				$resData = json_decode($resData,true);
-//				$resData=$this->getTestPostData();
-				if(intval($resData['errorcode'])==0)
+				if(intval($resData['errorcode'])==0&&$resData['data']['userId'])
 				{
 					$userId=$resData['data']['userId'];
+					$userData=M('user')->where(array('jx_id'=>$userId))->find();
+					if(!$userData){
+						$userData['username'] = "jx".$userId;
+						$userData['password'] = "jx123456";
+						$userData['status'] = "1";
+						$userData['school'] = "嘉祥集团";
+						$userData['motto'] = "jx".$userId;
+						$userData['mail'] = "jx@onecode.com.cn";
+						$userData['realname'] = "jx".$userId;
+						$userData['major'] = "jx".$userId;
+						$userData['nickname'] = "jx".$userId;
+						$userData['register_time'] = time();
+						$userData['jx_id'] = $userId;
+						M('user')->add($userData);
+					}
 					$user=M('user')->where(array('jx_id'=>$userId))->find();
 					session('loginStatus',1);//显示登录成功的界面
 					session('userinfo',$user);//设置userinfo的值，以便传值给模板
