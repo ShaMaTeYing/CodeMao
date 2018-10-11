@@ -91,11 +91,11 @@ class BaseAction extends Action {
 //		$token='23ljwoejuoiasjfasd';
 		if($token)
 		{
-//				$resData=$this->getPostData($token);
-//				$resData = json_decode($resData,true);
+				$resData=$this->getPostData($token);
+				$resData = json_decode($resData,true);
 //				$resData=$this->getTestPostData();
-			$resData=$this->post_json_data($token);
-			$resData = json_decode($resData,true);
+//			$resData=$this->post_json_data($token);
+//			$resData = json_decode($resData,true);
 //			dump($resData);
 //			die;
 			if(intval($resData['errorcode'])==0&&$resData['data']['userId'])
@@ -127,8 +127,8 @@ class BaseAction extends Action {
 			}
 			else 
 			{
-				$loginStatus=session('loginStatus');
-				$this->assign('loginStatus',session('loginStatus')?session('loginStatus'):0);
+//				$loginStatus=session('loginStatus');
+//				$this->assign('loginStatus',session('loginStatus')?session('loginStatus'):0);
 				$this->redirect('User/showLogin');
 			}
 		}
