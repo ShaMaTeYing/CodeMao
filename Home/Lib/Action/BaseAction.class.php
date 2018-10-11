@@ -81,7 +81,7 @@ class BaseAction extends Action {
 		{
 			$this->error("你已经被禁用,请联系管理员解禁！",U('User/showDisablePage'));	
 		}
-		$loginStatus=session('loginStatus');
+		
 		
 	   //控制切换登录窗口
 		
@@ -121,17 +121,20 @@ class BaseAction extends Action {
 				session('userinfo',$user);//设置userinfo的值，以便传值给模板
 				cookie('username',$user['realname']);
 				cookie('password',$this->oneMD5($_POST['password']));
+				$loginStatus=session('loginStatus');
 				$this->assign('loginStatus',session('loginStatus')?session('loginStatus'):0);
 				$this->redirect('Index/index');
 			}
 			else 
 			{
+				$loginStatus=session('loginStatus');
 				$this->assign('loginStatus',session('loginStatus')?session('loginStatus'):0);
 				$this->redirect('User/showLogin');
 			}
 		}
 		else 
 		{
+			$loginStatus=session('loginStatus');
 			$this->assign('loginStatus',session('loginStatus')?session('loginStatus'):0);
 			if(session('loginStatus'))//登录成功则传值给模板变量
 			{
