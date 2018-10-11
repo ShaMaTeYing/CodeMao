@@ -17,7 +17,7 @@ class BaseAction extends Action {
 	}
 	public function post_json_data($token)
 	{
-		$url="http://dev.cdwtrj.com:13007/api-ymxc/token/check"; 
+		$url="http://slb.cdwtrj.com:13007/api-ymxc/token/check"; 
 		$param=array("token"=>$token);
 		$data = json_encode($param);
 		list($return_code, $return_content) = $this->http_post_data($url, $data);
@@ -43,7 +43,7 @@ class BaseAction extends Action {
     public function getPostData($token){
 //    	$url  = 'http://codemao.com/index.php/API/getJudgeMessage';
 //		$post_data['judge_record_id']       = '5649';
-		$url = "http://dev.cdwtrj.com:13007/api-ymxc/token/check";
+		$url = "http://slb.cdwtrj.com:13007/api-ymxc/token/check";
 		$post_data['token'] = $token;
         $o = "";
         foreach ( $post_data as $k => $v ) 
