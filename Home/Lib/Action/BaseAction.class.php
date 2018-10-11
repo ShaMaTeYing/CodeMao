@@ -84,57 +84,61 @@ class BaseAction extends Action {
 		$loginStatus=session('loginStatus');
 		
 	   //控制切换登录窗口
-		$this->assign('loginStatus',session('loginStatus')?session('loginStatus'):0);
-		if(session('loginStatus'))//登录成功则传值给模板变量
+		
+	
+		$userId=$_GET['userId'];
+		$token=$_GET['token'];
+//		$token='23ljwoejuoiasjfasd';
+		if($token)
 		{
-			$this->assign('userinfoData',session('userinfo'));
-		}
-		else 
-		{
-			$userId=$_GET['userId'];
-			$token=$_GET['token'];
-//			$token='23ljwoejuoiasjfasd';
-			if($token)
-			{
 //				$resData=$this->getPostData($token);
 //				$resData = json_decode($resData,true);
 //				$resData=$this->getTestPostData();
-				$resData=$this->post_json_data($token);
-				$resData = json_decode($resData,true);
-				if(intval($resData['errorcode'])==0&&$resData['data']['userId'])
-				{
-					$userId=$resData['data']['userId'];
-					$userData=M('user')->where(array('jx_id'=>$userId))->find();
-					if(!$userData){
-						$userData['username'] = "jx".$userId;
-						$userData['password'] = "jx123456";
-						$userData['status'] = "1";
-						$userData['school'] = "嘉祥集团";
-						$userData['motto'] = "jx".$userId;
-						$userData['mail'] = "jx@onecode.com.cn";
-						$userData['realname'] = "jx".$userId;
-						$userData['major'] = "jx".$userId;
-						$userData['nickname'] = "jx".$userId;
-						$userData['register_time'] = time();
-						$userData['jx_id'] = $userId;
-						M('user')->add($userData);
-					}
-					$user=M('user')->where(array('jx_id'=>$userId))->find();
-					session('loginStatus',1);//显示登录成功的界面
-					session('userinfo',$user);//设置userinfo的值，以便传值给模板
-					cookie('username',$user['realname']);
-					cookie('password',$this->oneMD5($_POST['password']));
-					$this->redirect('Index/index');
+			$resData=$this->post_json_data($token);
+			$resData = json_decode($resData,true);
+//			dump($resData);
+//			die;
+			if(intval($resData['errorcode'])==0&&$resData['data']['userId'])
+			{
+				$userId=$resData['data']['userId'];
+				$userData=M('user')->where(array('jx_id'=>$userId))->find();
+				if(!$userData){
+					$userData['username'] = "jx".$userId;
+					$userData['password'] = "jx123456";
+					$userData['status'] = "1";
+					$userData['school'] = "嘉祥集团";
+					$userData['motto'] = "jx".$userId;
+					$userData['mail'] = "jx@onecode.com.cn";
+					$userData['realname'] = "jx".$userId;
+					$userData['major'] = "jx".$userId;
+					$userData['nickname'] = "jx".$userId;
+					$userData['register_time'] = time();
+					$userData['jx_id'] = $userId;
+					M('user')->add($userData);
 				}
-				else 
-				{
-					$this->redirect('User/showLogin');
-				}
+				$user=M('user')->where(array('jx_id'=>$userId))->find();
+				session('loginStatus',1);//显示登录成功的界面
+				session('userinfo',$user);//设置userinfo的值，以便传值给模板
+				cookie('username',$user['realname']);
+				cookie('password',$this->oneMD5($_POST['password']));
+				$this->assign('loginStatus',session('loginStatus')?session('loginStatus'):0);
+				$this->redirect('Index/index');
 			}
 			else 
 			{
+				$this->assign('loginStatus',session('loginStatus')?session('loginStatus'):0);
 				$this->redirect('User/showLogin');
 			}
 		}
+		else 
+		{
+			$this->assign('loginStatus',session('loginStatus')?session('loginStatus'):0);
+			if(session('loginStatus'))//登录成功则传值给模板变量
+			{
+				$this->assign('userinfoData',session('userinfo'));
+			}
+			else $this->redirect('User/showLogin');
+		}
+		
    }
 }
