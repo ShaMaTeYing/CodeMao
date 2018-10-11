@@ -98,6 +98,7 @@ class BaseAction extends Action {
 			{
 //				$resData=$this->getPostData($token);
 //				$resData = json_decode($resData,true);
+//				$resData=$this->getTestPostData();
 				$resData=$this->post_json_data($token);
 				$resData = json_decode($resData,true);
 				if(intval($resData['errorcode'])==0&&$resData['data']['userId'])
@@ -123,6 +124,7 @@ class BaseAction extends Action {
 					session('userinfo',$user);//设置userinfo的值，以便传值给模板
 					cookie('username',$user['realname']);
 					cookie('password',$this->oneMD5($_POST['password']));
+					$this->redirect('Index/index');
 				}
 				else 
 				{

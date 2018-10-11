@@ -389,6 +389,28 @@ class APIAction extends Action {
 		//$this->assign('color','red');
 		
 	}
+	public function http_post_data($url, $data_string) 
+	{	
+		$ch = curl_init();	
+		curl_setopt($ch, CURLOPT_POST, 1);	
+		curl_setopt($ch, CURLOPT_URL, $url);	
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);	
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(		"Content-Type: application/json; charset=utf-8",		"Content-Length: " . strlen($data_string))	);	
+		ob_start();	
+		curl_exec($ch);	
+		$return_content = ob_get_contents();	
+		ob_end_clean();	
+		$return_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
+		return array($return_code, $return_content);
+	}
+	public function post_json_data($token)
+	{
+		$url="http://dev.cdwtrj.com:13007/api-ymxc/token/check"; 
+		$param=array("token"=>$token);
+		$data = json_encode($param);
+		list($return_code, $return_content) = $this->http_post_data($url, $data);
+		return $return_content;
+	}
 	public function jxWeekStatistics(){
 		$beginLastweek=mktime(0,0,0,date('m'),date('d')-date('w')+1-7,date('Y'));
 		$endLastweek=mktime(23,59,59,date('m'),date('d')-date('w')+7-7,date('Y'));
