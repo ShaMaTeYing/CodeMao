@@ -838,7 +838,7 @@ class AdminAction extends BaseAction {
 		foreach($peopleId as $k => $v){
 //			dump($k);
 			$userId=$peopleId[$k];
-			if($user_problem->where(array('user_id'=>$userId,'judge_status'=>0))->find()){
+			if($user_problem->where(array(array('in',$peopleId),'judge_status'=>0))->find()){
 				$allUserData[$k]['status']=0;
 			}else {
 				$allUserData[$k]['status']=1;
