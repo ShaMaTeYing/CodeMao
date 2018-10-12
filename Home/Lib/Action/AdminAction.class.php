@@ -818,6 +818,7 @@ class AdminAction extends BaseAction {
 		}
 		if($_POST['problemId']){
 			$pid=M('problem')->where(array('problem_mark'=>$_POST['problemId']))->find()['id'];
+			$this->assign('pid',$_POST['problemId']);
 			$map['problem_id']  = $pid;
 		}else {
 			$map['problem_id']  = -1;
