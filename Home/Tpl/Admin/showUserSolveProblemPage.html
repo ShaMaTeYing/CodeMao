@@ -1,0 +1,75 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row" style="margin-bottom: 10px;">
+		<div class="col-md-12 text-center">
+			<h2>用户分组写题统计</h2>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 10px;">
+		<div class="col-md-12">
+			<form action="__APP__/Admin/showUserSolveProblemPage" class="form-inline" role="form" method="post"> 
+				<div class="form-group">
+			    	<label for="exampleInputName2">题号</label>
+			   		<input type="text" name="problemId" class="form-control" placeholder="A-001" value="<{$pid}>"/>	
+				</div>
+				<div class="form-group">
+			    	<label for="exampleInputName2">用户组</label>
+			   		<select name="group" class="form-control">
+						<volist name="groupData" id="vo">
+							<option value="<{$vo.id}>"> <{$vo.name}> </option>
+						</volist>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<input class="btn btn-primary" type="submit" value="查询">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<!--<span>总通过人数:一个人多次AC只算一次。总AC人数，一个人多次AC算多次</span>-->
+			<table class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr style="background-color:rgb(204,204,255)">
+					<th class="text-center">小组总人数</th>
+					<th class="text-center">总提交数</th>
+					<th class="text-center">总通过人数</th>
+					<th class="text-center">未通过人数</th>
+					<th class="text-center">总AC数</th>
+					<th class="text-center">首A人姓名</th>
+				</tr>
+				<tr class="text-center">
+						<td><{$peopleCnt}></td>
+						<td><{$submissionCnt}></td>
+						<td><{$acPeopleCnt}></td>
+						<td><{$NotAcPeopleCnt}></td>
+						<td><{$acCnt}></td>
+						<td><{$firstName['username']}></td>
+				</tr>
+				<tr style="background-color:rgb(204,204,255)">
+					<th class="text-center">详细统计情况</th>
+				</tr>
+				<tr>
+					<volist name="allUserData" id="vo" mod="6" >
+							
+								<eq name="vo.status" value="0">
+									<td style="background-color: green;">
+										<{$vo.username}>
+									</td>
+									<else/>
+									<td style="background-color: red;">
+										<{$vo.username}>
+									</td>
+								</eq>
+							<eq name="mod" value="5"></tr><tr></eq>
+					</volist>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div ><{$page}></div>
+		</div>
+	</div>
+</block>

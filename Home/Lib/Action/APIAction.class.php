@@ -220,45 +220,45 @@ class APIAction extends Action {
 		return $resData;
 //		dump($resData);
 	}
-	public function jxLogin(){
-		$token = $_POST['token'];
-		if(!$token) $token = $_GET['token'];
-		$resData=$this->getPostData($token);
-		$resData = json_decode($resData,true);
-//		$resData=$this->getTestPostData();
-		if(intval($resData['errorcode'])==0){
-			$userId=$resData['data']['userId'];
-			$userData=M('user')->where(array('jx_id'=>$userId))->find();
-			if(!$userData){
-				$userData['username'] = "jx".$userId;
-				$userData['password'] = "jx123456";
-				$userData['status'] = "1";
-				$userData['school'] = "嘉祥集团";
-				$userData['motto'] = "jx".$userId;
-				$userData['mail'] = "jx@onecode.com.cn";
-				$userData['realname'] = "jx".$userId;
-				$userData['major'] = "jx".$userId;
-				$userData['nickname'] = "jx".$userId;
-				$userData['register_time'] = time();
-				$userData['jx_id'] = $userId;
-				M('user')->add($userData);
-			}
-			$user=M('user')->where(array('jx_id'=>$userId))->find();
-			session('loginStatus',1);//显示登录成功的界面
-			session('userinfo',$user);//设置userinfo的值，以便传值给模板
-			cookie('username',$user['realname']);
-			cookie('password',$this->oneMD5($_POST['password']));
-			//$this->redirect('Index/index');
-			$data['status'] = 0;
-			$data['info'] = 'Login successfully';
-			$data['url'] = 'http://course.onecode.com.cn/index.php/Index/index';
-			$this->ajaxReturn($data,'JSON');
-		}else {
-			$data['status'] = 1;
-			$data['info'] = 'Login failed';
-			$this->ajaxReturn($data,'JSON');
-		}
-	}
+//	public function jxLogin(){
+//		$token = $_POST['token'];
+//		if(!$token) $token = $_GET['token'];
+//		$resData=$this->getPostData($token);
+//		$resData = json_decode($resData,true);
+////		$resData=$this->getTestPostData();
+//		if(intval($resData['errorcode'])==0){
+//			$userId=$resData['data']['userId'];
+//			$userData=M('user')->where(array('jx_id'=>$userId))->find();
+//			if(!$userData){
+//				$userData['username'] = "jx".$userId;
+//				$userData['password'] = "jx123456";
+//				$userData['status'] = "1";
+//				$userData['school'] = "嘉祥集团";
+//				$userData['motto'] = "jx".$userId;
+//				$userData['mail'] = "jx@onecode.com.cn";
+//				$userData['realname'] = "jx".$userId;
+//				$userData['major'] = "jx".$userId;
+//				$userData['nickname'] = "jx".$userId;
+//				$userData['register_time'] = time();
+//				$userData['jx_id'] = $userId;
+//				M('user')->add($userData);
+//			}
+//			$user=M('user')->where(array('jx_id'=>$userId))->find();
+//			session('loginStatus',1);//显示登录成功的界面
+//			session('userinfo',$user);//设置userinfo的值，以便传值给模板
+//			cookie('username',$user['realname']);
+//			cookie('password',$this->oneMD5($_POST['password']));
+//			//$this->redirect('Index/index');
+//			$data['status'] = 0;
+//			$data['info'] = 'Login successfully';
+//			$data['url'] = 'http://course.onecode.com.cn/index.php/Index/index';
+//			$this->ajaxReturn($data,'JSON');
+//		}else {
+//			$data['status'] = 1;
+//			$data['info'] = 'Login failed';
+//			$this->ajaxReturn($data,'JSON');
+//		}
+//	}
 	/*post  token
 		return 
 		{
@@ -449,5 +449,54 @@ class APIAction extends Action {
 //		dump($data);
 //		die;
 		$this->ajaxReturn($data,'JSON');
+	}
+	public function myMD5($value){
+		for($i=1;$i<=5;$i++){
+			$value=md5($value);
+		}
+		return $value;
+	}
+	public function userData(){
+		$userId=array("60680", "15064", "10416", "10010", "6384", "4243", "20042", "16247", "15535",
+		 "7196", "16902", "21727", "16243", "17846", "57171", "47291", "18979", "16243", "13402", 
+		 "12239", "16764", "7909", "18747", "46509", "60432", "21293", "18486", "16666", "5909", "12589", 
+		 "19023", "46332", "46921", "46377", "46540", "46663", "46606", "47166", "46844", "46661", "51094",
+		  "46322", "46635", "46670", "46849", "46907", "46913", "46948", "46867", "47419", "15694", "47137",
+		   "47297", "46512", "46625", "14993", "11471", "16137", "46363", "46642", "51857", "47030", "5127",
+		    "13709", "19216", "46446", "46507", "46305", "46421", "46859", "47297", "8324", "46690", "47146",
+		     "47421", "47470", "47497", "6324", "21764", "47338", "15802", "51440", "4624", "46371", "60153",
+		      "18260", "57239", "11751", "11256", "55817", "6306", "49116", "46405", "13086");
+		$username=array("陈飞羽", "于晴", "雷诣桁", "黄玉璐", "吴玮豪", "邓响", "王一新", "朱梓瑄", "刘亦航", "凌圣宗", "谢宜珎",
+		 "谭宇辰", "何天阳", "秦宇亨", "李砚鹏", "谷俐", "樊思彤", "何文心", "杨宛融", "万众", "管浩霖", "廖霈萱", "李彦战", "宋明哲",
+		  "张一天", "何锦曈", "陆榕国", "覃云瀚", "李卓恒", "苏彦旭", "江妍洁", "文泓又", "张新昊", "唐子涵", "樊易", "石星见", "张浩麟", 
+		  "张家乐", "赵建亦", "熊涵语", "张峻宁", "丰誉航", "唐熙远", "金彤", "伍宇昶", "袁炜蘅", "涂羽桐", "王子晋", "姜冰彬", "王鹏宇", 
+		  "吴莛宣", "谢明昊", "运动孩", "薛淞阳", "李劲汐", "康焜翔", "钟林珂", "高宇星", "杜彦希", "曾彬洁", "李彦宏", "唐际森", "俞一博",
+		   "任橹汐", "刘涛萌", "冯哲雅", "杨沛希", "黄译萱", "付佳利", "张峻涵", "提交", "张怡可", "王馨睿", "代睿麟", "李宇轩", "唐志雄",
+		    "张杰栋", "易泽宇", "何家乐", "陶俊驰", "刘思睿", "何沛联", "林靖然", "邓淳予", "严浩峰", "唐直", "何宗宪", "谢沐君", 
+		    "李卓衡", "陈昶言", "罗长青", "邢陈子轩", "谭钧议", "蒲浩歌" );
+		for($i=0;$i<count($userId);$i++){
+			$this->jxUserRegister($userId[$i],$username[$i]);
+		}
+		
+	}
+	public function jxUserRegister($userId,$username){
+//		$userId = $_POST['userId'];
+//		$username = $_POST['username'];
+		if(M('user')->where(array('jx_id'=>$userId))->find()) return ;
+		$userData['username'] = $username;
+		$userData['password'] = $this->myMD5("jx123456");
+		$userData['status'] = "1";
+		$userData['school'] = "嘉祥集团";
+		$userData['motto'] = "该用户很懒，什么都没有留下。";
+		$userData['mail'] = "jx@onecode.com.cn";
+		$userData['realname'] = $username;
+		$userData['major'] = "无。";
+		$userData['nickname'] = $username;
+		$userData['register_time'] = time();
+		$userData['jx_id'] = $userId;
+		$Id=M('user')->add($userData);
+		$userGroup['user_id']=$Id;
+		$userGroup['group_id']=3;
+		M('user_group')->add($userGroup);
 	}
 }

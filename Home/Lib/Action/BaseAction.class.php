@@ -103,18 +103,7 @@ class BaseAction extends Action {
 				$userId=$resData['data']['userId'];
 				$userData=M('user')->where(array('jx_id'=>$userId))->find();
 				if(!$userData){
-					$userData['username'] = "jx".$userId;
-					$userData['password'] = "jx123456";
-					$userData['status'] = "1";
-					$userData['school'] = "嘉祥集团";
-					$userData['motto'] = "jx".$userId;
-					$userData['mail'] = "jx@onecode.com.cn";
-					$userData['realname'] = "jx".$userId;
-					$userData['major'] = "jx".$userId;
-					$userData['nickname'] = "jx".$userId;
-					$userData['register_time'] = time();
-					$userData['jx_id'] = $userId;
-					M('user')->add($userData);
+					$this->redirect('User/showLogin');
 				}
 				$user=M('user')->where(array('jx_id'=>$userId))->find();
 				session('loginStatus',1);//显示登录成功的界面

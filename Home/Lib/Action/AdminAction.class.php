@@ -805,4 +805,55 @@ class AdminAction extends BaseAction {
 		$this->assign('violationData',$violationData);
 		$this->display();
 	}
+	public function showUserSolveProblemPage(){
+		$groupData=M('group')->select();
+		$peopleCnt=0;
+		if($_POST['group']){
+			$peopleId=M('user_group')->where(array('group_id'=>$_POST['group']))->field('user_id')->select();
+			foreach($peopleId as $k => $v){
+				$peopleId[$k]=$peopleId[$k]['user_id'];
+			}
+			$map['user_id']  = array('in',$peopleId);
+			$peopleCnt=count($peopleId);
+		}
+		if($_POST['problemId']){
+			$pid=M('problem')->where(array('problem_mark'=>$_POST['problemId']))->find()['id'];
+			$map['problem_id']  = $pid;
+		}else {
+			$map['problem_id']  = -1;
+		}
+		$Submissions=M('user_problem')->where($map)->select();
+		$submissionCnt=count($Submissions);
+		$map['judge_status']=0;
+		$Submissions=M('user_problem')->where($map)->Distinct(true)->field('user_id')->select();
+		$acPeopleCnt=count($Submissions);
+		$NotAcPeopleCnt=$peopleCnt-$acPeopleCnt;
+		$acCnt=M('user_problem')->where($map)->count();
+		$firstName=M('user_problem')->where(array('problem_id'=>$pid,'judge_status'=>0))->find();
+		$firstName=M('user')->where(array('id'=>$firstName['user_id']))->find();
+		$user_problem=M('user_problem');
+		$user=M('user');
+		$allUserData=array();
+		foreach($peopleId as $k => $v){
+//			dump($k);
+			$userId=$peopleId[$k];
+			if($user_problem->where(array('user_id'=>$userId,'judge_status'=>0))->find()){
+				$allUserData[$k]['status']=0;
+			}else {
+				$allUserData[$k]['status']=1;
+			}
+			$allUserData[$k]['user_id']=$userId;
+			$allUserData[$k]['username']=M('user')->where(array('id'=>$userId))->find()['username'];
+		}
+//		dump($allUserData);
+		$this->assign('groupData',$groupData);
+		$this->assign('peopleCnt',$peopleCnt);
+		$this->assign('submissionCnt',$submissionCnt);
+		$this->assign('acPeopleCnt',$acPeopleCnt);
+		$this->assign('NotAcPeopleCnt',$NotAcPeopleCnt);
+		$this->assign('acCnt',$acCnt);
+		$this->assign('firstName',$firstName);
+		$this->assign('allUserData',$allUserData);
+		$this->display();
+	}
 }
