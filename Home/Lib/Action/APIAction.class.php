@@ -327,10 +327,6 @@ class APIAction extends Action {
      * */
 	/*显示所有用户*/
 	public function showAllUserRank($username){
-		if(!session('loginStatus'))//登录不成功则跳转
-		{
-			$this->redirect('User/showLogin');
-		}
 	
 		$sortParam = $_POST['sort_param'];
 		
@@ -417,7 +413,12 @@ class APIAction extends Action {
 		$userId = $_POST['userId'];
 		if(!$userId) $userId = $_GET['userId'];
 		$userData = M('user')->where(array('jx_id'=>$userId))->find();
+//		dump($userId);
+//		dump($userData);
+//		die;
 		if($userData){
+//			dump('ssss');
+//			die;
 			$data['status'] = 0;
 			$data['info'] = 'Query successfully';
 			$data['rank'] = $this->showAllUserRank($userData['username']);
@@ -427,7 +428,9 @@ class APIAction extends Action {
 			$where['judge_status']=0;
 			$data['all_ac'] = M('user_problem')->where($where)->count();
 			$data['every_level_submit'] = $this->getEveryLevelSubmit($userData);
+//			dump('ssss2');
 			$data['every_level_ac'] = $this->getEveryLevelAc($userData);
+//			dump('ssss3');
 			if($data['all_ac']<5){
 				$data['evaluate'] = "题目写得有点少哦，还需要更加努力！";
 			}else if($data['all_ac']<10){
@@ -443,6 +446,8 @@ class APIAction extends Action {
 			$data['status'] = 1;
 			$data['info'] = 'Query failed';
 		}
+//		dump($data);
+//		die;
 		$this->ajaxReturn($data,'JSON');
 	}
 }
