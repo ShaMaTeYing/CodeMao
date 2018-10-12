@@ -830,7 +830,7 @@ class AdminAction extends BaseAction {
 		$acPeopleCnt=count($Submissions);
 		$NotAcPeopleCnt=$peopleCnt-$acPeopleCnt;
 		$acCnt=M('user_problem')->where($map)->count();
-		$firstName=M('user_problem')->where(array('problem_id'=>$pid,'judge_status'=>0))->find();
+		$firstName=M('user_problem')->where(array('problem_id'=>$pid,'user_id'=>array('in',$peopleId),'judge_status'=>0))->find();
 		$firstName=M('user')->where(array('id'=>$firstName['user_id']))->find();
 		$user_problem=M('user_problem');
 		$user=M('user');
@@ -838,7 +838,7 @@ class AdminAction extends BaseAction {
 		foreach($peopleId as $k => $v){
 //			dump($k);
 			$userId=$peopleId[$k];
-			if($user_problem->where(array(array('in',$peopleId),'judge_status'=>0))->find()){
+			if($user_problem->where(array('user_id'=>$userId,'judge_status'=>0))->find()){
 				$allUserData[$k]['status']=0;
 			}else {
 				$allUserData[$k]['status']=1;
