@@ -117,7 +117,7 @@ class BaseAction extends Action {
 //				die;
 				$loginStatus=session('loginStatus');
 				$this->assign('loginStatus',session('loginStatus')?session('loginStatus'):0);
-//				$this->redirect('Index/index');
+				$this->redirect('Index/index');
 			}
 			else 
 			{
