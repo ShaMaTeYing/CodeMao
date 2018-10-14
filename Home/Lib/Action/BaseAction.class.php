@@ -108,13 +108,16 @@ class BaseAction extends Action {
 				$user=M('user')->where(array('jx_id'=>$userId))->find();
 				session('loginStatus',1);//显示登录成功的界面
 				session('userinfo',$user);//设置userinfo的值，以便传值给模板
+				
 				cookie('username',$user['realname']);
 //				$loginData=M('login_msg')->where(array('user_id'=>$user['id'],'status'=>'登录成功'))->select();
 //				$login=$loginData[count($loginData)-1]['password'];
 				cookie('password',$this->oneMD5('jx123456'));
+//				dump("执行了");
+//				die;
 				$loginStatus=session('loginStatus');
 				$this->assign('loginStatus',session('loginStatus')?session('loginStatus'):0);
-				$this->redirect('Index/index');
+//				$this->redirect('Index/index');
 			}
 			else 
 			{
