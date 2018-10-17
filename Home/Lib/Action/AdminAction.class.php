@@ -857,4 +857,5 @@ class AdminAction extends BaseAction {
 		$this->assign('allUserData',$allUserData);
 		$this->display();
 	}
+	
 }

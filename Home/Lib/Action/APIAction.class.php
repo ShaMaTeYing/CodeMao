@@ -411,6 +411,54 @@ class APIAction extends Action {
 		$beginLastweek=mktime(0,0,0,date('m'),date('d')-date('w')+1-7,date('Y'));
 		$endLastweek=mktime(23,59,59,date('m'),date('d')-date('w')+7-7,date('Y'));
 		$userId = $_POST['userId'];
+		if(!$userId&&$_GET['userId']) $userId = $_GET['userId'];
+		if(!$userId) {
+			$data = json_decode($_POST, TRUE);   //格式化
+			$userId=$data['userId'];
+		}
+		$userData = M('user')->where(array('jx_id'=>$userId))->find();
+//		dump($userId);
+//		dump($userData);
+//		die;
+		if($userData){
+//			dump('ssss');
+//			die;
+			$data['status'] = 0;
+			$data['info'] = 'Query successfully';
+			$data['rank'] = $this->showAllUserRank($userData['username']);
+			$where['user_id']=$userData['id'];
+			$where['submit_time']=array(array('egt',$beginLastweek),array('elt',$endLastweek));
+			$data['all_submit'] = M('user_problem')->where($where)->count();
+			$where['judge_status']=0;
+			$data['all_ac'] = M('user_problem')->where($where)->count();
+			$data['every_level_submit'] = $this->getEveryLevelSubmit($userData);
+//			dump('ssss2');
+			$data['every_level_ac'] = $this->getEveryLevelAc($userData);
+//			dump('ssss3');
+			if($data['all_ac']<5){
+				$data['evaluate'] = "题目写得有点少哦，还需要更加努力！";
+			}else if($data['all_ac']<10){
+				$data['evaluate'] = "这周表现不错，希望再接再厉！";
+			}else if($data['all_ac']<15){
+				$data['evaluate'] = "这周已经很少有人比你更加努力了，继续加油前进！";
+			}else if($data['all_ac']<20){
+				$data['evaluate'] = "你是个有天赋的孩子，再接再厉吧！";
+			}else {
+				$data['evaluate'] = "你已经无人能敌了，希望继续保持！";
+			}
+		}else {
+			$data['status'] = 1;
+			$data['info'] = 'Query failed';
+		}
+//		dump($data);
+//		die;
+$data['userId']=$userId;
+		$this->ajaxReturn($data,'JSON');
+	}
+	public function jxThisWeekStatistics(){
+		$beginLastweek=mktime(0,0,0,date('m'),date('d')-date('w')+1,date('Y'));
+		$endLastweek=mktime(23,59,59,date('m'),date('d')-date('w')+7,date('Y'));
+		$userId = $_POST['userId'];
 		if(!$userId) $userId = $_GET['userId'];
 		$userData = M('user')->where(array('jx_id'=>$userId))->find();
 //		dump($userId);

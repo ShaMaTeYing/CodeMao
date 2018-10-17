@@ -12,12 +12,12 @@ return array(
 	'DB_HOST'=>'localhost',//设置主机
 	'DB_NAME'=>'codemao',//设置数据库名
 	'DB_USER'=>'root',    //设置用户名
-//	'DB_PWD'=>'12345687@onecode',        //设置密码
-	'DB_PWD'=>'OneCode',        //设置密码
+	'DB_PWD'=>'12345687@onecode',        //设置密码
+//	'DB_PWD'=>'OneCode',        //设置密码
 	'DB_PORT'=>'3306',   //设置端口号
 	'DB_PREFIX'=>'',  //设置表前缀
 	
-	//'SHOW_PAGE_TRACE' =>true, // 显示页面Trace信息
+	'SHOW_PAGE_TRACE' =>true, // 显示页面Trace信息
 
 	/*Mail config*/
 	'MAIL_ADDRESS'=>'13027217007@163.com', // 邮箱地址
