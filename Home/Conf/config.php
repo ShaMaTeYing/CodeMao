@@ -17,7 +17,7 @@ return array(
 	'DB_PORT'=>'3306',   //设置端口号
 	'DB_PREFIX'=>'',  //设置表前缀
 	
-	'SHOW_PAGE_TRACE' =>true, // 显示页面Trace信息
+//	'SHOW_PAGE_TRACE' =>true, // 显示页面Trace信息
 
 	/*Mail config*/
 	'MAIL_ADDRESS'=>'13027217007@163.com', // 邮箱地址
