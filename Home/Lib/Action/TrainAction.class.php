@@ -670,10 +670,15 @@ class TrainAction extends BaseAction {
 			->select();
 			foreach($courseSubSectionData as $k1 => $v1){
 				$courseSubSectionData[$k1]['all_problem']=$this->getProblemLink($courseSubSectionData[$k1]['all_problem']);
+				if($courseSubSectionData[$k1]['app_id']!=""){
+					$courseSubSectionData[$k1]['is_show']=1;
+				}else {
+					$courseSubSectionData[$k1]['is_show']=0;
+				}
 			}
 			$courseSectionData[$k]['subInfo']=$courseSubSectionData;
 		}
-//		dump($courseSectionData);
+//		dump($courseSubSectionData);
 		$this->assign('courseData',$courseData);
 		$this->assign('courseSectionData',$courseSectionData);
 //		$this->assign('courseSubSectionData',$courseSubSectionData);

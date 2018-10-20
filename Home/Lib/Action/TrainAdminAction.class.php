@@ -136,7 +136,7 @@ class TrainAdminAction extends BaseAction {
 		$courseSectionData=M('course_sub_section')->where(array('id'=>$_GET['id']))->find();
 		$courseSectionData['status']=(string)(1-intval($courseSectionData['status']));
 		$res=M('course_sub_section')->save($courseSectionData);
-		if($res) $this->redirect('showCourseSubSectionPage',array('id'=>$_GET['id']));
-		else $this->error("修改失败！",U('showCourseSubSectionPage',array("id"=>$_GET['id'])));
+		if($res) $this->redirect('showCourseSubSectionPage',array('id'=>$courseSectionData['course_section_id']));
+		else $this->error("修改失败！",U('showCourseSubSectionPage',array("id"=>$courseSectionData['course_section_id'])));
 	}
 }
