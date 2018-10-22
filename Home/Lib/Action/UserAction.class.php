@@ -279,34 +279,11 @@ class UserAction extends Action {
 		$map['status']  = 1;
 		
 		$User = M('User'); // 实例化User对象
-		import('ORG.Util.Page');// 导入分页类
-		$count      = $User->where($map)->count();// 查询满足要求的总记录数
-		$Page       = new Page($count,50);// 实例化分页类 传入总记录数和每页显示的记录数
-		$show       = $Page->show();// 分页显示输出
-		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-        //order('solve_problem desc,submissions asc')
-		$list = $User->where($map)->limit($Page->firstRow.','.$Page->listRows)->select();
-		$tips = M('tips');
-        for($i=0;$i<count($list);$i++){
-            if($i>0&&$list[$i]['solve_problem']==$list[$i-1]['solve_problem']&&$list[$i]['submissions']==$list[$i-1]['submissions']){
-                $list[$i]['rank']=$list[$i-1]['rank'];
-            }else {
-                $list[$i]['rank']=$Page->firstRow+$i+1;
-            }
-            if($list[$i]['rank']<=5){
-                $list[$i]['color']='red';
-            }else if($list[$i]['rank']<=10){
-                $list[$i]['color']='orange';
-            }else if($list[$i]['rank']<=15){
-                $list[$i]['color']='purple';
-            }else {
-                $list[$i]['color']='blue';
-            }
-            $list[$i]['score']=$tips->where(array('user_id'=>$list[$i]['id']))->sum('score');
-        }
-//      dump($list);
+		$list = $User->where($map)->select();
+		for($i=0;$i<count($list);$i++){
+			$list[$i]['score']=$list[$i]['library_score']+$list[$i]['ladder_score'];
+		}
         $list=$this->sortArrByManyField($list,'score',SORT_DESC,'solve_problem',SORT_DESC,'submissions',SORT_ASC);
-//		dump($list);
 		for($i=0;$i<count($list);$i++){
 			if($i>0&&$list[$i]['solve_problem']==$list[$i-1]['solve_problem']&&$list[$i]['submissions']==$list[$i-1]['submissions']){
 				$list[$i]['rank']=$list[$i-1]['rank'];
@@ -322,11 +299,15 @@ class UserAction extends Action {
 			}else {
 				$list[$i]['color']='blue';
 			}
-			
+			$list[$i]['score']=$list[$i]['library_score']+$list[$i]['ladder_score'];
 		}
-		//$this->assign('color','red');
-
-		$this->assign('list',$list);// 赋值数据集
+		import('ORG.Util.Page');// 导入分页类
+		$count      = count($list);// 查询满足要求的总记录数
+		//dump($count);
+		$Page       = new Page($count,25);// 实例化分页类 传入总记录数和每页显示的记录数
+		$show       = $Page->show();// 分页显示输出
+		$sublist = array_slice($list,$Page->firstRow,$Page->listRows);
+		$this->assign('list',$sublist);// 赋值数据集
 		$this->assign('page',$show);// 赋值分页输出
 		$this->display(); // 输出模板
 		

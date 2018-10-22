@@ -326,7 +326,29 @@ class APIAction extends Action {
      	判题端暂时未写
      * */
 	/*显示所有用户*/
-	public function showAllUserRank($username){
+//	public function showAllUserRank($jx_id){
+//		$map['status']  = 1;
+//		$User = M('User'); // 实例化User对象
+//		$list = $User->where($map)->select();
+//		$tips = M('tips');
+//      for($i=0;$i<count($list);$i++){
+//          $list[$i]['score']=$tips->where(array('user_id'=>$list[$i]['id']))->sum('score');
+//      }
+////      dump($list);
+//      $list=$this->sortArrByManyField($list,'score',SORT_DESC,'solve_problem',SORT_DESC,'submissions',SORT_ASC);
+////		dump($list);
+//		for($i=0;$i<count($list);$i++){
+//			if($i>0&&$list[$i]['solve_problem']==$list[$i-1]['solve_problem']&&$list[$i]['submissions']==$list[$i-1]['submissions']){
+//				$list[$i]['rank']=$list[$i-1]['rank'];
+//			}else {
+//				$list[$i]['rank']=$Page->firstRow+$i+1;
+//			}
+//			if($jx_id==$list[$i]['jx_id']) return $list[$i]['rank'];
+//		}
+//		//$this->assign('color','red');
+//		
+//	}
+	public function showAllUserRank($jx_id){
 	
 		$sortParam = $_POST['sort_param'];
 		
@@ -337,34 +359,11 @@ class APIAction extends Action {
 		$map['status']  = 1;
 		
 		$User = M('User'); // 实例化User对象
-		import('ORG.Util.Page');// 导入分页类
-		$count      = $User->where($map)->count();// 查询满足要求的总记录数
-		$Page       = new Page($count,50);// 实例化分页类 传入总记录数和每页显示的记录数
-		$show       = $Page->show();// 分页显示输出
-		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-        //order('solve_problem desc,submissions asc')
-		$list = $User->where($map)->limit($Page->firstRow.','.$Page->listRows)->select();
-		$tips = M('tips');
-        for($i=0;$i<count($list);$i++){
-            if($i>0&&$list[$i]['solve_problem']==$list[$i-1]['solve_problem']&&$list[$i]['submissions']==$list[$i-1]['submissions']){
-                $list[$i]['rank']=$list[$i-1]['rank'];
-            }else {
-                $list[$i]['rank']=$Page->firstRow+$i+1;
-            }
-            if($list[$i]['rank']<=5){
-                $list[$i]['color']='red';
-            }else if($list[$i]['rank']<=10){
-                $list[$i]['color']='orange';
-            }else if($list[$i]['rank']<=15){
-                $list[$i]['color']='purple';
-            }else {
-                $list[$i]['color']='blue';
-            }
-            $list[$i]['score']=$tips->where(array('user_id'=>$list[$i]['id']))->sum('score');
-        }
-//      dump($list);
+		$list = $User->where($map)->select();
+		for($i=0;$i<count($list);$i++){
+			$list[$i]['score']=$list[$i]['library_score']+$list[$i]['ladder_score'];
+		}
         $list=$this->sortArrByManyField($list,'score',SORT_DESC,'solve_problem',SORT_DESC,'submissions',SORT_ASC);
-//		dump($list);
 		for($i=0;$i<count($list);$i++){
 			if($i>0&&$list[$i]['solve_problem']==$list[$i-1]['solve_problem']&&$list[$i]['submissions']==$list[$i-1]['submissions']){
 				$list[$i]['rank']=$list[$i-1]['rank'];
@@ -380,10 +379,16 @@ class APIAction extends Action {
 			}else {
 				$list[$i]['color']='blue';
 			}
-			if($username==$list[$i]['username']) return $list[$i]['rank'];
+			$list[$i]['score']=$list[$i]['library_score']+$list[$i]['ladder_score'];
+			if($jx_id==$list[$i]['jx_id']) return $list[$i]['rank'];
 		}
-		//$this->assign('color','red');
 		
+		
+	}
+	public function test_get_rank(){
+		dump($_GET['id']);
+		$data=$this->showAllUserRank($_GET['id']);
+		dump($data);
 	}
 	public function http_post_data($url, $data_string) 
 	{	
@@ -426,7 +431,7 @@ class APIAction extends Action {
 //			die;
 			$data['status'] = 0;
 			$data['info'] = 'Query successfully';
-			$data['rank'] = $this->showAllUserRank($userData['username']);
+			$data['rank'] = $this->showAllUserRank($userData['jx_id']);
 			$where['user_id']=$userData['id'];
 			$where['submit_time']=array(array('egt',$beginLastweek),array('elt',$endLastweek));
 			$data['all_submit'] = M('user_problem')->where($where)->count();
@@ -475,7 +480,7 @@ class APIAction extends Action {
 	//			die;
 				$data['status'] = 0;
 				$data['info'] = 'Query successfully';
-				$data['rank'] = $this->showAllUserRank($userData['username']);
+				$data['rank'] = $this->showAllUserRank($userData['jx_id']);
 				$where['user_id']=$userData['id'];
 				$where['submit_time']=array(array('egt',$beginLastweek),array('elt',$endLastweek));
 				$data['all_submit'] = M('user_problem')->where($where)->count();
