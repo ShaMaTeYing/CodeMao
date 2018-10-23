@@ -463,12 +463,14 @@ class APIAction extends Action {
 		return $data;
 	}
 	public function getLastWeekData(){
+//		$id=$_GET['id'];
 		$userData=M('user')->where(array('motto'=>'该用户很懒，什么都没有留下。'))->select();
-//		dump($userData);
+//		dump($id);
 		$data=array();
 		foreach($userData as $k => $v){
 			$data[$k]=$this->jxLastWeekStatistics($userData[$k]['jx_id']);
 			$data[$k]['name']=$userData[$k]['username'];
+			$data[$k]['jx_id']=$userData[$k]['jx_id'];
 		}
 //		dump($data);
 		$list=$this->sortArrByManyField($data,'all_ac',SORT_DESC,'all_submit',SORT_ASC);
@@ -482,6 +484,27 @@ class APIAction extends Action {
 //		dump($list);
 		$this->assign('list',$list);// 赋值数据集
 		$this->display(); // 输出模板
+	}
+	public function getLastWeekRank($id){
+		$userData=M('user')->where(array('motto'=>'该用户很懒，什么都没有留下。'))->select();
+//		dump($userData);
+		$data=array();
+		foreach($userData as $k => $v){
+			$data[$k]=$this->jxLastWeekStatistics($userData[$k]['jx_id']);
+			$data[$k]['name']=$userData[$k]['username'];
+			$data[$k]['jx_id']=$userData[$k]['jx_id'];
+		}
+//		dump($data);
+		$list=$this->sortArrByManyField($data,'all_ac',SORT_DESC,'all_submit',SORT_ASC);
+		for($i=0;$i<count($list);$i++){
+			if($i>0&&$list[$i]['all_ac']==$list[$i-1]['all_ac']&&$list[$i]['all_submit']==$list[$i-1]['all_submit']){
+				$list[$i]['rank']=$list[$i-1]['rank'];
+			}else {
+				$list[$i]['rank']=$i+1;
+			}
+			if($list[$i]['jx_id']==$id) return $list[$i]['rank'];
+		}
+
 	}
 	public function jxWeekStatistics(){
 		$beginLastweek=mktime(0,0,0,date('m'),date('d')-date('w')+1-7,date('Y'));
@@ -503,6 +526,55 @@ class APIAction extends Action {
 			$data['status'] = 0;
 			$data['info'] = 'Query successfully';
 			$data['rank'] = $this->showAllUserRank($userData['jx_id']);
+			$where['user_id']=$userData['id'];
+			$where['submit_time']=array(array('egt',$beginLastweek),array('elt',$endLastweek));
+			$data['all_submit'] = M('user_problem')->where($where)->count();
+			$where['judge_status']=0;
+			$data['all_ac'] = M('user_problem')->where($where)->count();
+			$data['every_level_submit'] = $this->getEveryLevelSubmit($userData,$beginLastweek,$endLastweek);
+//			dump('ssss2');
+			$data['every_level_ac'] = $this->getEveryLevelAc($userData,$beginLastweek,$endLastweek);
+//			dump('ssss3');
+			if($data['all_ac']<5){
+				$data['evaluate'] = "题目写得有点少哦，还需要更加努力！";
+			}else if($data['all_ac']<10){
+				$data['evaluate'] = "这周表现不错，希望再接再厉！";
+			}else if($data['all_ac']<15){
+				$data['evaluate'] = "这周已经很少有人比你更加努力了，继续加油前进！";
+			}else if($data['all_ac']<20){
+				$data['evaluate'] = "你是个有天赋的孩子，再接再厉吧！";
+			}else {
+				$data['evaluate'] = "你已经无人能敌了，希望继续保持！";
+			}
+		}else {
+			$data['status'] = 1;
+			$data['info'] = 'Query failed';
+		}
+//		dump($data);
+//		die;
+// $data['userId']=$psotdata['userId'];
+		$this->ajaxReturn($data,'JSON');
+	}
+	public function jxLastLastWeekStatistics(){
+		$beginLastweek=mktime(0,0,0,date('m'),date('d')-date('w')+1-14,date('Y'));
+		$endLastweek=mktime(23,59,59,date('m'),date('d')-date('w')+7-14,date('Y'));
+		$userId = $_POST['userId'];
+		if(!$userId&&$_GET['userId']) $userId = $_GET['userId'];
+		if(!$userId) {
+			$psotdata=$GLOBALS['HTTP_RAW_POST_DATA'];
+			$psotdata = json_decode($psotdata,true);   //格式化
+			$userId=$psotdata['userId'];
+		}
+		$userData = M('user')->where(array('jx_id'=>$userId))->find();
+//		dump($userId);
+//		dump($userData);
+//		die;
+		if($userData){
+//			dump('ssss');
+//			die;
+			$data['status'] = 0;
+			$data['info'] = 'Query successfully';
+			$data['rank'] = $this->getLastWeekRank($userData['jx_id']);
 			$where['user_id']=$userData['id'];
 			$where['submit_time']=array(array('egt',$beginLastweek),array('elt',$endLastweek));
 			$data['all_submit'] = M('user_problem')->where($where)->count();
