@@ -684,6 +684,29 @@ class TrainAction extends BaseAction {
 //		$this->assign('courseSubSectionData',$courseSubSectionData);
 		$this->display();
 	}
+	public function showCourseIndexHistoryPage(){
+		$courseData=M('course')->find();
+		$courseSectionData=M('course_section')->where(array('course_id'=>$courseData['id'],'status'=>0))->order(array('order'))->select();
+		foreach($courseSectionData as $k => $v){
+			$secId=$courseSectionData[$k]['id'];
+			$courseSubSectionData=M('course_sub_section')->where(array('course_section_id'=>$secId))
+			->select();
+			foreach($courseSubSectionData as $k1 => $v1){
+				$courseSubSectionData[$k1]['all_problem']=$this->getProblemLink($courseSubSectionData[$k1]['all_problem']);
+			}
+			foreach($courseSubSectionData as $k1 => $v1){
+				if(!isset($courseSubSectionData[$k1]['video_address'])){
+					unset($courseSubSectionData[$k1]);
+				}
+			}
+			$courseSectionData[$k]['subInfo']=$courseSubSectionData;
+		}
+//		dump($courseSubSectionData);
+		$this->assign('courseData',$courseData);
+		$this->assign('courseSectionData',$courseSectionData);
+//		$this->assign('courseSubSectionData',$courseSubSectionData);
+		$this->display();
+	}
 	public function showCourseVideoPage(){
 		$courseSectionData=M('course_sub_section')->where(array('id'=>$_GET['id']))->find();
 		$this->assign('courseSectionData',$courseSectionData);
