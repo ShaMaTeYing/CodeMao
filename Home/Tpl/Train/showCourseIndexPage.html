@@ -96,9 +96,15 @@
 							      		<div class="col-lg-1" style="margin-top: 10px;">
 							      			<eq name="subvo.is_show" value="1">
 							      				<a href="__APP__/Train/showCourseVideoPage/id/<{$subvo.id}>" target="_blank" title="第<{$index}>.<{$subindex}>课 <{$subvo.name}>视频"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>							      			
-							      				|
+								      			<notempty name="subvo.video_address">
+								      				|
+								      			</notempty>
 							      			</eq>
-											<a href="<{$subvo.video_address}>" target="_blank" title="第<{$index}>.<{$subindex}>课 <{$subvo.name}>欢拓视频"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>
+							      			<notempty name="subvo.video_address">
+							      				<a href="<{$subvo.video_address}>" target="_blank" title="第<{$index}>.<{$subindex}>课 <{$subvo.name}>欢拓视频"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>
+							      			</notempty>
+
+											
 							      		</div>
 							      		
 							      	</div>
