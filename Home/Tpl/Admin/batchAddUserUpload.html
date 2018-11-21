@@ -1,0 +1,43 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center">批量新增用户确认表</h3>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-md-12">
+			<table  class="table table-bordered table-condensed table-striped  table-hover text-center">
+				<tr style="background-color:rgb(51,122,183);color: #FFFFFF;">
+					<th style="width: 7%;" class="text-center">用户名</th>
+					
+					<th style="width: 10%;" class="text-center">昵称</th>
+					<th  class="text-center">密码</th>
+					<th style="width: 8%;" class="text-center" >真实姓名</th>
+					<th  style="width: 10%;" class="text-center">邮箱</th>
+					<th  style="width: 10%;" class="text-center">学校</th>
+					<th  style="width: 10%;" class="text-center">专业</th>
+					<th  style="width: 10%;" class="text-center">座右铭</th>
+					<th style="width: 7%;" class="text-center">是否存在</th>
+				</tr>
+				<volist name='userList' id='vo'>
+					<tr style="width: 10%;">
+						<volist name='vo' id='vo1'>
+							<td class="text-center">
+								<{$vo1}>
+							</td>
+						</volist>
+					</tr>
+				</volist>
+				
+				</table>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<a href="__APP__/Admin/batchAddUser" >确认信息无误，提交新增用户</a>
+		</div>
+	</div>
+</block>

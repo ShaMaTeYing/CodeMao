@@ -857,5 +857,108 @@ class AdminAction extends BaseAction {
 		$this->assign('allUserData',$allUserData);
 		$this->display();
 	}
-	
+	public function showBatchAddUserPage(){
+		$this->display();
+	}
+	public function batchAddUserUpload(){
+		$path='Data/User';
+		if(!file_exists($path)) 
+		{
+			mkdir($path);
+			chmod($path, 0777);
+		}
+		//设置上传参数
+		import('ORG.Net.UploadFile');
+		$upload = new UploadFile();// 实例化上传类
+		$upload->maxSize  = 83886080 ;// 设置附件上传大小
+		$upload->uploadReplace=true;
+		$upload->savePath =  $path.'/';// 设置附件上传目录
+		$upload->saveRule='';
+		//$_FILES['input_path']['name'] = 'in';
+		//$_FILES['output_path']['name'] = 'out';
+		//$_FILES['file_path']['name'] = 'data.zip';
+		
+		if(!$upload->upload()) {// 上传错误提示错误信息
+			$this->error($upload->getErrorMsg());
+		}else{// 上传成功 获取上传文件信息
+			$info =  $upload->getUploadFileInfo();
+			$filepath=$upload->savePath.$info[0]['name'];
+//			dump($filepath);
+//			$file = fopen($filepath, "r") or exit("Unable to open file!");
+//			$cnt=0;
+//			while(!feof($file))   
+//			{   $tmp=fgets($file);
+//				$tmp=trim($tmp);
+//			    $userList[$cnt] = preg_split('/\s+/is',$tmp); 
+//			    $cnt+=1;
+//			} 
+//			fclose($file); 
+			Vendor('PHPExcel.Classes.PHPExcel.IOFactory');
+			Vendor('PHPExcel.Classes.PHPExcel');
+			
+			$objPHPExcel = new PHPExcel();
+			$objReader = new PHPExcel_Reader_Excel2007;  
+			$objPHPExcel = $objReader->load($filepath);
+			$sheet  = $objPHPExcel->getSheet(0);        //**读取excel文件中的指定工作表*/
+			$highestRowNum = $sheet->getHighestRow();//行数
+			$highestColumn = $sheet->getHighestColumn();//列数
+//			$highestColumnNum = PHPExcel_Cell::columnIndexFromString($highestColumn);
+//			dump($highestColumnNum);
+			$data = array();
+			for($rowIndex=2;$rowIndex<=$highestRowNum;$rowIndex++){        //循环读取每个单元格的内容。注意行从1开始，列从A开始
+				for($colIndex='A';$colIndex<=$highestColumn;$colIndex++){
+					$addr = $colIndex.$rowIndex;
+					$cell = $sheet->getCell($addr)->getValue();
+					if($cell instanceof PHPExcel_RichText){ //富文本转换字符串
+						$cell = $cell->__toString();
+					}
+					$data[$rowIndex][$colIndex] = $cell;
+				}
+			}
+//			dump($data);
+ 			$userList=$data;
+			foreach($userList as $k=>$v){
+				$res=M('user')->where(array('username'=>$userList[$k]['A']))->find();
+				if($res)
+					$userList[$k]['I']='用户已存在';
+				else $userList[$k]['I']='用户不存在';
+			}
+			session('userList',$userList);
+			$this->assign('userList',$userList);
+			$this->display();
+		}
+	}
+	public function batchAddUser(){
+		$userList=session('userList');
+		foreach($userList as $k=>$v){
+			$userData=array();
+			$userData['username']=$userList[$k]['A'];
+			if(M('user')->where(array('username'=>$userData['username']))->find()) continue;
+			$userData['nickname']=$userList[$k]['B'];
+			$userData['password']=myMD5($userList[$k]['C']);
+			$userData['realname']=$userList[$k]['D'];
+			$userData['mail']=$userList[$k]['E'];
+			$userData['school']=$userList[$k]['F'];
+			$userData['major']=$userList[$k]['G'];
+			$userData['motto']=$userList[$k]['H'];
+			$userData['status']=1;$userData['root']=0;
+			$userData['accepted']=0;$userData['submissions']=0;
+			$userData['solve_problem']=0;$userData['Submitted_problem']=0;
+			$userData['register_time']=time();
+			$res=M('user')->add($userData);
+		}
+		$this->success("新增成功！",U('Admin/showUserMessage'));
+	}
+	public function myMD5($value){
+		for($i=1;$i<=5;$i++){
+			$value=md5($value);
+		}
+		return $value;
+	}
+	public function resetPassword(){
+		$user=M('user')->where(array('id'=>$_GET['id']))->find();
+		$user['password']=$this->myMD5($_GET['psd']);
+		M('user')->save($user);
+		$this->success('重置成功!',U('showUserMessage'));
+	}
 }

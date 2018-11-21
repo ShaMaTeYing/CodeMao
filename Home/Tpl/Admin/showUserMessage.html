@@ -1,6 +1,24 @@
 <extend name="../Public/base" />
 <block name="main">
 	<div class="row">
+		<div class="col-md-3">
+			<div class="row" style="margin-bottom: 20px;">
+				<form action="__APP__/Admin/showUserMessage" method="post">
+					<div class="col-md-12">
+						<div class="input-group">
+                            <input type="text" class="form-control" name="value" placeholder="搜索" value="">
+                            <div class="input-group-btn">
+                            	<button type="submit" class="btn btn-primary">
+                            		<span class="glyphicon glyphicon-search"></span>
+                            	</button>
+                            </div>
+                        </div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--<div class="row">
 		<form action="__APP__/Admin/showUserMessage" method="post">
 			<div class="col-md-4">
 				<input type="text" class="form-control"  name="value">
@@ -9,21 +27,21 @@
 				<button class="btn btn-default" type="submit">搜索</button>
 			</div>
 		</form>
-	</div>
+	</div>-->
 	<div class="row">
 		<div class="col-md-12">
 			<table  class="table table-condensed table-striped table-bordered text-center table-hover">
-				<tr>
-					<th class="text-center">用户名</th>
-					<th class="text-center">昵称</th>
-					<th class="text-center">真实姓名</th>
-					<th class="text-center">邮箱</th>
-					<th class="text-center">状态</th>
-					<th class="text-center">权限</th>
-					<th class="text-center">学校</th>
-					<th class="text-center">专业</th>
-					<th class="text-center">操作</th>
-					<th class="text-center">查看</th>
+				<tr style="background-color:rgb(51,122,183);color: #FFFFFF;">
+					<th class="text-center" style="width: 7%;" >用户名</th>
+					<th class="text-center" style="width: 7%;" >昵称</th>
+					<th class="text-center" style="width: 7%;" >真实姓名</th>
+					<th class="text-center" style="width: 10%;" >邮箱</th>
+					<th class="text-center" style="width: 4%;" >状态</th>
+					<th class="text-center" style="width: 7%;" >权限</th>
+					<th class="text-center" style="width: 15%;" >学校</th>
+					<th class="text-center" style="width: 15%;" >专业</th>
+					<th class="text-center" style="width: 10%;" >操作</th>
+					<th class="text-center">查看提交记录</th>
 				</tr>
 				<volist name='userMessage' id='vo'>
 					<tr>
@@ -70,13 +88,43 @@
 									</a>
 								</eq>
 							</eq>
+							|
+							<a  data-toggle="modal" data-target="#myModal<{$vo.id}>">
+									  重置密码
+									</a>
+									
+									<!-- Modal -->
+									<div class="modal fade" id="myModal<{$vo.id}>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									  <div class="modal-dialog" role="document">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									        <h4 class="modal-title" id="myModalLabel">请输入新的密码</h4>
+									      </div>
+									      <div class="modal-body">
+									      	<div class="row">
+									      		<div class="col-lg-4 text-right">
+									      			<h4>新密码:</h4>
+									      		</div>
+									      		<div class="col-lg-5 text-left">
+									      			<input type="password" class="form-control" id="psd<{$vo.id}>">
+									      		</div>
+									      	</div>
+									        
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									        <button type="button" class="btn btn-primary" onclick="submit('<{$vo.id}>')">提交</button>
+									      </div>
+									    </div>
+									  </div>
+									</div>
 						</td>
 						<td>
 							<a href="__APP__/Admin/showUserRecord/id/<{$vo.id}>">
-										提交记录
+										题库
 									</a>
-							
-							
+						
 						</td>
 					</tr>
 					
@@ -89,4 +137,14 @@
 			<div><{$page}></div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		function submit(contestId)
+			{
+				//alert(contestId);
+				var psd=$('#psd'+contestId).val();
+//				alert(contestId);
+				window.location.href="__APP__/Admin/resetPassword/id/"+contestId+"/psd/"+psd;
+//window.location.href="__APP__/Admin/test";
+			}
+	</script>
 </block>
