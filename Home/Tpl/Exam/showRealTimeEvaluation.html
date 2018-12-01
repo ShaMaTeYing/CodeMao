@@ -120,7 +120,7 @@
 						<td><{$vo.exe_memory}> KB</td>
 						<td>
 							<if condition="($vo.user_id eq $myId) OR ($myRoot eq 2) "> 
-								<a href="__APP__/Exam/showUserCode/id/<{$vo.id}>/userId/<{$vo.user_id}>"><{$vo.code_len}>B</a>
+								<a href="__APP__/Exam/showUserCode/id/<{$vo.id}>"><{$vo.code_len}>B</a>
 							<else /> <{$vo.code_len}>B
 							</if>
 

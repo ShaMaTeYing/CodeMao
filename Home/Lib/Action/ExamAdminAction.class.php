@@ -79,6 +79,7 @@ class ExamAdminAction extends AdminAction {
 		$this->display();
 	}
 	public function modifyExam(){
+		$oldContestData=M('contest_list')->where(array('id'=>$_POST['id']))->find();
 		$contestId=$_POST['id'];
 		$_POST['start_time']=strtotime($_POST['start_time']);
 		$_POST['end_time']=strtotime($_POST['end_time']);
@@ -87,7 +88,18 @@ class ExamAdminAction extends AdminAction {
 		if(isset($_POST['is_visible'])) $_POST['is_visible']=0;
 		else $_POST['is_visible']=1;
 		unset($_POST['id']);
-		
+//		dump($oldContestData);
+//		dump($_POST);
+		//die;
+		if($oldContestData['password']!=$_POST['password'])
+		{
+			$tmp=session('contestLogin');
+//			dump($tmp);
+			$tmp[$oldContestData['id']]=0;
+//			dump($tmp);
+//			die;
+			session('contestLogin',$tmp);
+		}
 		$res=M('contest_list')->where(array('id'=>$contestId))->save($_POST);
 		if($res){
 			$this->success('修改成功！',U('ExamAdmin/index'));
@@ -201,10 +213,30 @@ class ExamAdminAction extends AdminAction {
 			$in=$dir.$i.'.in';
 			$out=$dir.$i.'.out';
 			//dump($in);dump($out);
-			if(!in_array($in,$files)) return 0;
-			if(!in_array($out,$files)) return 0;
+			if(!in_array($in,$files)) return 1;
+			if(!in_array($out,$files)) return 1;
 			//chmod($in,0777);
 			//chmod($in,0777);
+		}
+		foreach($files as $key => $value){
+			chmod($value,0777);
+		}
+		return 0;
+		//die;
+	}
+	public function operateFile($path){
+		$str=file_get_contents($path);
+		$order=array("\r\n");
+		$str=str_replace($order,"\n",$str);
+		file_put_contents($path,$str);
+	}
+	public function deleteFileChar($dir,$number){
+		$files=$this->my_scandir($dir);
+		for($i=1;$i<=$number;$i++){
+			$in=$dir.$i.'.in';
+			$out=$dir.$i.'.out';
+			$this->operateFile($in);
+			$this->operateFile($out);
 		}
 		foreach($files as $key => $value){
 			chmod($value,0777);
@@ -254,9 +286,9 @@ class ExamAdminAction extends AdminAction {
 			    }
 				$zip->extractTo($upload->savePath);//假设解压缩到在当前路径下images文件夹的子文件夹php
 				
-				if($this->fileIsOk($upload->savePath,$zip->numFiles))
+				if($this->fileIsOk($upload->savePath,($zip->numFiles)/2))
 					$this->error("数据文件格式错误！");
-				
+				$this->deleteFileChar($upload->savePath,($zip->numFiles)/2);
 				$problemData=M('problem')
 							->where(array('id'=>$problem_id))
 							->find();
@@ -286,10 +318,20 @@ class ExamAdminAction extends AdminAction {
 		$this->assign('problemData',$arr);
 		$this->display();
 	}
+	public function modifyBug(){
+		$contest_user_problem=M('contest_user_problem');
+		$contestJudgeData=$contest_user_problem->select();
+		foreach($contestJudgeData as $k=>$v){
+			$tmp=$contestJudgeData[$k];
+			$tmp['contest_id']=M('contest_problem')->where(array('id'=>$tmp['problem_id']))->find()['contest_id'];
+			$contest_user_problem->save($tmp);
+		}
+	}
 	public function reJudge(){
 		//dump($_GET);
 		$data['judge_status']=8;
-		$allJudgeRecord=M('contest_user_problem')->where(array('problem_id'=>$_GET['id']))->save($data);
-		$this->success('success!',U('ExamAdmin/showProblemListPage'));
+		$allJudgeRecord=M('contest_user_problem')->where('problem_id='.$_GET['id'])->save($data);
+		$contest_id=M('contest_problem')->where(array('id'=>$_GET['id']))->find()['contest_id'];
+		$this->success('success!',U('ExamAdmin/showProblemListPage',array('id'=>$contest_id)));
 	}
 }

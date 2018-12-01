@@ -13,7 +13,7 @@ class ExamAction extends BaseAction {
 		$where['is_visible']=1;
 		$list = $User->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
 		
-		//$list['username']=$userinfo;
+		$contestLogin=session('contestLogin');
 		foreach($list as $key=>$value){
 			
 			if(intval($value['start_time'])<time() && time()<intval($value['end_time'])){
@@ -30,7 +30,10 @@ class ExamAction extends BaseAction {
 				$list[$key]['type']='公开';
 			}else if($list[$key]['type']==1){
 				$list[$key]['type']='私有';
-			}else if($list[$key]['type']==2){
+			}else if($contestLogin[$list[$key]['id']]==1){
+				$list[$key]['type']='密码(已输入)';
+			}
+			else if($list[$key]['type']==2){
 				$list[$key]['type']='密码';
 			}
 			$list[$key]['anthor']=M('user')->where(array('id'=>$list[$key]['user_id']))->find()['nickname'];
@@ -58,11 +61,31 @@ class ExamAction extends BaseAction {
 		$this->assign('nowtime',time());// 赋值数据集
 		$this->display();
 	}
+	public function checkPassword(){
+		$contestData=M('contest_list')->where(array('id'=>$_GET['id']))->find();
+		if($contestData['password']==$_GET['psd']){
+			$tmp=session('contestLogin');
+			$tmp[$_GET['id']]=1;
+			session('contestLogin',$tmp);
+			$this->redirect('Exam/showProblemList',array('id' => $_GET['id']));
+		}else {
+			$this->error("密码错误！",U('Exam/index'));
+		}
+	}
 	public function showProblemList(){
-		
+		$contestData=array();
 		if(!isset($_GET['id'])) {
 			$contestData=session('contestData');
 			$_GET['id']=$contestData['id'];
+			
+		}else{
+			$contestData=M('contest_list')->where(array('id'=>$_GET['id']))->find();
+		}
+		if($contestData['type']==2){
+			$contestLogin=session('contestLogin');
+			if($contestLogin[$_GET['id']]!=1){
+				$this->error("非法进入！",U('Exam/index'));
+			}
 		}
 		$contest_problem=M('contest_problem')->where('contest_id='.$_GET['id'])->select();
 		$contest_list=M('contest_list')->where('id='.$_GET['id'])->select();
@@ -244,7 +267,8 @@ class ExamAction extends BaseAction {
 	    return count($files);
 	}
 	private function getCaseNumber($id){
-		$datapath='Data/Exam/problems/'.$id;
+		$datapath='Data/Contest/problems/'.$id;
+		
 		return $this->getfiles($datapath);
 	}
 	public function onlineJudge(){
@@ -310,7 +334,7 @@ class ExamAction extends BaseAction {
 
 		$resultData['user_id']=$userinfo['id'];
 		$resultData['problem_id']=$_POST['problemID'];
-		$resultData['contest_id']=$contestData['id'];
+		$resultData['contest_id']=M('contest_problem')->where(array('id'=>$_POST['problemID']))->find()['contest_id'];
 		$resultData['submit_time']=time();
 		$resultData['judge_status']=$verdict;
 		$resultData['exe_time']=0;
@@ -345,7 +369,8 @@ class ExamAction extends BaseAction {
 		$id=$_GET['id'];
 		$condition['id']=$id;
 		$userinfo=session('userinfo');
-		if($userinfo['root']==0&&$userinfo['id']!=$_GET['userId']){
+		$coder=M('contest_user_problem')->where(array("id"=>$_GET['id']))->find()['user_id'];
+		if($userinfo['root']==0&&$userinfo['id']!=$coder){
 			$this->error('不许偷看别人的源代码哦！',U("Exam/showRealTimeEvaluation"));
 		}
 		$data[0]=M('contest_user_problem')->where($condition)->find();
@@ -464,6 +489,7 @@ class ExamAction extends BaseAction {
 		
 		$contest_user_problem=M('contest_user_problem');
 		$judgeRecord=$contest_user_problem->where($where)->order('id')->select();
+		if(!$judgeRecord) return $this->display();
 		$ProblemMark=M('contest_problem')
 			->where(array('contest_id'=>$contestData['id']))
 			->distinct('problem_mark')

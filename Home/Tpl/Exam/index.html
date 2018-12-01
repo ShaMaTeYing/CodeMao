@@ -41,9 +41,43 @@
 				<volist name='list' id='vo'>
 					<tr>
 						<td>
-							<a href="__APP__/Exam/showProblemList/id/<{$vo.id}>">
-								<{$vo.name}> 
-							</a>
+							<eq name="vo.type" value="密码">
+								<!-- Button trigger modal -->
+									<a  data-toggle="modal" data-target="#myModal<{$vo.id}>">
+									  <{$vo.name}>
+									</a>
+									
+									<!-- Modal -->
+									<div class="modal fade" id="myModal<{$vo.id}>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									  <div class="modal-dialog" role="document">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									        <h4 class="modal-title" id="myModalLabel">请输入比赛密码</h4>
+									      </div>
+									      <div class="modal-body">
+									      	<div class="row">
+									      		<div class="col-lg-4 text-right">
+									      			<h4>密码:</h4>
+									      		</div>
+									      		<div class="col-lg-5 text-left">
+									      			<input type="password" class="form-control" id="psd<{$vo.id}>">
+									      		</div>
+									      	</div>
+									        
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									        <button type="button" class="btn btn-primary" onclick="submit('<{$vo.id}>')">提交</button>
+									      </div>
+									    </div>
+									  </div>
+									</div>
+								<else/>
+									<a href="__APP__/Exam/showProblemList/id/<{$vo.id}>" >
+										<{$vo.name}>
+									</a>
+							</eq>
 						</td>
 						<td> <{$vo.start_time|date="Y-m-d H:i",###}>  </td>
 						<td> <{$vo.end_time|date="Y-m-d H:i",###}> </td>
@@ -76,5 +110,12 @@
 				var seconds = myDate.getSeconds(); 
 				$("#showDate").html(date+" "+hours+":"+minutes+":"+seconds); //将值赋给div 
 			} 
+			function submit(contestId)
+			{
+				//alert(contestId);
+				var psd=$('#psd'+contestId).val();
+				//alert(psd);
+				window.location.href="__APP__/Exam/checkPassword/id/"+contestId+"/psd/"+psd;
+			}
 		</script>
 </block>
