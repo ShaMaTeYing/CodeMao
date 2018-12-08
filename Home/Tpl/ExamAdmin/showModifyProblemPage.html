@@ -54,6 +54,12 @@
 			    	<input type="text" class="form-control" name="source" value="<{$probelmData.source}>">
 			    </div>
 			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">难度</label>
+			    	<input type="text" class="form-control" name="hard_level" value="<{$probelmData.hard_level}>">
+			    </div>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
@@ -92,6 +98,22 @@
 				<div class="form-group">
 			    	<label for="exampleInputEmail1">输出样例</label>
 			    	<textarea class="form-control" rows="8" name="sample_output"><{$probelmData.sample_output}></textarea>
+			    </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">解题思路</label>
+			    	<textarea class="form-control" rows="8" name="problem_solving"><{$probelmData.problem_solving}></textarea>
+			    </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">标程</label>
+			    	<textarea class="form-control" rows="8" name="std_program"><{$probelmData.std_program}></textarea>
 			    </div>
 			</div>
 		</div>

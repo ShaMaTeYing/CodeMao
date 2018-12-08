@@ -97,7 +97,7 @@ class ProblemAction extends BaseAction {
 			$Page  = new Page($count,50);// 实例化分页类 传入总记录数和每页显示的记录数
 			$show  = $Page->show();// 分页显示输出
 			// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-			$list = $User->where($map)->limit($Page->firstRow.','.$Page->listRows)->select();
+			$list = $User->where($map)->order('problem_mark asc')->limit($Page->firstRow.','.$Page->listRows)->select();
 		//	dump($Page);
 			$listIds = $User
 			->where($map)
@@ -152,6 +152,8 @@ class ProblemAction extends BaseAction {
 				//$list[$k1]['class_status']="active";
 			}
 		}
+		
+//		$list=$this->my_sort($list,'problem_mark',SORT_DESC,SORT_STRING);
 //		dump($list);
 		$this->assign('problemData',$list);// 赋值数据集
 		$this->assign('page',$show);// 赋值分页输出

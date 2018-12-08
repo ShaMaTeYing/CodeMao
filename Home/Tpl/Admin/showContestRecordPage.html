@@ -1,0 +1,46 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row" style="margin-bottom: 50px;margin-top: 50px;">
+		<div class="col-lg-12">
+			<h3 class="text-center"><a href="__APP__/User/showUserMessage/id/<{$studentData.id}>"><{$studentData.realname}></a>的<{$contestData.name}>题目完成情况</h3>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 100px;">
+		<div class="col-md-12">
+			<table  class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr style="background-color:rgb(51,122,183);color: #FFFFFF;">
+					<th class="text-center" style="width: 7%;" >题目标题</th>
+					<th class="text-center" style="width: 7%;" >是否AC</th>
+					<th class="text-center" style="width: 7%;" >AC次数</th>
+					<th class="text-center" style="width: 10%;" >提交次数</th>
+					<th class="text-center" style="width: 4%;" >正确率</th>
+				</tr>
+				<volist name='contestProblem' id='vo'>
+					<tr>
+						<td> 
+							<{$vo.title}>
+						</td>
+						<td>
+							<eq name="vo.is_ac" value="1">
+								<span style="color: green;">是</span>
+								<else/>
+								<span style="color: red;">否</span>
+							</eq>
+						</td>
+						<td><{$vo.all_ac}></td>
+						<td><{$vo.all_submit}></td>
+						<td>
+							<{:getRatio($vo['all_ac'],$vo['all_submit'])}>%
+						</td>
+					</tr>
+					
+				</volist>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div><{$page}></div>
+		</div>
+	</div>
+</block>

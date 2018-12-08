@@ -1,0 +1,87 @@
+<extend name="../Public/base" />
+<block name="main">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 class="text-center">学生反馈</h2>
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="row" style="margin-bottom: 20px;">
+				<form action="__APP__/Admin/showUserMessage" method="post">
+					<div class="col-md-12">
+						<div class="input-group">
+                            <input type="text" class="form-control" name="value" placeholder="搜索" value="">
+                            <div class="input-group-btn">
+                            	<button type="submit" class="btn btn-primary">
+                            		<span class="glyphicon glyphicon-search"></span>
+                            	</button>
+                            </div>
+                        </div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<table  class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr style="background-color:rgb(51,122,183);color: #FFFFFF;">
+					<th class="text-center" style="width: 7%;" >用户名</th>
+					<th class="text-center" style="width: 20%;" >昵称</th>
+					<th class="text-center" style="width: 7%;" >真实姓名</th>
+					<th class="text-center" style="width: 4%;" >状态</th>
+					<th class="text-center" style="width: 7%;" >权限</th>
+					<th class="text-center" style="width: 15%;" >学校</th>
+					<th class="text-center" style="width: 15%;" >专业</th>
+					<th class="text-center">查看学生反馈</th>
+				</tr>
+				<volist name='userData' id='vo'>
+					<tr>
+						<td> 
+							<a href="__APP__/User/showUserMessage/id/<{$vo.id}>">
+								<{$vo.username}> 
+							</a>
+						</td>
+						<td><{$vo.nickname}></td>
+						<td><{$vo.realname}></td>
+						<td>
+							<eq name="vo.status" value="0">禁用</eq>
+							<eq name="vo.status" value="1">正常</eq>
+							<eq name="vo.status" value="2">邮箱未验证</eq>
+						</td>
+						<td>
+							<eq name="vo.root" value="0">普通用户</eq>
+							<eq name="vo.root" value="1">管理员</eq>
+							<eq name="vo.root" value="2">超级管理员</eq>
+						</td>
+						<td><{$vo.school}></td>
+						<td><{$vo.major}></td>
+						<td>
+							<a href="__APP__/Admin/showSelectTrainPage/id/<{$vo.id}>">
+								查看
+							</a>
+						</td>
+					</tr>
+					
+				</volist>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div><{$page}></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function submit(contestId)
+			{
+				//alert(contestId);
+				var psd=$('#psd'+contestId).val();
+//				alert(contestId);
+				window.location.href="__APP__/Admin/resetPassword/id/"+contestId+"/psd/"+psd;
+//window.location.href="__APP__/Admin/test";
+			}
+	</script>
+</block>

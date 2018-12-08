@@ -27,7 +27,20 @@ class JudgeAction extends BaseAction {
 		else if(isset($myget[$key])) $ans=$myget[$key];
 		return $ans;
 	}
+	public function getAcProblemId(){
+		$userinfo = session('userinfo');
+//		dump($userinfo);
+		$ids=M('user_problem')->where(array('user_id'=>$userinfo['id'],'judge_status'=>0))
+			->distinct(true)->field('problem_id')->select();
+		foreach($ids as $k => $v){
+			$ids[$k]=$ids[$k]['problem_id'];
+		}
+//		dump($ids);
+//		dump(array("12","34","56"));
+		return $ids;
+	}
 	public function showRealTimeEvaluation(){
+		$ids=$this->getAcProblemId();
 		$statusArray=$this->getStatusArray();
 		$languageArray=$this->getLanguage();
 		$this->assign("statusArray",$statusArray);
@@ -70,9 +83,13 @@ class JudgeAction extends BaseAction {
 		$list = $User->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
 		foreach($list as $k=>$v){
 			$list[$k]['problem_mark']=M('problem')->where(array('id'=>$list[$k]['problem_id']))->find()['problem_mark'];
-			
+			if(in_array($list[$k]['problem_id'],$ids)||$userinfo['root']>0){
+				$list[$k]['look_code']=1;
+			}else {
+				$list[$k]['look_code']=0;
+			}
 		}
-		//dump($count);
+//		dump($userinfo);
 		//dump($Page);
 		
 		//$list['username']=$userinfo;
@@ -228,18 +245,24 @@ class JudgeAction extends BaseAction {
 		$id=$_GET['id'];
 		$condition['id']=$id;
 		$userinfo=session('userinfo');
-		if($userinfo['root']==0&&$userinfo['id']!=$_GET['userId']){
-			saveViolationMessage('偷看源代码 运行ID'.$id);
-			$this->error('不许偷看别人的源代码哦！',U("Judge/showRealTimeEvaluation"));
-		}
+		
+//		if($userinfo['root']==0&&$userinfo['id']!=$_GET['userId']){
+//			saveViolationMessage('偷看源代码 运行ID'.$id);
+//			$this->error('不许偷看别人的源代码哦！',U("Judge/showRealTimeEvaluation"));
+//		}
 		$data[0]=M('user_problem')->where($condition)->find();
+		$res=M('user_problem')->where(array('problem_id'=>$data[0]['problem_id'],'user_id'=>$userinfo['id'],'judge_status'=>0))->find();
 		//dump($data);
+		
 		$filename = $data[0]['filepath'];
-		if($data[0]['user_id']!=$_GET['userId'] && $userinfo['root']==0){
+//		if($data[0]['user_id']!=$_GET['userId'] && $userinfo['root']==0){
+//			saveViolationMessage('偷看源代码 运行ID'.$id);
+//			$this->error('不许偷看别人的源代码哦！',U("Judge/showRealTimeEvaluation"));
+//		}
+		if($userinfo['root']==0&&!$res){
 			saveViolationMessage('偷看源代码 运行ID'.$id);
 			$this->error('不许偷看别人的源代码哦！',U("Judge/showRealTimeEvaluation"));
 		}
-
 		$contents=file_get_contents($filename);
 		$contents = htmlspecialchars($contents);
 		$this->assign('code',$contents);

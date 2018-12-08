@@ -961,4 +961,151 @@ class AdminAction extends BaseAction {
 		M('user')->save($user);
 		$this->success('重置成功!',U('showUserMessage'));
 	}
+	public function showStudentFeedbackPage(){
+		$userData = M('user')->where(array('status'=>1))->select();
+		$this->assign('userData',$userData);
+		$this->display();
+	}
+	public function showStudentProblemReport(){
+		$userId = $_POST['user_id'];
+		$contestId = $_POST['contest_id'];
+		$courseId = $_POST['course_id'];
+		$contestProblem=M('contest_problem')->where(array('contest_id'=>$contestId))->select();
+		$studentData=M('user')->where(array('id'=>$userId))->find();
+		$contestData=M('contest_list')->where(array('id'=>$contestId))->find();
+		$contest_user_problem=M('contest_user_problem');
+		foreach($contestProblem as $k => $v){
+			$pid = $contestProblem[$k]['id'];
+			if($contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId,'judge_status'=>0))->find())
+				$contestProblem[$k]['is_ac']=1;
+			else {
+				$contestProblem[$k]['is_ac']=0;
+			}
+			$contestProblem[$k]['all_ac']=$contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId,'judge_status'=>0))->count();
+			$contestProblem[$k]['all_submit']=$contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId))->count();
+			$contestProblem[$k]['std_program']=htmlspecialchars($contestProblem[$k]['std_program']);
+
+		}
+		$this->assign('contestData',$contestData);
+		$this->assign('studentData',$studentData);
+		$this->assign('contestProblem',$contestProblem);
+		
+		$courseSection=M('course_section')->where(array('course_id'=>$courseId))->select();
+		$user_problem=M('user_problem');
+		$problem=M('problem');
+		$course_sub_section=M('course_sub_section');
+		foreach($courseSection as $k => $v){
+			$problemList=$course_sub_section
+				->where(array('course_section_id'=>$courseSection[$k]['id'],'status'=>0))->select();
+//			dump($problemList);
+			$tmp="";
+			foreach($problemList as $k1=>$v1){
+				if(strlen($problemList[$k1]['all_problem'])>0)
+				{
+					$tmp=$tmp.";".$problemList[$k1]['all_problem'];
+				}
+			}
+			$tmp = $result = explode(';', $tmp);
+			foreach($tmp as $k1 => $v1){
+				if(strlen($tmp[$k1])==0){
+					unset($tmp[$k1]);
+				}
+			}
+//			dump($_GET['user_id']);
+			$courseSection[$k]['all_problem']=count($tmp);
+			$courseSection[$k]['all_submit']=0;
+			$courseSection[$k]['all_ac']=0;
+			$courseSection[$k]['all_ac_cnt']=0;
+			foreach($tmp as $k1 => $v1){
+				$pid=$problem->where(array('problem_mark'=>$tmp[$k1]))->find()['id'];
+				$cnt=$user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId))->count();
+				$courseSection[$k]['all_submit']+=$cnt;
+				if($user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId,'judge_status'=>0))->find())
+					$courseSection[$k]['all_ac']+=1;
+				$courseSection[$k]['all_ac_cnt']+=$user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId,'judge_status'=>0))->count();
+					
+			}
+//			dump($courseSection[$k]['std_program']);
+			
+		}
+		$courseData=M('course')->where(array('id'=>$courseId))->find();
+		$this->assign('courseData',$courseData);
+		$this->assign('courseSection',$courseSection);
+		$this->display();
+	}
+	public function showSelectTrainPage(){
+		$studentData=M('user')->where(array('id'=>$_GET['id']))->find();
+//		dump($studentData);
+		$allTrain=M('course')->select();
+		$allContest=M('contest_list')->where(array('is_visible'=>1))->select();
+		$this->assign('allContest',$allContest);
+		$this->assign('studentData',$studentData);
+		$this->assign('allTrain',$allTrain);
+		$this->display();
+	}
+	public function showContestRecordPage(){
+		$contestProblem=M('contest_problem')->where(array('contest_id'=>$_GET['contest_id']))->select();
+//		dump($contestProblem);
+		$studentData=M('user')->where(array('id'=>$_GET['user_id']))->find();
+		$contestData=M('contest_list')->where(array('id'=>$_GET['contest_id']))->find();
+		$contest_user_problem=M('contest_user_problem');
+		foreach($contestProblem as $k => $v){
+			$pid = $contestProblem[$k]['id'];
+			if($contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$_GET['user_id'],'judge_status'=>0))->find())
+				$contestProblem[$k]['is_ac']=1;
+			else {
+				$contestProblem[$k]['is_ac']=0;
+			}
+			$contestProblem[$k]['all_ac']=$contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$_GET['user_id'],'judge_status'=>0))->count();
+			$contestProblem[$k]['all_submit']=$contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$_GET['user_id']))->count();
+		}
+//		dump($contestProblem);
+		$this->assign('contestData',$contestData);
+		$this->assign('studentData',$studentData);
+		$this->assign('contestProblem',$contestProblem);
+		$this->display();
+	}
+	public function showTrainRecordPage(){
+		$courseSection=M('course_section')->where(array('course_id'=>$_GET['course_id']))->select();
+		$user_problem=M('user_problem');
+		$problem=M('problem');
+		$course_sub_section=M('course_sub_section');
+		foreach($courseSection as $k => $v){
+			$problemList=$course_sub_section
+				->where(array('course_section_id'=>$courseSection[$k]['id'],'status'=>0))->select();
+//			dump($problemList);
+			$tmp="";
+			foreach($problemList as $k1=>$v1){
+				if(strlen($problemList[$k1]['all_problem'])>0)
+				{
+					$tmp=$tmp.";".$problemList[$k1]['all_problem'];
+				}
+			}
+			$tmp = $result = explode(';', $tmp);
+			foreach($tmp as $k1 => $v1){
+				if(strlen($tmp[$k1])==0){
+					unset($tmp[$k1]);
+				}
+			}
+//			dump($_GET['user_id']);
+			$courseSection[$k]['all_problem']=count($tmp);
+			$courseSection[$k]['all_submit']=0;
+			$courseSection[$k]['all_ac']=0;
+			$courseSection[$k]['all_ac_cnt']=0;
+			foreach($tmp as $k1 => $v1){
+				$pid=$problem->where(array('problem_mark'=>$tmp[$k1]))->find()['id'];
+				$cnt=$user_problem->where(array('problem_id'=>$pid,'user_id'=>$_GET['user_id']))->count();
+				$courseSection[$k]['all_submit']+=$cnt;
+				if($user_problem->where(array('problem_id'=>$pid,'user_id'=>$_GET['user_id'],'judge_status'=>0))->find())
+					$courseSection[$k]['all_ac']+=1;
+				$courseSection[$k]['all_ac_cnt']+=$user_problem->where(array('problem_id'=>$pid,'user_id'=>$_GET['user_id'],'judge_status'=>0))->count();
+					
+			}
+			
+		}
+		$studentData=M('user')->where(array('id'=>$_GET['user_id']))->find();
+		$this->assign('studentData',$studentData);
+		$this->assign('courseSection',$courseSection);
+		$this->display();
+	}
 }
