@@ -337,6 +337,10 @@ class ProblemAction extends BaseAction {
 		$this->assign("languageArray",$languageArray);
 		$userinfo = session('userinfo');
 		$problemId=$this->getValue($_POST,$_GET,'problemId');
+		$acSatus=0;
+		if(M('user_problem')->where(array('problem_id'=>$problemId,'user_id'=>$userinfo['id'],'judge_status'=>0))->find()){
+			$acSatus=1;
+		}
 		$problemData=M('problem')->where(array('id'=>$problemId))->find();
 		$anthor=$this->getValue($_POST,$_GET,'anthor');
 		$language=$this->getValue($_POST,$_GET,'language');
@@ -370,6 +374,10 @@ class ProblemAction extends BaseAction {
 		$statusStaticData=$this->getAllStatusStatic($problemId);
 		foreach($statusStaticData as $k => $v){
 			$statusStaticData[$k]['judge_status']=$k;
+		}
+		foreach($list as $k=>$v){
+			$list[$k]['look_code']=$acSatus;
+			if($userinfo['root']) $list[$k]['look_code']=1;
 		}
 		$this->assign('problemData',$problemData);
 		$this->assign("statusStaticData",$statusStaticData);

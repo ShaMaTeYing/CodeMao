@@ -259,7 +259,7 @@ class JudgeAction extends BaseAction {
 //			saveViolationMessage('偷看源代码 运行ID'.$id);
 //			$this->error('不许偷看别人的源代码哦！',U("Judge/showRealTimeEvaluation"));
 //		}
-		if($userinfo['root']==0&&!$res){
+		if($userinfo['root']==0&&!$res&&$data[0]['user_id']!=$userinfo['id']){
 			saveViolationMessage('偷看源代码 运行ID'.$id);
 			$this->error('不许偷看别人的源代码哦！',U("Judge/showRealTimeEvaluation"));
 		}

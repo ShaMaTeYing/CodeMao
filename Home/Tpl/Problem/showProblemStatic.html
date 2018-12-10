@@ -161,7 +161,7 @@
 								<td><{$vo.exe_memory}> KB</td>
 								<td>
 									
-									<if condition="($vo.user_id eq $myId) OR ($myRoot eq 2) "> 
+									<if condition="($vo.user_id eq $myId) OR ($myRoot eq 2) OR ($vo.look_code eq 1) "> 
 										<a href="__APP__/Judge/showUserCode/id/<{$vo.id}>/userId/<{$vo.user_id}>"><{$vo.code_len}>B</a>
 									<else /> <{$vo.code_len}>B
 									</if>
