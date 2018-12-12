@@ -974,6 +974,16 @@ class AdminAction extends BaseAction {
 		$studentData=M('user')->where(array('id'=>$userId))->find();
 		$contestData=M('contest_list')->where(array('id'=>$contestId))->find();
 		$contest_user_problem=M('contest_user_problem');
+		$userClassData=M('user_classroom')->where(array('user_id'=>$userId,'status'=>0))->find();
+		$maxCourse=26;
+		if($userClassData){
+//			dump($userClassData);
+			$classData=M('classroom')->where(array('id'=>$userClassData['class_id']))->find();
+//			dump($classData);
+			$maxCourse=$classData['now_course'];
+//			dump($maxCourse);
+		}
+
 		foreach($contestProblem as $k => $v){
 			$pid = $contestProblem[$k]['id'];
 			if($contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId,'judge_status'=>0))->find())
@@ -989,8 +999,9 @@ class AdminAction extends BaseAction {
 		$this->assign('contestData',$contestData);
 		$this->assign('studentData',$studentData);
 		$this->assign('contestProblem',$contestProblem);
-		
-		$courseSection=M('course_section')->where(array('course_id'=>$courseId))->select();
+		$where['course_id']=$courseId;
+		$where['id']=array('elt',$maxCourse);
+		$courseSection=M('course_section')->where($where)->select();
 		$user_problem=M('user_problem');
 		$problem=M('problem');
 		$course_sub_section=M('course_sub_section');
@@ -1107,5 +1118,49 @@ class AdminAction extends BaseAction {
 		$this->assign('studentData',$studentData);
 		$this->assign('courseSection',$courseSection);
 		$this->display();
+	}
+	public function showUserClassPage(){
+		$classRoomData=M('classroom')->select();
+		foreach($classRoomData as $k=>$v){
+			$classRoomData[$k]['course_id']=$classRoomData[$k]['now_course'];
+			$classRoomData[$k]['now_course']=M('course_sub_section')->where(array('id'=>$classRoomData[$k]['now_course']))->find()['name'];
+			
+		}
+		$this->assign('classRoomData',$classRoomData);
+		$courseData=M('course_section')->where(array('status'=>0))->select();
+		$this->assign('courseData',$courseData);
+		$this->display();
+	}
+	public function addUserClass(){
+		M('classroom')->add($_POST);
+		$this->redirect('Admin/showUserClassPage');
+	}
+	public function editUserClass(){
+		M('classroom')->save($_POST);
+		$this->redirect('Admin/showUserClassPage');
+	}
+	public function showClassMessagePage(){
+		$classData=M('classroom')->where(array('id'=>$_GET['id']))->find();
+//		dump($classData);
+		$userData=M('user')->where(array('status'=>1))->select();
+		$classUserData=M('user_classroom')->where(array('class_id'=>$_GET['id'],'status'=>0))->select();
+		foreach($classUserData as $k => $v){
+			$classUserData[$k]['realname']=M('user')->where(array('id'=>$classUserData[$k]['user_id']))->find()['realname'];
+		}
+		$this->assign('classUserData',$classUserData);
+		$this->assign('userData',$userData);
+		$this->assign('classData',$classData);
+		$this->display();
+	}
+	public function addClassUser(){
+		M('user_classroom')->add($_POST);
+		$this->redirect('Admin/showClassMessagePage',array('id'=>$_POST['class_id']));
+		
+	}
+	public function deleteClassUser(){
+		$userClassData=M('user_classroom')->where(array('id'=>$_GET['id']))->find();
+		$userClassData['status']=1;
+		M('user_classroom')->save($userClassData);
+		$this->redirect('Admin/showClassMessagePage',array('id'=>$_GET['class_id']));
 	}
 }

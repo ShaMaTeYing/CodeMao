@@ -1,0 +1,75 @@
+<extend name="../Public/base" />
+<block name="js">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+</block>
+<block name="main">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h3><{$classData.name}></h3>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 20px;margin-top: 20px;">
+		<div class="col-md-8">
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+			  新增学员
+			</button>
+			
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title text-center" id="myModalLabel"><{$classData.name}></h4>
+			      </div>
+			      <div class="modal-body">
+			      	<form action="__APP__/Admin/addClassUser" method="post">
+			      		<input type="hidden" name="class_id" id="" value="<{$classData.id}>" />
+			      		<div class="form-group">
+						    <label for="exampleInputEmail1">学生姓名</label>
+							<select class="selectpicker show-tick form-control" data-live-search="true" name="user_id">
+								<volist name="userData" id="vo">
+									<option value="<{$vo.id}>"><{$vo.realname}></option>
+								</volist>
+							</select>
+					  	</div>
+					  	
+						<input type="submit" class="btn btn-primary btn-block"  value="添加" />
+			      	</form>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<table  class="table table-condensed table-striped table-bordered text-center table-hover">
+				<tr style="background-color:rgb(51,122,183);color: #FFFFFF;">
+					<th class="text-center">真实姓名</th>
+					<th class="text-center">反馈报告</th>
+					<th class="text-center">操作</th>
+				</tr>
+				<volist name='classUserData' id='vo'>
+					<tr>
+						<td>
+							<a href="#"><{$vo.realname}></a>
+						</td>
+						<td>
+							<a href="__APP__/Admin/showSelectTrainPage/id/<{$vo.user_id}>">
+								查看
+							</a>
+						</td>
+						<td>
+							<a href="__APP__/Admin/deleteClassUser/id/<{$vo.id}>/class_id/<{$vo.class_id}>">删除成员</a>
+						</td>
+					</tr>
+					
+				</volist>
+			</table>
+		</div>
+	</div>
+</block>
