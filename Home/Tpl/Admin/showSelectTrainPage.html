@@ -1,7 +1,12 @@
 <extend name="../Public/base" />
 <block name="main">
-	<div class="row" style="margin-bottom: 10px;">
-		<div class="col-lg-8 col-lg-offset-2">
+	<div class="row" style="margin-top: 100px;">
+		<div class="col-lg-12">
+			<h2 class="text-center"><{$studentData.realname}>的反馈</h2>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 50px;margin-top: 50px;">
+		<div class="col-lg-8 col-lg-offset-4">
 			<form action="__APP__/Admin/showStudentProblemReport" class="form-inline" role="form" method="post"> 
 				<input type="hidden" name="user_id" value="<{$studentData.id}>" />
 				<div class="form-group">
@@ -24,9 +29,36 @@
 			    	<input class="btn btn-primary" type="submit" value="查看反馈报告">
 				</div>
 			</form>
+			
 		</div>
 	</div>
-	<div class="row" style="margin-bottom: 40px;margin-top: 20px;">
+	<div class="row" style="margin-bottom: 150px;margin-top: 0px;">
+		<div class="col-lg-8 col-lg-offset-4">
+			<form action="__APP__/Admin/showPDFReport" class="form-inline" role="form" method="post"> 
+				<input type="hidden" name="user_id" value="<{$studentData.id}>" />
+				<div class="form-group">
+			    	<label for="exampleInputName2">课程</label>
+			   		<select name="course_id" class="form-control">
+						<volist name="allTrain" id="vo">
+							<option value="<{$vo.id}>"> <{$vo.name}> </option>
+						</volist>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<label for="exampleInputName2">测试</label>
+			   		<select name="contest_id" class="form-control">
+						<volist name="allContest" id="vo">
+							<option value="<{$vo.id}>"><{$vo.name}></option>	
+						</volist>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<input class="btn btn-primary" type="submit" value="查看反馈PDF">
+				</div>
+			</form>
+		</div>
+	</div>
+	<!--<div class="row" style="margin-bottom: 40px;margin-top: 20px;">
 		<div class="col-lg-12 text-center">
 			<h3>请选择一套课程,以查看<a href="__APP__/User/showUserMessage/id/<{$studentData.id}>"><{$studentData.realname}></a>对应的统计数据</h3>
 		</div>
@@ -53,5 +85,5 @@
 				</volist>
 			</div>
 		</div>
-	</div>
+	</div>-->
 </block>

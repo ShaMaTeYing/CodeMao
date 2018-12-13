@@ -1042,7 +1042,96 @@ class AdminAction extends BaseAction {
 		$courseData=M('course')->where(array('id'=>$courseId))->find();
 		$this->assign('courseData',$courseData);
 		$this->assign('courseSection',$courseSection);
+//		$content = $this->fetch();
+//		dump("666");
+//		dump($content);
+//		$this->pdf($content);
 		$this->display();
+	}
+	public function showPDFReport(){
+		$userId = $_POST['user_id'];
+		$contestId = $_POST['contest_id'];
+		$courseId = $_POST['course_id'];
+		$contestProblem=M('contest_problem')->where(array('contest_id'=>$contestId))->select();
+		$studentData=M('user')->where(array('id'=>$userId))->find();
+		$contestData=M('contest_list')->where(array('id'=>$contestId))->find();
+		$contest_user_problem=M('contest_user_problem');
+		$userClassData=M('user_classroom')->where(array('user_id'=>$userId,'status'=>0))->find();
+		$maxCourse=26;
+		if($userClassData){
+//			dump($userClassData);
+			$classData=M('classroom')->where(array('id'=>$userClassData['class_id']))->find();
+//			dump($classData);
+			$maxCourse=$classData['now_course'];
+//			dump($maxCourse);
+		}
+
+		foreach($contestProblem as $k => $v){
+			$pid = $contestProblem[$k]['id'];
+			if($contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId,'judge_status'=>0))->find())
+				$contestProblem[$k]['is_ac']=1;
+			else {
+				$contestProblem[$k]['is_ac']=0;
+			}
+			$contestProblem[$k]['all_ac']=$contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId,'judge_status'=>0))->count();
+			$contestProblem[$k]['all_submit']=$contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId))->count();
+			$contestProblem[$k]['std_program']=htmlspecialchars($contestProblem[$k]['std_program']);
+
+		}
+		$this->assign('contestData',$contestData);
+		$this->assign('studentData',$studentData);
+		$this->assign('contestProblem',$contestProblem);
+		$where['course_id']=$courseId;
+		$where['id']=array('elt',$maxCourse);
+		$courseSection=M('course_section')->where($where)->select();
+		$user_problem=M('user_problem');
+		$problem=M('problem');
+		$course_sub_section=M('course_sub_section');
+		foreach($courseSection as $k => $v){
+			$problemList=$course_sub_section
+				->where(array('course_section_id'=>$courseSection[$k]['id'],'status'=>0))->select();
+//			dump($problemList);
+			$tmp="";
+			foreach($problemList as $k1=>$v1){
+				if(strlen($problemList[$k1]['all_problem'])>0)
+				{
+					$tmp=$tmp.";".$problemList[$k1]['all_problem'];
+				}
+			}
+			$tmp = $result = explode(';', $tmp);
+			foreach($tmp as $k1 => $v1){
+				if(strlen($tmp[$k1])==0){
+					unset($tmp[$k1]);
+				}
+			}
+//			dump($_GET['user_id']);
+			$courseSection[$k]['all_problem']=count($tmp);
+			$courseSection[$k]['all_submit']=0;
+			$courseSection[$k]['all_ac']=0;
+			$courseSection[$k]['all_ac_cnt']=0;
+			foreach($tmp as $k1 => $v1){
+				$pid=$problem->where(array('problem_mark'=>$tmp[$k1]))->find()['id'];
+				$cnt=$user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId))->count();
+				$courseSection[$k]['all_submit']+=$cnt;
+				if($user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId,'judge_status'=>0))->find())
+					$courseSection[$k]['all_ac']+=1;
+				$courseSection[$k]['all_ac_cnt']+=$user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId,'judge_status'=>0))->count();
+					
+			}
+//			dump($courseSection[$k]['std_program']);
+			
+		}
+		$courseData=M('course')->where(array('id'=>$courseId))->find();
+		$this->assign('courseData',$courseData);
+		$this->assign('courseSection',$courseSection);
+		$content = $this->fetch();
+//		dump("666");
+//		dump($content);
+		$this->pdf($content);
+//		$this->display();
+	}
+	public function regexGetData($content){
+		
 	}
 	public function showSelectTrainPage(){
 		$studentData=M('user')->where(array('id'=>$_GET['id']))->find();
@@ -1162,5 +1251,54 @@ class AdminAction extends BaseAction {
 		$userClassData['status']=1;
 		M('user_classroom')->save($userClassData);
 		$this->redirect('Admin/showClassMessagePage',array('id'=>$_GET['class_id']));
+	}
+	
+	public function pdf($html='<h1 style="color:red">hello word</h1>'){
+//		$html=file_get_contents('Home/Lib/Action/pdfTemplate.html');
+		
+	    vendor('Tcpdf.tcpdf');
+	    $pdf = new Tcpdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+	    // 设置打印模式
+	    $pdf->SetCreator(PDF_CREATOR);
+	    $pdf->SetAuthor('Nicola Asuni');
+	    $pdf->SetTitle('TCPDF Example 001');
+	    $pdf->SetSubject('TCPDF Tutorial');
+	    $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+	    // 是否显示页眉
+	    $pdf->setPrintHeader(true);
+	    // 设置页眉显示的内容
+	    $pdf->SetHeaderData('onecode.png', 60, 'course.onecode.com.cn', 'onecode.com.cn', array(0,64,255), array(0,64,128));
+	    // 设置页眉字体
+	    $pdf->setHeaderFont(Array('dejavusans', '', '12'));
+	    // 页眉距离顶部的距离
+	    $pdf->SetHeaderMargin('5');
+	    // 是否显示页脚
+	    $pdf->setPrintFooter(true);
+	    // 设置页脚显示的内容
+	    $pdf->setFooterData(array(0,64,0), array(0,64,128));
+	    // 设置页脚的字体
+	    $pdf->setFooterFont(Array('dejavusans', '', '10'));
+	    // 设置页脚距离底部的距离
+	    $pdf->SetFooterMargin('10');
+	    // 设置默认等宽字体
+	    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+	    // 设置行高
+	    $pdf->setCellHeightRatio(1);
+	    // 设置左、上、右的间距
+	    $pdf->SetMargins('10', '10', '10');
+	    // 设置是否自动分页  距离底部多少距离时分页
+	    $pdf->SetAutoPageBreak(TRUE, '15');
+	    // 设置图像比例因子
+	    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+	    if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+	        require_once(dirname(__FILE__).'/lang/eng.php');
+	        $pdf->setLanguageArray($l);
+	    }
+	    $pdf->setFontSubsetting(true);
+	    $pdf->AddPage();
+	    // 设置字体
+	    $pdf->SetFont('stsongstdlight', '', 14, '', true);
+	    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+	    $pdf->Output('example_001.pdf', 'I');
 	}
 }
