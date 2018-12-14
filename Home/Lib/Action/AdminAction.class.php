@@ -1073,6 +1073,7 @@ class AdminAction extends BaseAction {
 			else {
 				$contestProblem[$k]['is_ac']=0;
 			}
+			$contestProblem[$k]['index']=$k+1;
 			$contestProblem[$k]['all_ac']=$contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId,'judge_status'=>0))->count();
 			$contestProblem[$k]['all_submit']=$contest_user_problem->where(array('problem_id'=>$pid,'user_id'=>$userId))->count();
 			$contestProblem[$k]['std_program']=htmlspecialchars($contestProblem[$k]['std_program']);
@@ -1127,7 +1128,7 @@ class AdminAction extends BaseAction {
 		$content = $this->fetch();
 //		dump("666");
 //		dump($content);
-		$this->pdf($content);
+		$this->pdf($content,$studentData['realname']);
 //		$this->display();
 	}
 	public function regexGetData($content){
@@ -1253,7 +1254,8 @@ class AdminAction extends BaseAction {
 		$this->redirect('Admin/showClassMessagePage',array('id'=>$_GET['class_id']));
 	}
 	
-	public function pdf($html='<h1 style="color:red">hello word</h1>'){
+	public function pdf($html='<h1 style="color:red">hello word</h1>',$name){
+		$pdfname=$name.'.pdf';
 //		$html=file_get_contents('Home/Lib/Action/pdfTemplate.html');
 		
 	    vendor('Tcpdf.tcpdf');
@@ -1261,17 +1263,17 @@ class AdminAction extends BaseAction {
 	    // 设置打印模式
 	    $pdf->SetCreator(PDF_CREATOR);
 	    $pdf->SetAuthor('Nicola Asuni');
-	    $pdf->SetTitle('TCPDF Example 001');
+	    $pdf->SetTitle('反馈报告');
 	    $pdf->SetSubject('TCPDF Tutorial');
 	    $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 	    // 是否显示页眉
 	    $pdf->setPrintHeader(true);
 	    // 设置页眉显示的内容
-	    $pdf->SetHeaderData('onecode.png', 60, 'course.onecode.com.cn', 'onecode.com.cn', array(0,64,255), array(0,64,128));
+	    $pdf->SetHeaderData('onecode.png', 30, '                     course.onecode.com.cn', 'onecode.com.cn', array(0,64,255), array(0,64,128));
 	    // 设置页眉字体
 	    $pdf->setHeaderFont(Array('dejavusans', '', '12'));
 	    // 页眉距离顶部的距离
-	    $pdf->SetHeaderMargin('5');
+	    $pdf->SetHeaderMargin('4');
 	    // 是否显示页脚
 	    $pdf->setPrintFooter(true);
 	    // 设置页脚显示的内容
@@ -1299,6 +1301,6 @@ class AdminAction extends BaseAction {
 	    // 设置字体
 	    $pdf->SetFont('stsongstdlight', '', 14, '', true);
 	    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-	    $pdf->Output('example_001.pdf', 'I');
+	    $pdf->Output($pdfname, 'I');
 	}
 }

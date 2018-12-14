@@ -1,110 +1,140 @@
-<extend name="../Public/base" />
-<block name="main">
-	<div class="row" style="margin-bottom: 10px;margin-top: 20px;">
-		<div class="col-lg-12">
-			<h3 class="left-center">第1部分 <a href="__APP__/User/showUserMessage/id/<{$studentData.id}>"><{$studentData.realname}></a>的<{$courseData.name}>课程题目完成情况</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<table  class="table table-condensed table-striped table-bordered text-center table-hover">
-				<tr style="background-color:rgb(51,122,183);color: #FFFFFF;">
-					<th class="text-center" style="width: 7%;" >知识点</th>
-					<th class="text-center" style="width: 7%;" >课程题目总数</th>
-					<th class="text-center" style="width: 7%;" >完成数</th>
-					<th class="text-center" style="width: 10%;" >提交次数</th>
-					<th class="text-center" style="width: 4%;" >正确率</th>
-					<th class="text-center" style="width: 7%;" >完成度</th>
-				</tr>
-				<volist name='courseSection' id='vo'>
-					<tr>
-						<td> 
-							<{$vo.name}>
-						</td>
-						<td><{$vo.all_problem}></td>
-						<td><{$vo.all_ac}></td>
-						<td><{$vo.all_submit}></td>
-						<td>
-							<{:getRatio($vo['all_ac_cnt'],$vo['all_submit'])}>%
-						</td>
-						<td>
-							<{:getRatio($vo['all_ac'],$vo['all_problem'])}>%
-						</td>
-					</tr>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <link rel="stylesheet" href="/Public/bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
+	    <link rel="stylesheet" href="/Public/bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<link rel="shortcut icon" href="/Public/img/favicon.ico" type="image/x-icon" />
+		<!--<link rel="shortcut icon" href="https://hi.codemao.cn/favicon.ico">-->
+		
+		<script language="javascript" src="/Public/bootstrap-3.3.7-dist/js/jquery-1.12.2.min.js"></script>
+		<script language="javascript" src="/Public/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		
+		<title>
+			一码学程
+		</title>
+		<style type="text/css">
+	 		table,th, td
+		  {
+		  border: 1px solid orange;
+		  }
+		</style>
+	</head>	
+	<body>
+		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<h1 class="text-center" style="text-align: center;"><{$studentData.realname}>的反馈报告</h1>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="left-center">第1部分  <{$studentData.realname}>的<{$courseData.name}>课程题目完成情况</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<table  cellpadding="4" cellspacing="1"   style="text-align:center;">
+								<tr style="font-weight: bold;">
+									<th class="text-center" style="width: 30%;">知识点</th>
+									<th class="text-center" style="width: 16%;" >题目总数</th>
+									<th class="text-center" style="width: 15%;" >完成数量</th>
+									<th class="text-center" style="width: 15%;" >提交次数</th>
+									<th class="text-center" style="width: 12%;" >正确率</th>
+									<th class="text-center" style="width: 12%;" >完成度</th>
+								</tr>
+								<volist name='courseSection' id='vo'>
+									<tr>
+										<td> 
+											<{$vo.name}>
+										</td>
+										<td><{$vo.all_problem}></td>
+										<td><{$vo.all_ac}></td>
+										<td><{$vo.all_submit}></td>
+										<td>
+											<{:getRatio($vo['all_ac_cnt'],$vo['all_submit'])}>%
+										</td>
+										<td>
+											<{:getRatio($vo['all_ac'],$vo['all_problem'])}>%
+										</td>
+									</tr>
+									
+								</volist>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="left-center">第2部分 <{$studentData.realname}>的<{$contestData.name}>题目完成情况</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<table  cellpadding="4" cellspacing="1"  style="text-align:center;">
+								<tr style="font-weight: bold;">
+									<th class="text-center" style="width: 30%;" >题目标题</th>
+									<th class="text-center" style="width: 20%;" >是否AC</th>
+									<th class="text-center" style="width: 20%;" >AC次数</th>
+									<th class="text-center" style="width: 15%;" >提交次数</th>
+									<th class="text-center" style="width: 15%;" >正确率</th>
+								</tr>
+								<volist name='contestProblem' id='vo'>
+									<tr>
+										<td> 
+											<{$vo.title}>
+										</td>
+										<td>
+											<eq name="vo.is_ac" value="1">
+												<span style="color: green;">是</span>
+												<else/>
+												<span style="color: red;">否</span>
+											</eq>
+										</td>
+										<td><{$vo.all_ac}></td>
+										<td><{$vo.all_submit}></td>
+										<td>
+											<{:getRatio($vo['all_ac'],$vo['all_submit'])}>%
+										</td>
+									</tr>
+									
+								</volist>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<h2 class="left-center">第3部分 测试题目解析</h2>
+						</div>
+					</div>
 					
-				</volist>
-			</table>
+					<volist name='contestProblem' id='vo'>
+						<div class="panel panel-primary">
+						  <div class="panel-heading">
+						    <h3 class="panel-title"><{$vo.title}></h3>
+						  </div>
+						  <div class="panel-body">
+						    <div class="row">
+						    	<div class="col-lg-12">
+						    		<h4>解题思路</h4>
+						    		<{$vo.problem_solving}>
+						    	</div>
+						    </div>
+						    <div class="row">
+						    	<div class="col-lg-12">
+						    		<h4>标程</h4>
+						    		<pre><{$vo.std_program}></pre>
+						    	</div>
+						    </div>
+						  </div>
+						</div>
+					</volist>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="row" style="margin-bottom: 10px;margin-top: 20px;">
-		<div class="col-lg-12">
-			<h3 class="left-center">第2部分 <a href="__APP__/User/showUserMessage/id/<{$studentData.id}>"><{$studentData.realname}></a>的<{$contestData.name}>题目完成情况</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<table  class="table table-condensed table-striped table-bordered text-center table-hover">
-				<tr style="background-color:rgb(51,122,183);color: #FFFFFF;">
-					<th class="text-center" style="width: 7%;" >题目标题</th>
-					<th class="text-center" style="width: 7%;" >是否AC</th>
-					<th class="text-center" style="width: 7%;" >AC次数</th>
-					<th class="text-center" style="width: 10%;" >提交次数</th>
-					<th class="text-center" style="width: 4%;" >正确率</th>
-				</tr>
-				<volist name='contestProblem' id='vo'>
-					<tr>
-						<td> 
-							<{$vo.title}>
-						</td>
-						<td>
-							<eq name="vo.is_ac" value="1">
-								<span style="color: green;">是</span>
-								<else/>
-								<span style="color: red;">否</span>
-							</eq>
-						</td>
-						<td><{$vo.all_ac}></td>
-						<td><{$vo.all_submit}></td>
-						<td>
-							<{:getRatio($vo['all_ac'],$vo['all_submit'])}>%
-						</td>
-					</tr>
-					
-				</volist>
-			</table>
-		</div>
-	</div>
-	<div class="row" style="margin-bottom: 10px;margin-top: 20px;">
-		<div class="col-md-12">
-			<h3 class="left-center">第3部分 测试题目解析</h3>
-		</div>
-	</div>
-	
-	<volist name='contestProblem' id='vo'>
-		<div class="panel panel-primary">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">题目标题 <{$vo.title}></h3>
-		  </div>
-		  <div class="panel-body">
-		    <div class="row">
-		    	<div class="col-lg-12">
-		    		<h4>解题思路</h4>
-		    		<pre><{$vo.problem_solving}></pre>
-		    	</div>
-		    </div>
-		    <div class="row">
-		    	<div class="col-lg-12">
-		    		<h4>难度 <{$vo.hard_level}></h4>
-		    	</div>
-		    </div>
-		    <div class="row">
-		    	<div class="col-lg-12">
-		    		<h4>标程</h4>
-		    		<pre><{$vo.std_program}></pre>
-		    	</div>
-		    </div>
-		  </div>
-		</div>
-	</volist>
-
-</block>
+		
+		
+	</body>
+</html>

@@ -7556,10 +7556,10 @@ class TCPDF {
 			$dest = $dest ? 'D' : 'F';
 		}
 		$dest = strtoupper($dest);
-		if ($dest[0] != 'F') {
-			$name = preg_replace('/[\s]+/', '_', $name);
-			$name = preg_replace('/[^a-zA-Z0-9_\.-]/', '', $name);
-		}
+//		if ($dest[0] != 'F') {
+//			$name = preg_replace('/[\s]+/', '_', $name);
+//			$name = preg_replace('/[^a-zA-Z0-9_\.-]/', '', $name);
+//		}
 		if ($this->sign) {
 			// *** apply digital signature to the document ***
 			// get the document content
@@ -7630,7 +7630,8 @@ class TCPDF {
 					header('Pragma: public');
 					header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
 					header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
-					header('Content-Disposition: inline; filename="'.basename($name).'"');
+//					header('Content-Disposition: inline; filename="'.basename($name).'"');
+header('Content-Disposition: inline; filename="'.$name.'"');
 					TCPDF_STATIC::sendOutputData($this->getBuffer(), $this->bufferlen);
 				} else {
 					echo $this->getBuffer();
@@ -7661,7 +7662,8 @@ class TCPDF {
 					header('Content-Type: application/pdf');
 				}
 				// use the Content-Disposition header to supply a recommended filename
-				header('Content-Disposition: attachment; filename="'.basename($name).'"');
+//				header('Content-Disposition: attachment; filename="'.basename($name).'"');
+				header('Content-Disposition: attachment; filename="'.$name.'"');
 				header('Content-Transfer-Encoding: binary');
 				TCPDF_STATIC::sendOutputData($this->getBuffer(), $this->bufferlen);
 				break;
