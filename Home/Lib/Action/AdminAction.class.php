@@ -1269,11 +1269,11 @@ class AdminAction extends BaseAction {
 	    // 是否显示页眉
 	    $pdf->setPrintHeader(true);
 	    // 设置页眉显示的内容
-	    $pdf->SetHeaderData('onecode.png', 30, '                     course.onecode.com.cn', 'onecode.com.cn', array(0,64,255), array(0,64,128));
+	    $pdf->SetHeaderData('onecode.png', 30, '                     course.onecode.com.cn', '', array(0,64,255), array(0,64,128));
 	    // 设置页眉字体
 	    $pdf->setHeaderFont(Array('dejavusans', '', '12'));
 	    // 页眉距离顶部的距离
-	    $pdf->SetHeaderMargin('4');
+	    $pdf->SetHeaderMargin('10');
 	    // 是否显示页脚
 	    $pdf->setPrintFooter(true);
 	    // 设置页脚显示的内容
@@ -1287,7 +1287,7 @@ class AdminAction extends BaseAction {
 	    // 设置行高
 	    $pdf->setCellHeightRatio(1);
 	    // 设置左、上、右的间距
-	    $pdf->SetMargins('10', '10', '10');
+	    $pdf->SetMargins('10', '16', '10');
 	    // 设置是否自动分页  距离底部多少距离时分页
 	    $pdf->SetAutoPageBreak(TRUE, '15');
 	    // 设置图像比例因子
