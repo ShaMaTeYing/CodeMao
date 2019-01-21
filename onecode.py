@@ -183,21 +183,34 @@ class onecode:
             self.run_file_path = "./a.out"
         return False
 
-    def fileSame(self,a,b):
-        fileA = open(a, 'r')
-        fileB = open(b, 'r')
-        fa = fileA.read()
-        fb = fileB.read()
-        fileA.close()
-        fileB.close()
-        fa = fa.replace('\r', '')
-        fb = fb.replace('\r', '')
-        fa = fa.rstrip('\t \n')
-        fb = fb.rstrip('\t \n')
-        if fa == fb:
-            return True
-        return False
-
+#     def fileSame(self,a,b):
+#         fileA = open(a, 'r')
+#         fileB = open(b, 'r')
+#         fa = fileA.read()
+#         fb = fileB.read()
+#         fileA.close()
+#         fileB.close()
+#         fa = fa.replace('\r', '')
+#         fb = fb.replace('\r', '')
+#         fa = fa.rstrip('\t \n')
+#         fb = fb.rstrip('\t \n')
+#         if fa == fb:
+#             return True
+#         return False
+	def fileSame(self,a,b):
+		with open(a,'r',encoding='utf-8') as f:
+			fa = [_ for _ in f.readlines()]
+		with open(b,'r',encoding='utf-8') as f:
+			fb = [_ for _ in f.readlines()]
+		if len(fa) != len(fb):
+			return False
+		for i in range(len(fa)):
+			a = fa[i].replace('\r', '').rstrip('\t \n')
+			b = fb[i].replace('\r', '').rstrip('\t \n')
+			if a != b:
+				return False
+		return True
+		
     def fileAboutEqual(self,a,b):
         fileA = open(a, 'r')
         fileB = open(b, 'r')
