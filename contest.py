@@ -157,9 +157,9 @@ class onecode:
         return False
 
     def fileSame(self,a, b):
-        with open(a, 'r', encoding='utf-8') as f:
+        with open(a, 'r') as f:
             fa = [_ for _ in f.readlines()]
-        with open(b, 'r', encoding='utf-8') as f:
+        with open(b, 'r') as f:
             fb = [_ for _ in f.readlines()]
         if len(fa) != len(fb):
             return False
