@@ -155,8 +155,8 @@ class onecode:
         else:
             self.run_file_path = "./a.out"
         return False
-    
-    def fileSame(a, b):
+
+    def fileSame(self,a, b):
         with open(a, 'r', encoding='utf-8') as f:
             fa = [_ for _ in f.readlines()]
         with open(b, 'r', encoding='utf-8') as f:
