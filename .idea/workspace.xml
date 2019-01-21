@@ -1,54 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e77a5b12-63e4-4d43-a51c-0e5e8bf245c4" name="Default" comment="" />
+    <list default="true" id="e77a5b12-63e4-4d43-a51c-0e5e8bf245c4" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/OneCode.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/OneCode.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contest.py" beforeDir="false" afterPath="$PROJECT_DIR$/contest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/onecode.py" beforeDir="false" afterPath="$PROJECT_DIR$/onecode.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="2137650365">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="9" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="9" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="contest.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/contest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2220">
-              <caret line="244" column="24" lean-forward="false" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
+            <state relative-caret-position="92">
+              <caret line="157" column="4" selection-start-line="157" selection-start-column="4" selection-end-line="157" selection-end-column="4" />
               <folding>
-                <element signature="e#614#791#0" expanded="false" />
-                <element signature="e#824#841#0" expanded="false" />
-                <element signature="e#894#1239#0" expanded="false" />
-                <element signature="e#1279#1638#0" expanded="false" />
-                <element signature="e#1705#1787#0" expanded="false" />
-                <element signature="e#1827#2130#0" expanded="false" />
-                <element signature="e#2161#2178#0" expanded="false" />
-                <element signature="e#2249#2414#0" expanded="false" />
-                <element signature="e#2498#2670#0" expanded="false" />
-                <element signature="e#2733#2977#0" expanded="false" />
-                <element signature="e#3031#3858#0" expanded="false" />
-                <element signature="e#3915#4381#0" expanded="false" />
-                <element signature="e#4460#5102#0" expanded="false" />
-                <element signature="e#5159#5276#0" expanded="false" />
-                <element signature="e#5331#5432#0" expanded="false" />
-                <element signature="e#5483#5802#0" expanded="false" />
-                <element signature="e#5844#6659#0" expanded="false" />
-                <element signature="e#6697#7040#0" expanded="false" />
-                <element signature="e#7084#7522#0" expanded="false" />
-                <element signature="e#7578#9253#0" expanded="false" />
-                <element signature="e#9288#9333#0" expanded="false" />
+                <element signature="e#614#791#0" />
+                <element signature="e#824#841#0" />
+                <element signature="e#894#1239#0" />
+                <element signature="e#1279#1638#0" />
+                <element signature="e#1705#1787#0" />
+                <element signature="e#1827#2130#0" />
+                <element signature="e#2161#2178#0" />
+                <element signature="e#2249#2414#0" />
+                <element signature="e#2498#2670#0" />
+                <element signature="e#2733#2977#0" />
+                <element signature="e#3031#3858#0" />
+                <element signature="e#3915#4381#0" />
+                <element signature="e#4460#5102#0" />
+                <element signature="e#5159#5276#0" />
+                <element signature="e#5331#5432#0" />
+                <element signature="e#5483#5802#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="onecode.py" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/onecode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="294" column="105" lean-forward="true" selection-start-line="294" selection-start-column="105" selection-end-line="294" selection-end-column="105" />
-              <folding />
+            <state relative-caret-position="30">
+              <caret line="185" column="4" selection-start-line="185" selection-start-column="4" selection-end-line="197" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -88,8 +107,8 @@
         <option value="$PROJECT_DIR$/Home/Tpl/Ladder/showRankPage.html" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/train.py" />
-        <option value="$PROJECT_DIR$/contest.py" />
         <option value="$PROJECT_DIR$/onecode.py" />
+        <option value="$PROJECT_DIR$/contest.py" />
       </list>
     </option>
   </component>
@@ -101,23 +120,13 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2107" />
-    <option name="y" value="-23" />
-    <option name="width" value="1398" />
-    <option name="height" value="992" />
+    <option name="x" value="9" />
+    <option name="y" value="123" />
+    <option name="width" value="1890" />
+    <option name="height" value="930" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -133,13 +142,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="D:/code/python/tensorflowTest1" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/Test" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -162,6 +170,7 @@
   </component>
   <component name="RunManager" selected="Python.contest">
     <configuration name="contest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="OneCode" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -172,14 +181,17 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="OneCode" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/contest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="ladder" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="OneCode" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -190,14 +202,17 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="OneCode" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ladder.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="onecode" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="OneCode" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -208,14 +223,17 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="OneCode" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/onecode.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="OneCode" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -226,27 +244,26 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="OneCode" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
-    <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Python.ladder" />
-      <item index="1" class="java.lang.String" itemvalue="Python.onecode" />
-      <item index="2" class="java.lang.String" itemvalue="Python.train" />
-      <item index="3" class="java.lang.String" itemvalue="Python.contest" />
+    <list>
+      <item itemvalue="Python.ladder" />
+      <item itemvalue="Python.onecode" />
+      <item itemvalue="Python.train" />
+      <item itemvalue="Python.contest" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.contest" />
+      <list>
+        <item itemvalue="Python.contest" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -268,28 +285,28 @@
     <option name="totallyTimeSpent" value="18737000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1911" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.128125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39845476" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12787926" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3289183" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39845476" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Data View" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,220 +318,52 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="6" />
-    </breakpoint-manager>
-    <watches-manager />
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/onecode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342">
-          <caret line="271" column="24" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showUserCode.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Lib/Action/JudgeAction.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4104">
-          <caret line="228" column="1" lean-forward="false" selection-start-line="228" selection-start-column="1" selection-end-line="228" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showTestData.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showRealTimeEvaluation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2286">
-          <caret line="127" column="54" lean-forward="false" selection-start-line="127" selection-start-column="54" selection-end-line="127" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showJudgeDetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="89" column="55" lean-forward="false" selection-start-line="89" selection-start-column="55" selection-end-line="89" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Home/Lib/Action/IndexAction.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Lib/Action/ProblemAction.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
-          <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+          <caret line="33" column="10" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/Public/examHeader.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/Public/footer.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
-          <caret line="29" column="59" lean-forward="false" selection-start-line="29" selection-start-column="59" selection-end-line="29" selection-end-column="59" />
+          <caret line="29" column="59" selection-start-line="29" selection-start-column="59" selection-end-line="29" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/Public/ladderHeader.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="16" column="66" lean-forward="false" selection-start-line="16" selection-start-column="66" selection-end-line="16" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Lib/Action/UserAction.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="257" column="84" lean-forward="false" selection-start-line="257" selection-start-column="84" selection-end-line="257" selection-end-column="84" />
+          <caret line="16" column="66" selection-start-line="16" selection-start-column="66" selection-end-line="16" selection-end-column="66" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/LadderAdmin/showAddProblemPage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
-          <caret line="28" column="104" lean-forward="false" selection-start-line="28" selection-start-column="104" selection-end-line="28" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Tpl/User/showAllUserRank.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="41" column="54" lean-forward="false" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
+          <caret line="28" column="104" selection-start-line="28" selection-start-column="104" selection-end-line="28" selection-end-column="104" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showContestListPage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Lib/Action/AdminAction.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5040">
-          <caret line="280" column="36" lean-forward="false" selection-start-line="280" selection-start-column="36" selection-end-line="280" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Lib/Action/LadderAction.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="172" column="31" lean-forward="false" selection-start-line="172" selection-start-column="31" selection-end-line="172" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Lib/Action/LadderAction.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7956">
-          <caret line="442" column="40" lean-forward="true" selection-start-line="442" selection-start-column="40" selection-end-line="442" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showTestData.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showRealTimeEvaluation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2286">
-          <caret line="127" column="54" lean-forward="true" selection-start-line="127" selection-start-column="54" selection-end-line="127" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Lib/Action/UserAction.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4356">
-          <caret line="242" column="39" lean-forward="true" selection-start-line="242" selection-start-column="39" selection-end-line="242" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Tpl/User/showAllUserRank.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="46" column="29" lean-forward="true" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Lib/Action/JudgeAction.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4104">
-          <caret line="228" column="1" lean-forward="true" selection-start-line="228" selection-start-column="1" selection-end-line="228" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showJudgeDetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1602">
-          <caret line="89" column="55" lean-forward="false" selection-start-line="89" selection-start-column="55" selection-end-line="89" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/onecode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ladder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4122">
-          <caret line="229" column="36" lean-forward="true" selection-start-line="229" selection-start-column="36" selection-end-line="229" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Lib/Action/LadderAction.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3690">
-          <caret line="205" column="57" lean-forward="true" selection-start-line="205" selection-start-column="57" selection-end-line="205" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/onecode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="292" column="26" lean-forward="true" selection-start-line="292" selection-start-column="26" selection-end-line="292" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ladder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="229" column="36" lean-forward="true" selection-start-line="229" selection-start-column="36" selection-end-line="229" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Home/Lib/Action/LadderAction.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="205" column="57" lean-forward="false" selection-start-line="205" selection-start-column="57" selection-end-line="205" selection-end-column="57" />
+          <caret line="280" column="36" selection-start-line="280" selection-start-column="36" selection-end-line="280" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -526,11 +375,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showUserCode.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Lib/Action/UserAction.class.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -547,16 +392,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showTestData.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showRealTimeEvaluation.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2286">
-          <caret line="127" column="54" lean-forward="false" selection-start-line="127" selection-start-column="54" selection-end-line="127" selection-end-column="54" />
+          <caret line="127" column="54" selection-start-line="127" selection-start-column="54" selection-end-line="127" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -570,70 +411,66 @@
     <entry file="file://$PROJECT_DIR$/Home/Tpl/Public/header.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
-          <caret line="21" column="40" lean-forward="false" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+          <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/LadderAdmin/showAddContestPage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/LadderAdmin/showContestListPage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="648">
-          <caret line="36" column="78" lean-forward="false" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="78" />
+          <caret line="36" column="78" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="78" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/LadderAdmin/showModifyContestPage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="7" column="51" lean-forward="false" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
+          <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Lib/Action/LadderAdminAction.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
-          <caret line="49" column="36" lean-forward="false" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
+          <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Lib/Action/LadderAction.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8298">
-          <caret line="463" column="49" lean-forward="false" selection-start-line="463" selection-start-column="49" selection-end-line="463" selection-end-column="49" />
+          <caret line="463" column="49" selection-start-line="463" selection-start-column="49" selection-end-line="463" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/Ladder/showRankPage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
-          <caret line="20" column="24" lean-forward="false" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/Admin/showTrainModifyProblem.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
-          <caret line="10" column="14" lean-forward="false" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ladder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="805">
-          <caret line="281" column="47" lean-forward="false" selection-start-line="281" selection-start-column="47" selection-end-line="281" selection-end-column="47" />
+          <caret line="281" column="47" selection-start-line="281" selection-start-column="47" selection-end-line="281" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
-          <caret line="264" column="60" lean-forward="false" selection-start-line="264" selection-start-column="60" selection-end-line="264" selection-end-column="60" />
+          <caret line="264" column="60" selection-start-line="264" selection-start-column="60" selection-end-line="264" selection-end-column="60" />
         </state>
       </provider>
     </entry>
@@ -647,45 +484,39 @@
     <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1318">
-          <caret line="300" column="24" lean-forward="false" selection-start-line="300" selection-start-column="24" selection-end-line="300" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2220">
-          <caret line="244" column="24" lean-forward="false" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
-          <folding>
-            <element signature="e#614#791#0" expanded="false" />
-            <element signature="e#824#841#0" expanded="false" />
-            <element signature="e#894#1239#0" expanded="false" />
-            <element signature="e#1279#1638#0" expanded="false" />
-            <element signature="e#1705#1787#0" expanded="false" />
-            <element signature="e#1827#2130#0" expanded="false" />
-            <element signature="e#2161#2178#0" expanded="false" />
-            <element signature="e#2249#2414#0" expanded="false" />
-            <element signature="e#2498#2670#0" expanded="false" />
-            <element signature="e#2733#2977#0" expanded="false" />
-            <element signature="e#3031#3858#0" expanded="false" />
-            <element signature="e#3915#4381#0" expanded="false" />
-            <element signature="e#4460#5102#0" expanded="false" />
-            <element signature="e#5159#5276#0" expanded="false" />
-            <element signature="e#5331#5432#0" expanded="false" />
-            <element signature="e#5483#5802#0" expanded="false" />
-            <element signature="e#5844#6659#0" expanded="false" />
-            <element signature="e#6697#7040#0" expanded="false" />
-            <element signature="e#7084#7522#0" expanded="false" />
-            <element signature="e#7578#9253#0" expanded="false" />
-            <element signature="e#9288#9333#0" expanded="false" />
-          </folding>
+          <caret line="300" column="24" selection-start-line="300" selection-start-column="24" selection-end-line="300" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/onecode.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="294" column="105" lean-forward="true" selection-start-line="294" selection-start-column="105" selection-end-line="294" selection-end-column="105" />
-          <folding />
+        <state relative-caret-position="30">
+          <caret line="185" column="4" selection-start-line="185" selection-start-column="4" selection-end-line="197" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="157" column="4" selection-start-line="157" selection-start-column="4" selection-end-line="157" selection-end-column="4" />
+          <folding>
+            <element signature="e#614#791#0" />
+            <element signature="e#824#841#0" />
+            <element signature="e#894#1239#0" />
+            <element signature="e#1279#1638#0" />
+            <element signature="e#1705#1787#0" />
+            <element signature="e#1827#2130#0" />
+            <element signature="e#2161#2178#0" />
+            <element signature="e#2249#2414#0" />
+            <element signature="e#2498#2670#0" />
+            <element signature="e#2733#2977#0" />
+            <element signature="e#3031#3858#0" />
+            <element signature="e#3915#4381#0" />
+            <element signature="e#4460#5102#0" />
+            <element signature="e#5159#5276#0" />
+            <element signature="e#5331#5432#0" />
+            <element signature="e#5483#5802#0" />
+          </folding>
         </state>
       </provider>
     </entry>
