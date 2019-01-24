@@ -30,89 +30,28 @@ class ProblemAction extends BaseAction {
     	$query=array();
 		$userinfo=session('userinfo');
 		$tipsData=M('tips')->where(array('user_id'=>$userinfo['id']))->select();
-//		dump($tipsData);
-		$query['user_id']=$userinfo['id'];
-		$userProblem=M('ladder_user_problem')->where($query)->field('problem_id')->select();
-		foreach($userProblem as $k => $v){
-			$submitProblem[$k]=$userProblem[$k]['problem_id'];
-		}
-		$query=array();
-        if($submitProblem)
-		    $query['problem_id']=array('not in',$submitProblem);
-		$notSubmitProblem=M('ladder_contest_problem')->where($query)->field('problem_id')->select();
-		//dump($notSubmitProblem);
-		$problemMark=array();
-		foreach($notSubmitProblem as $k => $v){
-			$problemMark[$notSubmitProblem[$k]['problem_id']]=1;
-		}
-		//dump($problemMark);
-		$userinfo = session('userinfo');
-		$value=$_POST['value'];
-		//dump($_GET);
-		$labelId=$_GET['label_id'];
-		//dump($labelId);
-		if($labelId){
-			$list=M("table")->table('problem a,problem_label b')
-			->where("a.id=b.problem_id and b.label_id=".$labelId." and b.status=0 and a.status=1")
-			->select();
-		
-			//dump($list);
-			
-			//$User = M('problem'); // 实例化User对象
-			import('ORG.Util.Page');// 导入分页类
-			$count = M("table")->table('problem a,problem_label b')
-			->where("a.id=b.problem_id and b.label_id=".$labelId." and b.status=0 and a.status=1")->count();// 查询满足要求的总记录数
-			$Page  = new Page($count,50);// 实例化分页类 传入总记录数和每页显示的记录数
-			
-			$show  = $Page->show();// 分页显示输出
-			//dump($list);
-			// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-			$list = M("table")->table('problem a,problem_label b')
-			->where("a.id=b.problem_id and b.label_id=".$labelId." and b.status=0 and a.status=1")->limit($Page->firstRow.','.$Page->listRows)
-			->order('problem_id')
-			->select();
-			//dump($list);
-			$listIds = M("table")->table('problem a,problem_label b')
-			->where("a.id=b.problem_id and b.label_id=".$labelId." and b.status=0 and a.status=1")
-			->limit($Page->firstRow.','.$Page->listRows)
-			->getField('problem_id',true);
-//			foreach($list as $key => $value){
-//				$list['id']=$list['problem_id'];
-//			}
-			//dump($listIds);
-		}
-		else {
-			$where['title']  = array('like','%'.$value.'%');
-			$where['id']  = array('like','%'.$value.'%');
-			$where['description']  = array('like','%'.$value.'%');
-			$where['_logic'] = 'or';
-			$map['_complex'] = $where;
-			$map['status']=1;
-			//$problemData=M('problem')->select();
-			//$this->assign('problemData',$problemData);
-			
-			$User = M('problem'); // 实例化User对象
-			import('ORG.Util.Page');// 导入分页类
-			$count = $User->where($map)->count();// 查询满足要求的总记录数
-			$Page  = new Page($count,50);// 实例化分页类 传入总记录数和每页显示的记录数
-			$show  = $Page->show();// 分页显示输出
-			// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-			$list = $User->where($map)->order('problem_mark asc')->limit($Page->firstRow.','.$Page->listRows)->select();
-		//	dump($Page);
-			$listIds = $User
-			->where($map)
+		$map['status']=1;
+		$User = M('problem'); // 实例化User对象
+		import('ORG.Util.Page');// 导入分页类
+		$count = $User->where($map)->count();// 查询满足要求的总记录数
+		$Page  = new Page($count,50);// 实例化分页类 传入总记录数和每页显示的记录数
+		$show  = $Page->show();// 分页显示输出
+		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+		$list = $User->where($map)->order('problem_mark asc')->limit($Page->firstRow.','.$Page->listRows)->select();
+	//	dump($Page);
+		$listIds = $User
+			->where($map)->order('problem_mark asc')
 			->limit($Page->firstRow.','.$Page->listRows)
 			->getField('id',true);
-			//dump($listIds);
-		}		
-		//dump($listIds);
+		//dump($listIds);	
+//		dump($listIds);
 		$userDo = M('user_problem')
 			->where(array('problem_id'=>array(IN,$listIds),'user_id'=>$userinfo['id']))
 			->distinct('judge_status')
 			->order('problem_id')
 			->field('problem_id,judge_status')
 			->select();
-		//dump($userDo);
+//		dump($userDo);
 		$userDoNew = array();
         foreach($userDo as $k => $v){
 			if($v['judge_status'] == 0 || $userDoNew[$v['problem_id']] > 0 
@@ -152,38 +91,10 @@ class ProblemAction extends BaseAction {
 				//$list[$k1]['class_status']="active";
 			}
 		}
-		
-//		$list=$this->my_sort($list,'problem_mark',SORT_DESC,SORT_STRING);
-//		dump($list);
+
 		$this->assign('problemData',$list);// 赋值数据集
 		$this->assign('page',$show);// 赋值分页输出
-
-		
-		//提取标签数据
-		$Label=M('label_info');
-		$LabelAllData=$Label->where("status=0")->select();
-		$labelData=array(array());
-		foreach($LabelAllData as $k => $v){
-			if($LabelAllData[$k]['label_name']=="") continue;
-			$labelData[$k]['label_name']=$v['label_name'];
-			$labelData[$k]['label_id']=$v['id'];
-			$tmp=M('problem_label')->where(array('label_id'=>$v['id'],'status'=>0))->count();
-			if($v['status']){
-				$labelData[$k]['problem_number']=0;
-			}
-			else {
-				$labelData[$k]['problem_number']=$tmp;
-			}
-		}
-		$labelData=$this->my_sort($labelData,'problem_number',SORT_DESC);
-		$this->assign('labelData',$labelData);
-		
-		//dump($labelData);
-
-		
 		$this->display();
-		
-		//$this->display();
 	}
 	
 	public function replace($arr){
