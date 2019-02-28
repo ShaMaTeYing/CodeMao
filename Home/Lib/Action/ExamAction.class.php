@@ -87,7 +87,7 @@ class ExamAction extends BaseAction {
 				$this->error("非法进入！",U('Exam/index'));
 			}
 		}
-		$contest_problem=M('contest_problem')->where('contest_id='.$_GET['id'])->select();
+		$contest_problem=M('contest_problem')->where(array('contest_id'=>$_GET['id'],'status'=>1))->select();
 		$contest_list=M('contest_list')->where('id='.$_GET['id'])->select();
 		if($contest_list[0]['type']==2){//需要密码
 			
