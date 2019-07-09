@@ -492,4 +492,28 @@ class UserAction extends Action {
 		$contestSubmit=$this->setContest($contestSubmit);
 		
 	}
+	public function showRegisterPage(){
+		$this->display();
+	}
+	public function addUser(){
+		if($_POST['password']!=$_POST['repassword']){
+			$this->error('密码不一致，请重新输入！',U('User/showRegisterPage'));
+		}
+		if(M('user')->where(array('username'=>$_POST['username']))->find()){
+			$this->error('该用户名已经存在,请重新输入！',U('User/showRegisterPage'));
+		}
+		$_POST['password']=myMD5($_POST['password']);
+		unset($_POST['repassword']);
+		$_POST['status']=1;$_POST['root']=0;
+		$_POST['accepted']=0;$_POST['submissions']=0;
+		$_POST['solve_problem']=0;$_POST['Submitted_problem']=0;
+		$_POST['register_time']=time();
+		$res=M('user')->add($_POST);
+		if($res) {
+			$this->success("注册成功！",U('User/showLogin'));
+		}else {
+			$this->error("注册失败,请重新操作！",U('User/showRegisterPage'));
+		}
+		//dump($_POST);
+	}
 }
