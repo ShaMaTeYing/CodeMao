@@ -376,9 +376,19 @@ class AdminAction extends BaseAction {
 		$userinfo=session('userinfo');
 		$map['root']=array('elt',$userinfo['root']);
 
-		$userMessage=M('user')->where($map)->select();
+        $User = M('user'); // 实例化User对象
+        import('ORG.Util.Page');// 导入分页类
+        $count = $User->where($map)->count();// 查询满足要求的总记录数
+//        dump($count);
+        $Page  = new Page($count,30);// 实例化分页类 传入总记录数和每页显示的记录数
+        $show  = $Page->show();// 分页显示输出
+        // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+        $list = $User->where($map)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+
+//		$userMessage=M('user')->where($map)->select();
 		//dump($userMessage);
-		$this->assign('userMessage',$userMessage);
+		$this->assign('userMessage',$list);
+        $this->assign('page',$show);// 赋值分页输出
 		$this->display();
 	}
 	public function operation(){
